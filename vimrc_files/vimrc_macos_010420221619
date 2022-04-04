@@ -1,0 +1,144 @@
+" Default
+set nocompatible
+
+" Enable plugins
+filetype plugin on
+
+" Tab stuff
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab  "tab char to spaces
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+"set smartindent
+
+"Search & display
+set nowrap
+set ignorecase
+set incsearch
+set nohls
+set number
+set relativenumber
+set showmatch
+set smartcase
+set path+=**
+set wildmenu
+syntax on
+set noerrorbells
+"set showcmd		" Show (partial) command in status line.
+" Add a line at column 80 for reference
+set colorcolumn=80
+highligh ColorColumn ctermbg=0 guibg=lightgrey
+
+" Default colorscheme if no plugins
+colorscheme slate
+set background=dark
+
+" Navigation
+" Move vertically between windows
+let mapleader = " "
+nnoremap <leader>h :wincmd h<CR> 
+nnoremap <leader>j :wincmd j<CR> 
+nnoremap <leader>k :wincmd k<CR> 
+nnoremap <leader>l :wincmd l<CR> 
+"set mouse=a		" Enable mouse usage (all modes)
+noremap <TAB> ) " use tab to move to next sentence
+noremap <S-TAB> ( " use shift tab to move to the previous sentence
+"noremap <SPACE> <C-F> " use space to scroll down
+
+" Clipboard handling
+set clipboard=unnamedplus  " use same clipboard as the system
+
+" Files and undo
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set autowrite		" Automatically save before commands like :next and :make
+
+" Spelling
+set spell spelllang=en_us,en_gb,es_mx
+setlocal spell spelllang=es_mx
+
+" Some useful commands
+command! MakeTags !ctags -R .
+command! Wc !wc % 
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Programming stuff
+set encoding=utf-8
+" Python
+command! Py ! python3 %
+" Use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+" Flag unnecesary white spaces
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" PEP 8 indentation
+au Filetype python set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins and stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox' "theme
+Plug 'ycm-core/YouCompleteMe'
+Plug 'mbbill/undotree' 
+Plug 'vim-latex/vim-latex'
+Plug 'vim-syntastic/syntastic' " syntax checking 
+Plug 'nvie/vim-flake8'      " pep 8 support
+Plug 'tpope/vim-fugitive'  "git support
+Plug 'bling/vim-airline' " Status bar
+call plug#end()
+
+" From/for plugins
+" gruvbox
+colorscheme gruvbox
+
+let g:netrw_browse_split=2
+let g:netrw_banner=0
+let g:netrw_winsize=25
+
+let python_highlight_all=1
+
+" See Undo Tree
+nnoremap <leader>u :UndotreeShow<CR>
+
+" netrw: Default file browser included in vim
+" Split vertically, open file explorer, resize.
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+
+" YouCompleteMe mapping for go to definitions.
+nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+
+" Syntastics Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+" LATEX 
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+"filetype plugin on
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
