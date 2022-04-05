@@ -33,14 +33,14 @@ NonStandarPlugins:
 Only standard plugins added.
 
 1. mkdir -p ~/.vim/undodir
-2. cp ./vimrc_noplugins ~/.vimrc 
+2. cp ./vimrc_files/vimrc_noplugins ~/.vimrc 
 
 
 #### vimrc_plugins
 Uses vim-plug to add some useful plugins
 
 1. mkdir -p ~/.vim/undodir
-2. cp ./vimrc_noplugins ~/.vimrc 
+2. cp ./vimrc_files/vimrc_noplugins ~/.vimrc 
 3. curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 4. from vim,  :PlugInstall
