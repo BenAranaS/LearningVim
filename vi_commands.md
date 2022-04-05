@@ -1,4 +1,6 @@
 #### Learning VIM
+
+
 #### Basics
 vi -o file1.txt file2.txt
 vi -u NONE  # open without settings or plugins 
