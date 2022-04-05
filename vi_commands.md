@@ -1,11 +1,12 @@
-#### Learning VIM
+# Learning VIM
+## Basics
+Command | Description
+_______________ | ______________
+`vi -o file1.txt file2.txt`  |
+`vi -u NONE`  |       __open without settings or plugins__
 
-
-#### Basics
-vi -o file1.txt file2.txt
-vi -u NONE  # open without settings or plugins 
 ## Motions
-hjkl # instead of move arrows
+`h j k l`: __instead of move arrows__
 H   # move cursor to the top of the window
 M   # = to the middle of the window
 L   # = to the bottom of the window
@@ -270,4 +271,15 @@ ip  # inner paragraph
 "sorrounding"
 
 
+### Marked
+:MarkedOpen[!]          Open the current Markdown buffer in Marked. Call with
+                        a bang to prevent Marked from stealing focus from Vim.
+                        Documents opened in Marked are tracked and closed
+                        automatically when you quit Vim.
 
+:MarkedQuit             Close the current Markdown buffer in Marked. Quits
+                        Marked if there are no other documents open.
+
+:MarkedToggle[!]        If the current Markdown buffer is already open in
+                        Marked, calls :MarkedQuit. If not, calls
+                        :MarkedOpen[!].

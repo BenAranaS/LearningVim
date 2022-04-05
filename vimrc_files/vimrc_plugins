@@ -36,7 +36,7 @@ colorscheme slate
 set background=dark
 
 " Fix highlight for misspelled words
-hi SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=red
+hi SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 
 " Use the below highlight group when displaying bad whitespace is desired.
 highlight BadWhitespace ctermbg=red guibg=red
@@ -121,6 +121,7 @@ Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
 Plug 'bling/vim-airline' " Status bar
+Plug 'itspriddle/vim-marked' "markdown plug
 call plug#end()
 
 " From/for plugins
@@ -129,7 +130,7 @@ colorscheme gruvbox
 set background=dark
 
 " Fix highlight for misspelled words
-hi SpellBad term=NONE cterm=underline ctermfg=red
+hi SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
 
 " Use the below highlight group when displaying bad whitespace is desired.
 highlight BadWhitespace ctermbg=red guibg=red
@@ -152,6 +153,10 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+
+" vim-marked plugin settings  ONLY AVAILABLE FOR MACOS
+let g:marked_app = "Marked 2"
+let g:marked_filetypes = ["markdown", "mkd", "ghmarkdown", "vimwiki"]
 
 " LATEX 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
