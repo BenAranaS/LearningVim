@@ -248,6 +248,8 @@ SS2 subsubsection
 <space>ll  # Compile
 <space>lv  # Visualise compiled file
 
+za # fold and unfold
+set nofoldable
 
 ####### No Plugin
 https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
