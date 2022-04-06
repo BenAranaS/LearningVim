@@ -26,7 +26,6 @@ Command | Description
 `F`| find backward
 `/word `| search for word
 `/*ord` | RegEx search
-
 `n, #`  | move to next or previous word
 `?`| search backwards
 `)`| move to next sentence
@@ -38,9 +37,10 @@ Command | Description
 `:linenumber   `| go to line linenumber
 `$`| go to end of line
 `0`| go to beginning of line
+`@:` | repeat last command from normal mode
 
 
-## Commands
+## Edition Commands
 Command | Description
 ------------ | -------------
 `h j k l` | instead of move arrows
@@ -67,7 +67,9 @@ Command | Description
 `cw`| change word
 `c/word`| change until word
 
-#### visual mode
+### in visual mode
+Command | Description
+------------ | -------------
 `V`| select current line
 `ctrl + v `| visual block
 `ctrl+v l4j `| select one column and 4 rows
@@ -80,28 +82,37 @@ Command | Description
 `i `| insert where cursor is
 `I `| Insert in the beginning of line
 
-###### yank
+### yank to registers
+Command | Description
+------------ | -------------
 `"Ayy `| yank into register A
 `"Ap  `| paste from register A
 `"AgP `| paste from register A before cursor and put cursor at the end of paste text
- ##### Substitute 
+
+### Substitute 
+Command | Description
+------------ | -------------
 :s/word/newword/g
 `:s/word/newword/gc `| ask for confirmation
 
-##### MARKS
+## MARKS
+Command | Description
+------------ | -------------
 `ma `| create mark a
 `mA`| create mark A 
 `'a`| go to mark a
+
+## TAGS
 `ctrl+o `| go to move backward 
 `ctrl+i `| move backwards
 :jumps
 :clearjumps
 `'.`| move to last edited line
 
-##### TAGS
-
-##### Multiple files
-## buffer window
+## Multiple files
+# buffer window
+Command | Description
+------------ | -------------
 :split
 ctrl+w
 ctrl+ww
@@ -123,18 +134,21 @@ ctrl+ww
 :b file.tx
 :b tab
 :b prefix tab
-`ctrl+w + `| Increase horizontal window size
+`ctrl+w + #`| Increase horizontal window size
 `ctrl+> `| increase vertical window size
-ctrl*<
+`ctrl+<` | decrease vertical window size
 `:30vs  `| vertical split from column 30
 `:vs `| vertical split
+`ctrl + ^` | caret: go to previous opened file
 
 ## The read Command
 :r
 `:-1r file.txt `| adds content of file.txt at the beginning of file
 
-#### Configuration files
+## Configuration files
 ~/.vimrc
+
+### Settings
 set number
 set ruler
 set nocompatible
@@ -142,11 +156,11 @@ syntax on
 filetype plugin on
 `set autoread `| automatically refresh
 
-noremap <TAB> ) " use tab to move to next sentence
-noremap <S-TAB> ( " use shift tab to move to the previous sentence
+noremap <TAB> ) | use tab to move to next sentence
+noremap <S-TAB> ( | use shift tab to move to the previous sentence
 set tabstop=2 shiftwidth=2 expandtab
 :retab
-noremap <SPACE> <C-F> " use space to scroll down
+noremap <SPACE> <C-F> | use space to scroll down
 #### Abbreviations
 :abb _ys *Youngstart*:
 This is a test 
@@ -188,7 +202,7 @@ vim +d file1.txt file2.txt
 `:set dip+=vertical `| diffopt=filler, vertical
 
 ##.vimrc
-set diffopt+=vertical "show diff side by side
+set diffopt+=vertical |show diff side by side
 
 ### Zip files
 vim weather.zip
@@ -215,9 +229,9 @@ vimtutor
 :setlocal spell spelllang=en_us,en_gb,es_mx
 
 zG store new words in internal wordlist
-zg add word under curosr to dictionary
+zg add word under cursor to dictionary
 zw remove the word from dictionary
-zW stores the words in internal wordlist which is lgobal
+zW stores the words in internal wordlist which is global
 z= load spell suggestions
 `Ctrl + x + s `| in insert mode to load spell suggestions.
 `:spellrepall  `| command to apply the same change to all words that match. 
@@ -241,6 +255,8 @@ http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings
 ``p `8 `/`| abbreviation for pi, inf, fracc
 `F9  `| insert references \label \cite
 
+ctrl + j | jump to the next input needed
+
 `:TTemplate`| Select from a list of latex templates
 `FEM`| emph
 `FTS`| bold
@@ -259,14 +275,22 @@ SS2 subsubsection
 `<space>lv `| Visualise compiled file
 
 `za`| fold and unfold
-set nofoldable
+set nofoldenable
+'\rf' | fold up the entire file
 
-####### No Plugin
+## Syntastic
+`:Errors` | Load errors into vim
+`:lnext` | go to next error in the Location list
+`:lprev` | go to previous error
+`]l` | go to next error remap needed
+`[l` | go to previous error
+
+## No Plugin
 https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
 https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
 
 
-####### Mastering the Vim Language
+## Mastering the Vim Language
 https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
 iw => inner word 
 `it `| inner tag
@@ -290,3 +314,9 @@ iw => inner word
 :MarkedToggle[!]        If the current Markdown buffer is already open in
                         Marked, calls :MarkedQuit. If not, calls
                         :MarkedOpen[!].
+
+
+
+
+
+
