@@ -17,6 +17,8 @@ filetype indent on
 set nowrap
 set ignorecase
 set incsearch
+set hlsearch " highlight search pattern
+set cursorline " highlight current line
 set nohls
 set number
 set relativenumber

@@ -8,17 +8,30 @@ Command | Description
 `vi file.xt +8  `| open file file.txt and go straight to line 8
 
 ## Motions
-
+## Navigation
 Command | Description
 ------------ | -------------
 `h j k l` | instead of move arrows
+`w` | move to the beginning of next word 
+`W` | move to the beginning of next big word 
+`e` | move to the end of next word 
+`E` | move to the end of next big word 
+`b` | move to the beginning of previous word 
+`B` | move to the beginning of previous big word 
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
 `^E `| scroll the window down without moving cursor
 `^Y `| = up
-`ctrl+f `| move a screen forward
-`ctrl+b`| move a screen backwards
+`ctrl+f `| move a screen forward a full page
+`ctrl+b`| move a screen backwards a full page 
+`ctrl+u `| move a screen forward a half page
+`ctrl+d`| move a screen backwards a half page 
+`ctrl+e `| move a screen upward one line
+`ctrl+y`| move a screen downwards one line
+`zt` | moves display cursor on the window's top
+`zz` | center the cursor on the window
+`zb` | moves display to set cursor on the window's bottom
 `a`| all
 `i`| in
 `t`| 'til
@@ -37,13 +50,17 @@ Command | Description
 `:linenumber   `| go to line linenumber
 `$`| go to end of line
 `0`| go to beginning of line
+`^` | go to non-space first character of the line
+`g_` | last non-space character of the line
 `@:` | repeat last command from normal mode
+`*` | search for the current word and takes you to the next occurrence
+`%` | go to the pair of ( or ) 
+
 
 
 ## Edition Commands
 Command | Description
 ------------ | -------------
-`h j k l` | instead of move arrows
 `d`| delete
 `c`| change ( delete and place in insert mode)
 `y  `| yank, copy
@@ -81,6 +98,9 @@ Command | Description
 `a `| insert after the current location of cursor
 `i `| insert where cursor is
 `I `| Insert in the beginning of line
+`s` | remove character and go to insert mode
+`S` | delete line and go to insert mode
+`gi` | Go to last edited position in insert mode
 
 ### yank to registers
 Command | Description
@@ -116,7 +136,8 @@ Command | Description
 :split
 ctrl+w
 ctrl+ww
-`ctrl+wc `| close window
+`ctrl+wc`| close window
+`:close` | close window
 :new file.txt
 :e file.txt
 `:bd `| buffer delete
@@ -155,7 +176,8 @@ set nocompatible
 syntax on
 filetype plugin on
 `set autoread `| automatically refresh
-
+set cursorline | Highligh the current line
+set cursorcolumn  | highligh current column
 noremap <TAB> ) | use tab to move to next sentence
 noremap <S-TAB> ( | use shift tab to move to the previous sentence
 set tabstop=2 shiftwidth=2 expandtab
