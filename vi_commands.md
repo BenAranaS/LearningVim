@@ -55,11 +55,18 @@ Command | Description
 `*` | search for the current word and takes you to the next occurrence
 `%` | go to the pair of ( or ) 
 
-
-
-## Edition Commands
+## netrw
 Command | Description
 ------------ | -------------
+`:Explore` | launch netrw explorer
+`Enter` | opens a dir or file
+`-` | go to parent dir
+`u` | go to previous dir in history
+`p` | opens a preview window
+`D` | delete file of empty dir
+`d` | creates a directory
+
+## Edition Commands
 `d`| delete
 `c`| change ( delete and place in insert mode)
 `y  `| yank, copy
@@ -75,7 +82,17 @@ Command | Description
 `dd `| delete line
 `d/Genius `| delete until word Genius
 `yw `| copy word
-`ctrl + r + "  `| paste yanked test into vim command line
+`ctrl + r + register`| paste text from register
+`ctrl + a` |  paste text from register '.'
+`ctrl + p` | open completion menu
+`ctrl + x` | especial completion mode in insert submode
+`ctrl+x + ctrl+]` | tag insert mode
+`ctrl+x + ctrl+p` | autocomplete from previous context
+`ctrl+x + ctrl+n` | autocomplete from next context
+`ctrl+x + ctrl+f` | autocomplete file name
+`ctrl+x + ctrl+l` | autocomplete line
+`ctrl+x + ctrl+o` | all autocompletion
+`set complete=.,w,b,u,t,i,kspell` |  (this file, window, buffer, ... spell when enabled
 `p  `| paste on place
 `P `| paste beforer cursor
 `yy`| copy line

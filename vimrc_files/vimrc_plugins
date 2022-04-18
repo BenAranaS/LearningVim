@@ -29,31 +29,6 @@ set wildmenu
 syntax on
 set noerrorbells
 "set showcmd        " Show (partial) command in status line.
-" Add a line at column 80 for reference
-set colorcolumn=80
-highligh ColorColumn ctermbg=0 guibg=lightgrey
-
-" Default colorscheme if no plugins
-colorscheme slate
-set background=dark
-
-" Fix highlight for misspelled words
-hi SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
-
-" Use the below highlight group when displaying bad whitespace is desired.
-highlight BadWhitespace ctermbg=red guibg=red
-
-" Navigation
-" Move vertically between windows
-let mapleader = " "
-nnoremap <leader>h :wincmd h<CR> 
-nnoremap <leader>j :wincmd j<CR> 
-nnoremap <leader>k :wincmd k<CR> 
-nnoremap <leader>l :wincmd l<CR> 
-"set mouse=a        " Enable mouse usage (all modes)
-noremap <TAB> ) " use tab to move to next sentence
-noremap <S-TAB> ( " use shift tab to move to the previous sentence
-"noremap <SPACE> <C-F> " use space to scroll down
 
 " Clipboard handling
 " use same clipboard as the system
@@ -74,20 +49,52 @@ set autowrite       " Automatically save before commands like :next and :make
 set spell spelllang=en_us,en_gb " ,es_mx
 "setlocal spell spelllang=es_mx
 
+" Autocomplete
+set complete=.,w,b,u,t,i,kspell
+
+" Programming stuff
+set encoding=utf-8
+
+" Add a line at column 80 for reference
+set colorcolumn=80
+highligh ColorColumn ctermbg=0 guibg=lightgrey
+
+" Default colorscheme if no plugins
+colorscheme slate
+set background=dark
+
+" Fix highlight for misspelled words
+highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
+" displaying bad whitespace 
+" highlight BadWhitespace ctermbg=red guibg=red
+
+" Navigation
+" Move vertically between windows
+let mapleader = " "
+nnoremap <leader>h :wincmd h<CR> 
+nnoremap <leader>j :wincmd j<CR> 
+nnoremap <leader>k :wincmd k<CR> 
+nnoremap <leader>l :wincmd l<CR> 
+noremap <TAB> ) " use tab to move to next sentence
+noremap <S-TAB> ( " use shift tab to move to the previous sentence
+"noremap <SPACE> <C-F> " use space to scroll down
+"set mouse=a        " Enable mouse usage (all modes)
+
 " Some useful commands
+noremap <Leader>W :w !sudo tee % > /dev/null 
 command! MakeTags !ctags -R .
 command! Wc !wc % 
+
+" Python
+command! Py  :w  | ! clear; python3 %
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Programming stuff
-set encoding=utf-8
-" Python
-command! Py ! python3 %
 " Flag unnecessary white spaces
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
 " PEP 8 indentation
 au Filetype python set
     \ tabstop=4
@@ -102,14 +109,19 @@ au Filetype python set
 " Standard Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " netrw: Default file browser included in vim
-let g:netrw_browse_split=2
-let g:netrw_banner=0
+" open files from netrw in a previous window, unless we're opening the current dir
+if argv(0) ==# '.'
+    let g:netrw_browse_split = 0
+else
+    let g:netrw_browse_split = 4
+endif
+let g:netrw_banner=1
 let g:netrw_winsize=25
+let g:netrw_liststyle = 3
 " Split vertically, open file explorer, resize.
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-
-
-
+nnoremap <leader>dd :Lexplore %:p:h<CR>
+nnoremap <Leader>da :Lexplore<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Non-Standard Plugins and stuff
@@ -132,16 +144,14 @@ colorscheme gruvbox
 set background=dark
 
 " Fix highlight for misspelled words
-hi SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
-
+highlight SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
 " Use the below highlight group when displaying bad whitespace is desired.
-highlight BadWhitespace ctermbg=red guibg=red
+"highlight BadWhitespace ctermbg=red guibg=red
 
 let python_highlight_all=1
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
-
 
 " YouCompleteMe mapping for go to definitions.
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -157,8 +167,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1 
 
-nnoremap <leader>] :lnext<CR>
+nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
+
+set hlsearch " highlight search pattern
 
 " vim-marked plugin settings  ONLY AVAILABLE FOR MACOS
 " let g:marked_app = "Marked 2"
@@ -182,4 +194,4 @@ au Filetype latex,tex,plaintex  set
     \ lbr
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words 
-"
+
