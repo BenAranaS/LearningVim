@@ -65,6 +65,7 @@ Command | Description
 `p` | opens a preview window
 `D` | delete file of empty dir
 `d` | creates a directory
+`R` | rename file
 
 ## Edition Commands
 `d`| delete
