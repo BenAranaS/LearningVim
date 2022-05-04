@@ -26,7 +26,7 @@ NonStandarPlugins:
 - vim-flake8: support for PEP8
 - vim-fugitive: git
 - vim-airline: a status bar
-
+- hardtime
 
 ### Install 
 #### vimrc_noplugins
@@ -34,6 +34,7 @@ Only standard plugins added.
 
 1. mkdir -p ~/.vim/undodir
 2. cp ./vimrc_files/vimrc_noplugins ~/.vimrc 
+2. cp ./.vim/plugins.vim ~/.vim/plugins.vim
 
 
 #### vimrc_plugins
