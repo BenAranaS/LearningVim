@@ -14,7 +14,8 @@ filetype indent on
 "set smartindent
 
 "Search & display
-set nowrap
+set wrap
+set linebreak
 set ignorecase
 set incsearch
 set hlsearch " highlight search pattern
@@ -95,6 +96,12 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Flag unnecessary white spaces
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
+" Settings for plain text files
+au BufRead,BufNewFile *.txt set
+    \ textwidth=79
+    \ wrapmargin=0
+
+
 " PEP 8 indentation
 au Filetype python set
     \ tabstop=4
@@ -120,8 +127,8 @@ let g:netrw_winsize=25
 let g:netrw_liststyle = 3
 " Split vertically, open file explorer, resize.
 " nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>dd :Lexplore %:p:h<CR>
-nnoremap <Leader>da :Lexplore<CR>
+nnoremap <leader>dd :Lexplore %:p:h <bar> :vert resize +10 <bar> :set number relativenumber <CR>
+nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <bar> :set number relativenumber<CR>
 
 " Functions
 " Function to source only if file exists {
