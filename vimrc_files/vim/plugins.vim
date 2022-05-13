@@ -89,7 +89,7 @@ au Filetype latex,tex,plaintex  set
     \ expandtab
     \ autoindent
     \ fileformat=unix
-    \ spell
+    \ spell spelllang=en_gb
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words 
 " section jumping
