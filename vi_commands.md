@@ -20,8 +20,6 @@ Command | Description
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
-`^E `| scroll the window down without moving cursor
-`^Y `| = up
 `ctrl+f `| move a screen forward a full page
 `ctrl+b`| move a screen backwards a full page 
 `ctrl+u `| move a screen forward a half page
@@ -66,6 +64,18 @@ Command | Description
 `D` | delete file of empty dir
 `d` | creates a directory
 `R` | rename file
+`v` | open file on new vertical window
+`t` | open file on new tab
+`gh` | hide/unhide hidden files, dot-files
+`cd` | make browsing dir current dir
+`md` | bookmark current dir
+`gb` | go to previous bookmarked dir 
+`qb` | List bookmarked dir and history
+`%` | open new file in current dir
+
+
+
+
 
 ## Edition Commands
 `d`| delete
@@ -95,7 +105,7 @@ Command | Description
 `ctrl+x + ctrl+o` | all autocompletion
 `set complete=.,w,b,u,t,i,kspell` |  (this file, window, buffer, ... spell when enabled
 `p  `| paste on place
-`P `| paste beforer cursor
+`P `| paste before cursor
 `yy`| copy line
 `x `| delete word
 `xp`| exchange letters
@@ -150,6 +160,10 @@ Command | Description
 `:jumps` | show list of jumps
 `:clearjumps` | clear jump list
 `'.`| move to last edited line
+`:MakeTags` | user-defined, create tags (requires ctags)
+`ctrl + ]` | jump to tag under cursor
+`g ctrl + ]` | ambiguous tags
+`ctrl + t` | jump back up the tag stack
 
 ## Macros
 
@@ -185,8 +199,8 @@ Command | Description
 `:b tab` | autocomplete with opened buffers
 `:b prefix tab` | autocomplete buffer starting with prefix
 `ctrl+w + #`| Increase horizontal window size
-`ctrl+> `| increase vertical window size
-`ctrl+<` | decrease vertical window size
+`ctrl+ w > `| increase vertical window size
+`ctrl+ w <` | decrease vertical window size
 `:30vs  `| vertical split from column 30
 `:vs `| vertical split
 `ctrl + ^` | caret: go to previous opened file
@@ -337,13 +351,17 @@ Command | Description
 `:TTemplate`| Select from a list of latex templates
 `FEM`| emph
 `FTS`| bold
+`FBF` | bfseries
 ``sf`| emph selected text
 ``st`| bold selected text
+
 `SSE`| section
 `SSS`| subsection
 `SS2`| subsubsection
+`EEN` | enumerate
 ``D `|  \Delta
-
+`[[` | go to previous section
+`]]` | go to previous section
 ## With default leader settings
 Command | Description
 --------- | -------------
