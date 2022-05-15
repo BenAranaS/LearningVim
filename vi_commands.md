@@ -32,6 +32,7 @@ Command | Description
 `a`| all
 `i`| in
 `t`| 'til
+`T`| 'til backward
 `f`| find forward
 `F`| find backward
 `/word `| search for word

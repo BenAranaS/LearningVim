@@ -3,14 +3,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' "theme
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree' 
 Plug 'vim-latex/vim-latex'
 Plug 'vim-syntastic/syntastic' " syntax checking 
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
-Plug 'bling/vim-airline' " Status bar
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'bling/vim-airline' " Status bar
+"Plug 'vim-airline/vim-airline-themes'
+
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
 call plug#end()
