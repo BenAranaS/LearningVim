@@ -11,19 +11,19 @@ Command | Description
 Command | Description
 ------------ | -------------
 `h j k l` | instead of move arrows
-`w` | move to the beginning of next word 
-`W` | move to the beginning of next big word 
-`e` | move to the end of next word 
-`E` | move to the end of next big word 
-`b` | move to the beginning of previous word 
-`B` | move to the beginning of previous big word 
+`w` | move to the beginning of next word
+`W` | move to the beginning of next big word
+`e` | move to the end of next word
+`E` | move to the end of next big word
+`b` | move to the beginning of previous word
+`B` | move to the beginning of previous big word
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
 `ctrl+f `| move a screen forward a full page
-`ctrl+b`| move a screen backwards a full page 
+`ctrl+b`| move a screen backwards a full page
 `ctrl+u `| move a screen forward a half page
-`ctrl+d`| move a screen backwards a half page 
+`ctrl+d`| move a screen backwards a half page
 `ctrl+e `| move a screen upward one line
 `ctrl+y`| move a screen downwards one line
 `zt` | moves display cursor on the window's top
@@ -51,7 +51,7 @@ Command | Description
 `g_` | last non-space character of the line
 `@:` | repeat last command from normal mode
 `*` | search for the current word and takes you to the next occurrence
-`%` | go to the pair of ( or ) 
+`%` | go to the pair of ( or )
 
 ## netrw
 Command | Description
@@ -69,12 +69,9 @@ Command | Description
 `gh` | hide/unhide hidden files, dot-files
 `cd` | make browsing dir current dir
 `md` | bookmark current dir
-`gb` | go to previous bookmarked dir 
+`gb` | go to previous bookmarked dir
 `qb` | List bookmarked dir and history
 `%` | open new file in current dir
-
-
-
 
 
 ## Edition Commands
@@ -120,7 +117,7 @@ Command | Description
 `V`| select current line
 `ctrl + v `| visual block
 `ctrl+v l4j `| select one column and 4 rows
-`ctrl+v l4j c - esc `| and chance space by - 
+`ctrl+v l4j c - esc `| and chance space by -
 `7G `| go to line 7
 `O `| add a line above and go to insert mode
 `o `| add a line below and insert there
@@ -149,13 +146,13 @@ Command | Description
 Command | Description
 ------------ | -------------
 `ma `| create mark a
-`mA`| create mark A 
+`mA`| create mark A
 `'a`| go to mark a
 
 ## TAGS
 Command | Description
 ------------ | -------------
-`ctrl+o `| go to move backward 
+`ctrl+o `| go to move backward
 `ctrl+i `| move backwards
 `:jumps` | show list of jumps
 `:clearjumps` | clear jump list
@@ -170,7 +167,7 @@ Command | Description
 `qq` | Start recording on register q
 `Esc + q` | Stop recording
 `@q` | apply macro on register q to current position
-`:5,10norm! @q` | apply macro in q on lines 5 to 10 
+`:5,10norm! @q` | apply macro in q on lines 5 to 10
 
 ## Multiple windows
 ### buffer & window
@@ -185,7 +182,7 @@ Command | Description
 `:e file.txt` | open/edit file.txt
 `:bd `| buffer delete
 `:e tab` | autocomplete when using <T>
-`:e d tab` | 
+`:e d tab` |
 `:e .` | open file explorer in current location
 `:e!` | refresh content of buffer from disk
 `:checktime`| manually refresh file
@@ -195,7 +192,7 @@ Command | Description
 `:b file.txt`| select buffer
 `:b 2 `| go to buffer 2
 `ctrl+g`| show file details line
-`:b file.tx` | move to buffer with file.txt 
+`:b file.tx` | move to buffer with file.txt
 `:b tab` | autocomplete with opened buffers
 `:b prefix tab` | autocomplete buffer starting with prefix
 `ctrl+w + #`| Increase horizontal window size
@@ -211,38 +208,38 @@ Command | Description
 
 ## Configuration files
 User defined configuration file: `~/.vimrc`
-`:source ~/.vimrc` | 
+`:source ~/.vimrc` |
 
 ### Settings
 Setting | Description
 --------- | -------------
-`set number` | 
-`set ruler` | 
-`set nocompatible` | 
-`syntax on` | 
-`filetype plugin on` | 
+`set number` |
+`set ruler` |
+`set nocompatible` |
+`syntax on` |
+`filetype plugin on` |
 `set autoread `| automatically refresh
 `set cursorline `| Highligh the current line
 `set cursorcolumn  `| highligh current column
 `noremap <TAB> ) `| use tab to move to next sentence
 `noremap <S-TAB> ( `| use shift tab to move to the previous sentence
-`set tabstop=2 shiftwidth=2 expandtab` | 
-`:retab` | 
+`set tabstop=2 shiftwidth=2 expandtab` |
+`:retab` |
 `noremap <SPACE> <C-F> `| use space to scroll down
 
 #### Abbreviations
 Command | Description
 --------- | -------------
-`:abb _ys *Youngstart*:` | 
-This is a test 
+`:abb _ys *Youngstart*:` |
+This is a test
 `ctrl + v`| to avoid expansion of abb
 `:set paste `| to avoid wrong formatting when pasting
-`:set nopaste` | 
+`:set nopaste` |
 
 ## Running commands
 Command | Description
 --------- | -------------
-`:! ls` | 
+`:! ls` |
 `:com! Py ! python %`| % is expanded to the name eof the file
 `:Py`| run the command
 `:comm! Wc !wc %`| run wc on the current file
@@ -258,11 +255,11 @@ Command | Description
 ### Buildon diff mode on vim
 Command | Description
 --------- | -------------
-`vim +d file1.txt file2.txt` | 
+`vim +d file1.txt file2.txt` |
 `do`| diff obtain
 `dp`| diff put
-`:diffsplit` | 
-`:vert diffsplit` | 
+`:diffsplit` |
+`:vert diffsplit` |
 `:set dip+=vertical `| diffopt=filler, vertical
 
 ##.vimrc
@@ -287,11 +284,11 @@ Command | Description
 ### Zip files
 Command | Description
 --------- | -------------
-`vim weather.zip` | 
+`vim weather.zip` |
 select and enter
 edit as usual
 
-###Opening files referenced in text 
+###Opening files referenced in text
 Command | Description
 --------- | -------------
 `gf `|go to file or url
@@ -301,20 +298,24 @@ Command | Description
 ### Using OS Commands
 Command | Description
 --------- | -------------
-`:!date` | 
-`:e file.txt` | 
-`:r !ls` | 
+`:!date` |
+`:e file.txt` |
+`:r !ls` |
 
-`:e file.json` | 
+`:e file.json` |
 `:%! jq . `| run current file (%) over jq,  formatting jsons
-`vimtutor` | 
+`vimtutor` |
+
+`command! Dts :%s/\s\+$//e ` | Delete trailing spaces command
+
+
 #######################################################################
 
 ##### Spelling
 Setting | Description
 --------- | -------------
-`:set spell spelllang=en_us` | 
-`:setlocal spell spelllang=en_us,en_gb,es_mx` | 
+`:set spell spelllang=en_us` |
+`:setlocal spell spelllang=en_us,en_gb,es_mx` |
 
 Command | Description
 --------- | -------------
@@ -324,20 +325,20 @@ Command | Description
 `zW `| stores the words in internal wordlist which is global
 `z= `| load spell suggestions
 `Ctrl + x + s `| in insert mode to load spell suggestions.
-`:spellrepall  `| command to apply the same change to all words that match. 
+`:spellrepall  `| command to apply the same change to all words that match.
 `]s  `| find the misspelled word after the cursor
 `[s `| find the misspelled word before the cursor
 `]S  `| same as ]s but only stop at bad words.
-`[S  `| same 
+`[S  `| same
 `:set nospell `| stop checking spell
 
 
 ##### Latex Suite
 vi /usr/share/doc/vim-latexsuite/README.Debian
- `filetype plugin on` | 
- `set grepprg=grep\ -nH\ $*` | 
- `filetype indent on` | 
- `let g:tex_flavor='latex'` | 
+ `filetype plugin on` |
+ `set grepprg=grep\ -nH\ $*` |
+ `filetype indent on` |
+ `let g:tex_flavor='latex'` |
 
 http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings.html
 
@@ -373,7 +374,7 @@ Command | Description
 `<space>ll `| Compile
 `<space>lv `| Visualise compiled file
 `za`| fold and unfold
-`set nofoldenable` | 
+`set nofoldenable` |
 `\rf `| fold up the entire file
 
 ## Syntastic
@@ -397,12 +398,12 @@ Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
 
 Command | Description
 --------- | -------------
-`iw `| inner word 
+`iw `| inner word
 `it `| inner tag
 `i" `| inner quotes
 `ip `| inner paragraph
-`:set relativenumber` | 
-`:set notrelativenumber` | 
+`:set relativenumber` |
+`:set notrelativenumber` |
 ## Surround
 "sorrounding"
 
