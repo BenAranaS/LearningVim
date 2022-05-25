@@ -66,25 +66,26 @@ set background=dark
 
 " Fix highlight for misspelled words
 highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
-" displaying bad whitespace 
+" displaying bad whitespace
 " highlight BadWhitespace ctermbg=red guibg=red
 
 " Navigation
 " Move vertically between windows
 let mapleader = " "
-nnoremap <leader>h :wincmd h<CR> 
-nnoremap <leader>j :wincmd j<CR> 
-nnoremap <leader>k :wincmd k<CR> 
-nnoremap <leader>l :wincmd l<CR> 
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
 noremap <TAB> ) " use tab to move to next sentence
 noremap <S-TAB> ( " use shift tab to move to the previous sentence
 "noremap <SPACE> <C-F> " use space to scroll down
 "set mouse=a        " Enable mouse usage (all modes)
 
 " Some useful commands
-noremap <Leader>W :w !sudo tee % > /dev/null 
+noremap <Leader>W :w !sudo tee % > /dev/null
 command! MakeTags !ctags -R .
-command! Wc !wc % 
+command! Wc !wc %
+command! Dts :%s/\s\+$//e
 
 " Python
 command! Py  :w  | ! clear; python3 %
@@ -129,8 +130,8 @@ let g:netrw_liststyle = 3
 let g:netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 " Split vertically, open file explorer, resize.
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>dd :Lexplore %:p:h <bar> :vert resize +10 <bar> :set number relativenumber <CR>
-nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <bar> :set number relativenumber<CR>
+nnoremap <leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
+nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
 
 " Functions
 " Function to source only if file exists {
