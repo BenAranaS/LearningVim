@@ -86,7 +86,10 @@ noremap <Leader>W :w !sudo tee % > /dev/null
 command! MakeTags !ctags -R .
 command! Wc !wc %
 command! Dts :%s/\s\+$//e
-
+command! Filename execute ":echo expand('%:p')"
+command! Config execute ":e $MYVIMRC"
+command! ConfigPlug execute ":e ~/.vim/plugins.vim"
+command! Reload execute ":source $MYVIMRC"
 " Python
 command! Py  :w  | ! clear; python3 %
 
@@ -99,7 +102,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " Settings for plain text files
 au BufRead,BufNewFile *.txt set
-    \ textwidth=79
     \ wrapmargin=0
     \ smartindent
     \ spell spelllang=en_gb
@@ -109,7 +111,6 @@ au Filetype python set
     \ tabstop=4
     \ softtabstop=4
     \ shiftwidth=4
-    \ textwidth=79
     \ expandtab
     \ autoindent
     \ fileformat=unix
