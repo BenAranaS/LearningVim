@@ -59,6 +59,8 @@ Command | Description
 ------------ | -------------
 `:Explore` | launch netrw explorer
 `Enter` | opens a dir or file
+`I` | toggle banner
+`%` | create a new file
 `-` | go to parent dir
 `u` | go to previous dir in history
 `p` | opens a preview window
@@ -69,10 +71,11 @@ Command | Description
 `t` | open file on new tab
 `gh` | hide/unhide hidden files, dot-files
 `cd` | make browsing dir current dir
+`gn` | Make current dir the tree root
+
 `md` | bookmark current dir
 `gb` | go to previous bookmarked dir
 `qb` | List bookmarked dir and history
-`%` | open new file in current dir
 
 
 ## Edition Commands
