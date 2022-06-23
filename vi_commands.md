@@ -73,7 +73,7 @@ Command | Description
 `cd` | make browsing dir current dir
 `gn` | Make current dir the tree root
 
-`md` | bookmark current dir
+`mb` | bookmark current dir
 `gb` | go to previous bookmarked dir
 `qb` | List bookmarked dir and history
 

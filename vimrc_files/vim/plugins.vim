@@ -13,6 +13,8 @@ Plug 'bling/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
+Plug 'mhinz/vim-startify'
+" Plug 'justinmk/vim-sneak'
 call plug#end()
 
 " From/for plugins
@@ -125,19 +127,19 @@ au Filetype latex,tex,plaintex  set
     \ spell spelllang=en_gb
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words 
-" section jumping
-noremap <buffer> <silent> ]] :<c-u>call TexJump2Section( v:count1, '' )<CR>
-noremap <buffer> <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
 
-" section jumping mapping
+" section jumping
+noremap <buffer> <silent> ,] :<c-u>call TexJump2Section( v:count1, '' )<CR>
+noremap <buffer> <silent> ,[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
+
 function! TexJump2Section( cnt, dir )
   let i = 0
   let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
-   let flags = 'W' . a:dir
-   while i < a:cnt && search( pat, flags ) > 0
-     let i = i+1
-   endwhile
-   let @/ = pat
+  let flags = 'W' . a:dir
+  while i < a:cnt && search( pat, flags ) > 0
+    let i = i+1
+  endwhile
+  let @/ = pat
 endfunction
 
 " Hardtime plugin options
@@ -145,9 +147,10 @@ let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
 let g:hardtime_allow_different_key = 1 " allow different keys repetions
 let g:hardtime_maxcount = 2 " start ignoring presses after n
-" Do not allow movement with arrows
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
 
+" Do not allow movement with arrows
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
+"

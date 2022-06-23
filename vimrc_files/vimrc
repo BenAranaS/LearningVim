@@ -46,6 +46,10 @@ set undodir=~/.vim/undodir
 set undofile
 set autowrite       " Automatically save before commands like :next and :make
 
+" Windows and buffers
+set hidden " allow changing buffer wo saving
+
+
 " Spelling
 set spell spelllang=en_us,en_gb " ,es_mx
 setlocal spell spelllang=en_gb
@@ -76,8 +80,12 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
-noremap <TAB> ) " use tab to move to next sentence
-noremap <S-TAB> ( " use shift tab to move to the previous sentence
+nnoremap <TAB> ) " use tab to move to next sentence
+nnoremap <S-TAB> ( " use shift tab to move to the previous sentence
+nnoremap <Up> :resize +4 <CR>
+nnoremap <Down> :resize -4 <CR>
+nnoremap <Left> :vertical resize +4 <CR>
+nnoremap <Right> :vertical resize -4 <CR>
 "noremap <SPACE> <C-F> " use space to scroll down
 "set mouse=a        " Enable mouse usage (all modes)
 
@@ -85,7 +93,7 @@ noremap <S-TAB> ( " use shift tab to move to the previous sentence
 noremap <Leader>W :w !sudo tee % > /dev/null
 command! MakeTags !ctags -R .
 command! Wc !wc %
-command! Dts :%s/\s\+$//e
+command! Dts :%s/\s\+$//e "delete trailing spaces
 command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
 command! ConfigPlug execute ":e ~/.vim/plugins.vim"
@@ -129,6 +137,16 @@ let g:netrw_banner=0
 let g:netrw_winsize=25
 let g:netrw_liststyle = 3
 let g:netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
+" hide dotfiles by default (gh)
+let ghregex='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide=ghregex
+
+"Open netrw at vimstartup
+"augroup ProjectDrawer
+"    autocmd!
+"    autocmd VimEnter * if argc() == 0 | Explore! | endif
+"augroup END
+
 " Split vertically, open file explorer, resize.
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
