@@ -49,6 +49,7 @@ let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set laststatus=2
 set t_Co=256
+" Unicode symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''

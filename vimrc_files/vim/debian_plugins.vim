@@ -11,9 +11,10 @@ Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
 "Plug 'bling/vim-airline' " Status bar
 "Plug 'vim-airline/vim-airline-themes'
-
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
+Plug 'mhinz/vim-startify'
+" Plug 'justinmk/vim-sneak'
 call plug#end()
 
 " From/for plugins
@@ -47,25 +48,22 @@ endif
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set laststatus=2
+set t_Co=256
+" Unicode symbols
 "let g:airline_left_sep = ''
 "let g:airline_left_alt_sep = ''
 "let g:airline_right_sep = ''
 "let g:airline_right_alt_sep = ''
 "let g:airline_symbols.branch = ''
+""let g:airline_symbols.branch = '⎇'
 "let g:airline_symbols.readonly = ''
 "let g:airline_symbols.linenr = '☰'
-"let g:airline_symbols.maxlinenr = ''
-"let g:airline_symbols.dirty='⚡'
-set t_Co=256
-" Unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = ' ␊:'
+"let g:airline_symbols.linenr = ' ␤:'
 "let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.maxlinenr = ' '
+""let g:airline_symbols.colnr = ' ㏇:'
+"let g:airline_symbols.dirty='⚡'
 "let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.paste = 'Þ'
 "let g:airline_symbols.paste = '∥'
@@ -124,26 +122,25 @@ au Filetype latex,tex,plaintex  set
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
-    \ textwidth=79
     \ expandtab
     \ autoindent
     \ fileformat=unix
     \ spell spelllang=en_gb
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words 
-" section jumping
-noremap <buffer> <silent> ]] :<c-u>call TexJump2Section( v:count1, '' )<CR>
-noremap <buffer> <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
 
-" section jumping mapping
+" section jumping
+noremap <buffer> <silent> ,] :<c-u>call TexJump2Section( v:count1, '' )<CR>
+noremap <buffer> <silent> ,[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
+
 function! TexJump2Section( cnt, dir )
   let i = 0
   let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
-   let flags = 'W' . a:dir
-   while i < a:cnt && search( pat, flags ) > 0
-     let i = i+1
-   endwhile
-   let @/ = pat
+  let flags = 'W' . a:dir
+  while i < a:cnt && search( pat, flags ) > 0
+    let i = i+1
+  endwhile
+  let @/ = pat
 endfunction
 
 " Hardtime plugin options
@@ -151,12 +148,10 @@ let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
 let g:hardtime_allow_different_key = 1 " allow different keys repetions
 let g:hardtime_maxcount = 2 " start ignoring presses after n
+
 " Do not allow movement with arrows
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
-
-
-
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
+"
