@@ -127,12 +127,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Flag unnecessary white spaces
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-" Settings for plain text files
-au BufRead,BufNewFile *.txt set
-    \ wrapmargin=0
-    \ smartindent
-    \ spell spelllang=en_gb
-
 " PEP 8 indentation
 au Filetype python set
     \ tabstop=4
@@ -141,6 +135,20 @@ au Filetype python set
     \ expandtab
     \ autoindent
     \ fileformat=unix
+
+augroup filetypedetect
+"  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
+"      \ filetype tex
+
+  "au BufNew,BufNewFile,BufRead *.md,*.markdown set  
+      \ setfiletype markdown  
+
+  " Settings for plain text files
+  au BufRead,BufNewFile *.txt set
+      \ wrapmargin=0
+      \ smartindent
+      \ spell spelllang=en_gb
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Standard Plugins

@@ -98,7 +98,7 @@ set hlsearch " highlight search pattern
 
 " LATEX 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-"filetype plugin on
+" filetype plugin on
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
 set shellslash
@@ -113,6 +113,11 @@ set iskeyword+=:
 let g:tex_flavor='latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
+
+"augroup filetypedetect
+"  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
+"      \ filetype=tex
+"augroup END
 
 au Filetype latex,tex,plaintex  set
     \ wrap 
