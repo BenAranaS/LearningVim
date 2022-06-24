@@ -82,10 +82,24 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <TAB> ) " use tab to move to next sentence
 nnoremap <S-TAB> ( " use shift tab to move to the previous sentence
-nnoremap <Up> :resize +4 <CR>
-nnoremap <Down> :resize -4 <CR>
-nnoremap <Left> :vertical resize +4 <CR>
-nnoremap <Right> :vertical resize -4 <CR>
+nnoremap <Up> :resize +6 <CR>
+nnoremap <Down> :resize -6 <CR>
+nnoremap <Left> :vertical resize +6 <CR>
+nnoremap <Right> :vertical resize -6 <CR>
+" Do not allow movement with arrows
+"nnoremap <Left> :echo "ArrowKeys Disabled!"<CR>
+vnoremap <Left> :<C-u>echo "ArrowKeys Disabled!"<CR>
+inoremap <Left> <C-o>:echo "ArrowKeys Disabled!"<CR>
+vnoremap <Right> :<C-u>echo "ArrowKeys Disabled!"<CR>
+inoremap <Right> <C-o>:echo "ArrowKeys Disabled!"<CR>
+vnoremap <Up> :<C-u>echo "ArrowKeys Disabled!"<CR>
+inoremap <Up> <C-o>:echo "ArrowKeys Disabled!"<CR>
+vnoremap <Down> :<C-u>echo "ArrowKeys Disabled!"<CR>
+inoremap <Down> <C-o>:echo "ArrowKeys Disabled!"<CR>
+"inoremap <Up> :echo "ArrowKeys Disabled!"<CR>
+"inoremap <Down> <NOP>
+"inoremap <Left> <NOP>
+"inoremap <Right> <NOP>
 "noremap <SPACE> <C-F> " use space to scroll down
 "set mouse=a        " Enable mouse usage (all modes)
 

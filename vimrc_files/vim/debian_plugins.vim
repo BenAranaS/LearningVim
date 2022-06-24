@@ -149,9 +149,4 @@ let g:hardtime_showmsg = 1 " show notification of hardtime enabled
 let g:hardtime_allow_different_key = 1 " allow different keys repetions
 let g:hardtime_maxcount = 2 " start ignoring presses after n
 
-" Do not allow movement with arrows
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
-"
+
