@@ -206,6 +206,20 @@ Command | Description
 `:vs `| vertical split
 `ctrl + ^` | caret: go to previous opened file
 
+## Personalised Commands
+Shortcut | Description
+--------- | -------------
+`leader dd`| open netrw on same dir as current file
+`leader da`| open netrw on home dir
+`leader p`| Switch to previous buffer
+`leader n`| Switch to next buffer
+`leader bd`| delete current buffer
+`leader b`| list buffers
+`,[`| go to previous section on latex
+`,[`| go to previous section on latex
+
+
+
 ## The read Command
 `:r` | read a file and dump it content in current buffer
 `:-1r file.txt `| adds content of file.txt at the beginning of file

@@ -27,6 +27,7 @@ set showmatch
 set smartcase
 set path+=**
 set wildmenu
+set scrolloff=4
 syntax on
 set noerrorbells
 "set showcmd        " Show (partial) command in status line.
@@ -76,12 +77,14 @@ highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 " Navigation
 " Move vertically between windows
 let mapleader = " "
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
+nnoremap <Leader>h :wincmd h<CR>
+nnoremap <Leader>j :wincmd j<CR>
+nnoremap <Leader>k :wincmd k<CR>
+nnoremap <Leader>l :wincmd l<CR>
+
 nnoremap <TAB> ) " use tab to move to next sentence
 nnoremap <S-TAB> ( " use shift tab to move to the previous sentence
+
 nnoremap <Up> :resize +6 <CR>
 nnoremap <Down> :resize -6 <CR>
 nnoremap <Left> :vertical resize +6 <CR>
@@ -96,11 +99,11 @@ vnoremap <Up> :<C-u>echo "ArrowKeys Disabled!"<CR>
 inoremap <Up> <C-o>:echo "ArrowKeys Disabled!"<CR>
 vnoremap <Down> :<C-u>echo "ArrowKeys Disabled!"<CR>
 inoremap <Down> <C-o>:echo "ArrowKeys Disabled!"<CR>
-"inoremap <Up> :echo "ArrowKeys Disabled!"<CR>
-"inoremap <Down> <NOP>
-"inoremap <Left> <NOP>
-"inoremap <Right> <NOP>
 "noremap <SPACE> <C-F> " use space to scroll down
+noremap <Leader>n :bn<CR>
+noremap <Leader>p :bp<CR>
+noremap <Leader>b :ls<CR>
+noremap <Leader>bd :bd<CR>
 "set mouse=a        " Enable mouse usage (all modes)
 
 " Some useful commands
@@ -162,8 +165,8 @@ let g:netrw_list_hide=ghregex
 "augroup END
 
 " Split vertically, open file explorer, resize.
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
+nnoremap <Leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
 nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
 
 " Functions
@@ -174,8 +177,6 @@ function! SourceIfExists(file)
   endif
 endfunction
 " }
-
-
 
 " Adding plugins!
 call SourceIfExists("~/.vim/plugins.vim")
