@@ -149,4 +149,6 @@ let g:hardtime_showmsg = 1 " show notification of hardtime enabled
 let g:hardtime_allow_different_key = 1 " allow different keys repetions
 let g:hardtime_maxcount = 2 " start ignoring presses after n
 
+" Startify Configuration
+nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
