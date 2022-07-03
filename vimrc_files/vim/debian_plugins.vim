@@ -152,3 +152,30 @@ let g:hardtime_maxcount = 2 " start ignoring presses after n
 " Startify Configuration
 nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
+" vimwiki Configuration
+" let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
+                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" vimwiki custom md2HTML
+let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
+  \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
+  \ 'syntax': 'markdown',
+  \ 'ext': '.md',
+  \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
+
+
+" instant-markdown "Uncomment to override defaults:
+map <Leader>md :InstantMarkdownPreview<CR>
+map <Leader>ms :InstantMarkdownStop<CR>
+
+"let g:instant_markdown_slow = 1
+"let g:instant_markdown_autostart = 0
+"let g:instant_markdown_open_to_the_world = 1
+"let g:instant_markdown_allow_unsafe_content = 1
+"let g:instant_markdown_allow_external_content = 0
+let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_mermaid = 1
+"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+"let g:instant_markdown_autoscroll = 0
+"let g:instant_markdown_port = 8888
+"let g:instant_markdown_python = 1
