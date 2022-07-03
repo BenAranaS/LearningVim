@@ -15,6 +15,8 @@ Plug 'tpope/vim-fugitive'  "git support
 Plug 'takac/vim-hardtime' " stop using arrows!
 Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
+Plug 'vimwiki/vimwiki'
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 call plug#end()
 
 " From/for plugins
