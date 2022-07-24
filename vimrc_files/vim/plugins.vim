@@ -17,6 +17,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+Plug 'dpelle/vim-LanguageTool'
 call plug#end()
 
 " From/for plugins
@@ -103,7 +104,7 @@ set hlsearch " highlight search pattern
 " filetype plugin on
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
-set shellslash
+" set shellslash
 " TIP: if you write your \label's as \label{fig:something}, then if you
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
@@ -186,3 +187,6 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
+
+" LanguageTool Configuration
+let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'

@@ -49,6 +49,7 @@ set autowrite       " Automatically save before commands like :next and :make
 
 " Windows and buffers
 set hidden " allow changing buffer wo saving
+set eadirection=hor "keep size of windows after closing a horizontal one.
 
 
 " Spelling
@@ -106,6 +107,11 @@ noremap <Leader>n :bn<CR>
 noremap <Leader>p :bp<CR>
 noremap <Leader>b :ls<CR>
 noremap <Leader>bd :bd<CR>
+
+"Press F5 in normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
+:nnoremap <Leader>T "=strftime("%c")<CR>P
+":inoremap <Leader>T <C-R>=strftime("%c")<CR>
+
 "set mouse=a        " Enable mouse usage (all modes)
 
 " Some useful commands
@@ -117,6 +123,7 @@ command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
 command! ConfigPlug execute ":e ~/.vim/plugins.vim"
 command! Reload execute ":source $MYVIMRC"
+
 " Python
 command! Py  :w  | ! clear; python3 %
 
