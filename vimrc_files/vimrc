@@ -10,6 +10,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab  "tab char to spaces
+set autoindent
+set breakindent  
 " OPTIONAL: This enables automatic indentation as you type.
 filetype indent on
 "set smartindent
