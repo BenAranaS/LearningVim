@@ -4,11 +4,12 @@
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' "theme
 Plug 'ycm-core/YouCompleteMe'
-Plug 'mbbill/undotree' 
+Plug 'mbbill/undotree'
 Plug 'vim-latex/vim-latex'
-Plug 'vim-syntastic/syntastic' " syntax checking 
+Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
+Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itspriddle/vim-marked' "markdown plug
@@ -17,7 +18,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
-Plug 'dpelle/vim-LanguageTool'
+"Plug 'dpelle/vim-LanguageTool'
 call plug#end()
 
 " From/for plugins
@@ -40,7 +41,7 @@ nnoremap <leader>u :UndotreeShow<CR>
 let g:airline#extensions#tabline#enabled = 1 "enable list of buffers
 let g:airline_theme='dark'
 " Note: You must define the dictionary first before setting values.
-" Also, it's a good idea to check whether it exists as to avoid 
+" Also, it's a good idea to check whether it exists as to avoid
 " accidentally overwriting its contents.
 
 if !exists('g:airline_symbols')
@@ -72,7 +73,7 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 " If you only see boxes here it may be because your system doesn't have
-" the correct fonts. Try it in vim first and if that fails see the help 
+" the correct fonts. Try it in vim first and if that fails see the help
 " pages for vim-airline :help airline-troubleshooting
 
 
@@ -88,7 +89,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_highlighting = 1 
+let g:syntastic_enable_highlighting = 1
 
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
@@ -99,7 +100,7 @@ set hlsearch " highlight search pattern
 " let g:marked_app = "Marked 2"
 " let g:marked_filetypes = ["markdown", "mkd", "ghmarkdown", "vimwiki", "md"]
 
-" LATEX 
+" LATEX
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
 " filetype plugin on
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
@@ -123,9 +124,9 @@ let g:tex_indent_brace = 1
 "augroup END
 
 au Filetype latex,tex,plaintex  set
-    \ wrap 
-    \ breakindent  
-    \ formatoptions=l 
+    \ wrap
+    \ breakindent
+    \ formatoptions=l
     \ lbr
     \ tabstop=2
     \ softtabstop=2
@@ -135,7 +136,7 @@ au Filetype latex,tex,plaintex  set
     \ fileformat=unix
     \ spell spelllang=en_gb
 " Indents word-wrapped lines as much as the 'parent' line
-" Ensures word-wrap does not split words 
+" Ensures word-wrap does not split words
 
 " section jumping
 noremap <buffer> <silent> ,] :<c-u>call TexJump2Section( v:count1, '' )<CR>

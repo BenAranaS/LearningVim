@@ -1,5 +1,6 @@
 " Default
 set nocompatible
+let mapleader = " "
 
 " Enable plugins
 filetype plugin on
@@ -53,8 +54,11 @@ set eadirection=hor "keep size of windows after closing a horizontal one.
 
 
 " Spelling
-set spell spelllang=en_us,en_gb " ,es_mx
-setlocal spell spelllang=en_gb
+set spell 
+set spelllang=en_gb,en_us " ,es_mx
+"setlocal spell spelllang=en_gb
+nnoremap <Leader>es :setlocal spelllang=es_mx <CR>
+nnoremap <Leader>en :setlocal spelllang=en_gb <CR>
 
 " Autocomplete
 set complete=.,w,b,u,t,i,kspell
@@ -77,7 +81,6 @@ highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 
 " Navigation
 " Move vertically between windows
-let mapleader = " "
 nnoremap <Leader>h :wincmd h<CR>
 nnoremap <Leader>j :wincmd j<CR>
 nnoremap <Leader>k :wincmd k<CR>
@@ -108,9 +111,9 @@ noremap <Leader>p :bp<CR>
 noremap <Leader>b :ls<CR>
 noremap <Leader>bd :bd<CR>
 
-"Press F5 in normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
-:nnoremap <Leader>T "=strftime("%c")<CR>P
-":inoremap <Leader>T <C-R>=strftime("%c")<CR>
+"In normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
+nnoremap <Leader>tt "=strftime("%c")<CR>P
+"inoremap <Leader>tt <C-R>=strftime("%c")<CR>
 
 "set mouse=a        " Enable mouse usage (all modes)
 

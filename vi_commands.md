@@ -17,6 +17,7 @@ Command | Description
 `E` | move to the end of next big word
 `b` | move to the beginning of previous word
 `B` | move to the beginning of previous big word
+`ge` | move to the end of the previous word
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
@@ -53,6 +54,12 @@ Command | Description
 `@:` | repeat last command from normal mode
 `*` | search for the current word and takes you to the next occurrence
 `%` | go to the pair of ( or )
+`g~` | toggle case
+`gU` | all to uppercase
+`gu` | all to lowercase
+`:changes` | shows the list of changes
+`g;` | Move to the last change
+`g,` | Move to the next (more recent) change
 
 ## netrw
 Command | Description
@@ -156,8 +163,8 @@ Command | Description
 ## TAGS
 Command | Description
 ------------ | -------------
-`ctrl+o `| go to move backward
-`ctrl+i `| move backwards
+`ctrl+o `| go to previous jump
+`ctrl+i `| move to more recent jumps
 `:jumps` | show list of jumps
 `:clearjumps` | clear jump list
 `'.`| move to last edited line
