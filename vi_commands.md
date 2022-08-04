@@ -86,6 +86,8 @@ Command | Description
 
 
 ## Edition Commands
+Command | Description
+------------ | -------------
 `d`| delete
 `c`| change ( delete and place in insert mode)
 `y  `| yank, copy
@@ -174,7 +176,8 @@ Command | Description
 `ctrl + t` | jump back up the tag stack
 
 ## Macros
-
+Command | Description
+------------ | -------------
 `qq` | Start recording on register q
 `Esc + q` | Stop recording
 `@q` | apply macro on register q to current position
@@ -228,6 +231,8 @@ Shortcut | Description
 
 
 ## The read Command
+Command | Description
+------------ | -------------
 `:r` | read a file and dump it content in current buffer
 `:-1r file.txt `| adds content of file.txt at the beginning of file
 
@@ -255,8 +260,7 @@ Setting | Description
 #### Abbreviations
 Command | Description
 --------- | -------------
-`:abb _ys *Youngstart*:` |
-This is a test
+`:abb _ys *Youngstart*:` | This is a test
 `ctrl + v`| to avoid expansion of abb
 `:set paste `| to avoid wrong formatting when pasting
 `:set nopaste` |
@@ -326,15 +330,12 @@ Command | Description
 `:!date` |
 `:e file.txt` |
 `:r !ls` |
-
 `:e file.json` |
 `:%! jq . `| run current file (%) over jq,  formatting jsons
 `vimtutor` |
-
 `command! Dts :%s/\s\+$//e ` | Delete trailing spaces command
 
-
-#######################################################################
+---
 
 ##### Spelling
 Setting | Description
@@ -360,6 +361,8 @@ Command | Description
 
 ##### Latex Suite
 vi /usr/share/doc/vim-latexsuite/README.Debian
+Command | Description
+--------- | -------------
  `filetype plugin on` |
  `set grepprg=grep\ -nH\ $*` |
  `filetype indent on` |
@@ -380,7 +383,6 @@ Command | Description
 `FBF` | bfseries
 ``sf`| emph selected text
 ``st`| bold selected text
-
 `SSE`| section
 `SSS`| subsection
 `SS2`| subsubsection
@@ -388,11 +390,13 @@ Command | Description
 ``D `|  \Delta
 `[[` | go to previous section
 `]]` | go to previous section
+
 ## With default leader settings
 Command | Description
 --------- | -------------
 `\ll `| Compile
 `\lv `| Visualise compiled file
+
 ## After mapping leader key to space:
 Command | Description
 --------- | -------------
@@ -429,21 +433,29 @@ Command | Description
 `ip `| inner paragraph
 `:set relativenumber` |
 `:set notrelativenumber` |
-## Surround
-"sorrounding"
 
+## Surround
+Command | Description
+--------- | -------------
+`ds"` | delete surrounding \"
+`cs"` | change surrounding \"
+`ysiw]` | add surrounding [] to iw
+`[` | adds spaces
+`]` | do not add spaces
 
 ### Marked
-`:MarkedOpen[!]  `|        Open the current Markdown buffer in Marked. Call with
-                        a bang to prevent Marked from stealing focus from Vim.
-                        Documents opened in Marked are tracked and closed
-                        automatically when you quit Vim.
+Command | Description
+--------- | -------------
+`:MarkedOpen[!]  `|        Open the current Markdown buffer in Marked. Call with a bang to prevent Marked from stealing focus from Vim. Documents opened in Marked are tracked and closed automatically when you quit Vim.
+`:MarkedQuit     `|        Close the current Markdown buffer in Marked. Quits Marked if there are no other documents open.
+`:MarkedToggle[!] `|       If the current Markdown buffer is already open in Marked, calls :MarkedQuit. If not, calls :MarkedOpen[!].
 
-`:MarkedQuit     `|        Close the current Markdown buffer in Marked. Quits
-                        Marked if there are no other documents open.
-
-`:MarkedToggle[!] `|       If the current Markdown buffer is already open in
-                        Marked, calls :MarkedQuit. If not, calls
-                        :MarkedOpen[!].
+## Startify
+Command | Description
+--------- | -------------
+`:SLoad` | load a session
+`:SSave` |  save a session
+`:SDelete` |delete a session
+`:SClose` | close current session
 
 ## Using Plug-Vim

@@ -114,8 +114,8 @@ noremap <Leader>b :ls<CR>
 noremap <Leader>bd :bd<CR>
 
 "In normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
-nnoremap <Leader>tt "=strftime("%c")<CR>P
-"inoremap <Leader>tt <C-R>=strftime("%c")<CR>
+nnoremap TTT "=strftime(" %c")<CR>P
+inoremap TTT <C-R>=strftime(" %c")<CR>
 
 "set mouse=a        " Enable mouse usage (all modes)
 
