@@ -123,6 +123,17 @@ let g:tex_indent_brace = 1
 "      \ filetype=tex
 "augroup END
 
+" section jumping
+function! TexJump2Section( cnt, dir )
+    let i = 0
+    let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
+    let flags = 'W' . a:dir
+    while i < a:cnt && search( pat, flags ) > 0
+        let i = i+1
+    endwhile
+    let @/ = pat
+endfunction
+
 au Filetype latex,tex,plaintex  set
     \ wrap
     \ breakindent
@@ -135,22 +146,14 @@ au Filetype latex,tex,plaintex  set
     \ autoindent
     \ fileformat=unix
     \ spell spelllang=en_gb
+    \ conceallevel=2 "allows translation of characters to utf
+  nnoremap <silent> ]] :<c-u>call TexJump2Section( v:count1, '' )  <bar> <ESC> zO 
+  nnoremap <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' ) <CR>
+  let b:tex_stylish = 1
+  
+
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words
-
-" section jumping
-noremap <buffer> <silent> ,] :<c-u>call TexJump2Section( v:count1, '' )<CR>
-noremap <buffer> <silent> ,[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
-
-function! TexJump2Section( cnt, dir )
-  let i = 0
-  let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
-  let flags = 'W' . a:dir
-  while i < a:cnt && search( pat, flags ) > 0
-    let i = i+1
-  endwhile
-  let @/ = pat
-endfunction
 
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers

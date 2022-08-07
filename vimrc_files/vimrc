@@ -88,8 +88,18 @@ nnoremap <Leader>j :wincmd j<CR>
 nnoremap <Leader>k :wincmd k<CR>
 nnoremap <Leader>l :wincmd l<CR>
 
-nnoremap <TAB> ) " use tab to move to next sentence
-nnoremap <S-TAB> ( " use shift tab to move to the previous sentence
+" Tab and Shift Tab config
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+"" use tab to move to next sentence
+"nnoremap <TAB> ) 
+"" use shift tab to move to the previous sentence
+"nnoremap <S-TAB> ( 
+
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
