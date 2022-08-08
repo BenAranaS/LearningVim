@@ -10,7 +10,7 @@ Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
 Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline' " Status bar
+"Plug 'bling/vim-airline' " Status bar
 "Plug 'vim-airline/vim-airline-themes'
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
@@ -161,17 +161,12 @@ let g:hardtime_maxcount = 2 " start ignoring presses after n
 " Startify Configuration
 nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
-" vimwiki Configuration
-" let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
-                       \ 'syntax': 'markdown', 'ext': '.md'}]
-
 " vimwiki custom md2HTML
 let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
   \ 'syntax': 'markdown',
   \ 'ext': '.md',
   \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
-
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -187,7 +182,7 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
-"let g:instant_markdown_python = 1
+let g:instant_markdown_python = 1
 
 " LanguageTool Configuration
 "let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'

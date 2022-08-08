@@ -287,7 +287,7 @@ Command | Description
 `:vert diffsplit` |
 `:set dip+=vertical `| diffopt=filler, vertical
 
-##.vimrc
+## .vimrc
 Command | Description
 --------- | -------------
 `set diffopt+=vertical` |show diff side by side
@@ -313,7 +313,7 @@ Command | Description
 select and enter
 edit as usual
 
-###Opening files referenced in text
+### Opening files referenced in text
 Command | Description
 --------- | -------------
 `gf `|go to file or url
