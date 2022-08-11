@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' "theme
 Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree'
-Plug 'vim-latex/vim-latex'
+"Plug 'vim-latex/vim-latex'
 Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
@@ -16,8 +16,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'takac/vim-hardtime' " stop using arrows!
 Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
-Plug 'vimwiki/vimwiki'
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+"Plug 'vimwiki/vimwiki'
+"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 "Plug 'dpelle/vim-LanguageTool'
 call plug#end()
 
