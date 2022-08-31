@@ -34,12 +34,10 @@ set background=dark
 highlight SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
 " Use the below highlight group when displaying bad whitespace is desired.
 "highlight BadWhitespace ctermbg=red guibg=red
-
 let python_highlight_all=1
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
-
 
 " vim-airline options
 let g:airline#extensions#tabline#enabled = 1 "enable list of buffers
@@ -47,11 +45,9 @@ let g:airline_theme='dark'
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid
 " accidentally overwriting its contents.
-
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
 " powerline symbols
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
@@ -88,17 +84,13 @@ nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
-
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
-
-set hlsearch " highlight search pattern
 
 " vim-marked plugin settings  ONLY AVAILABLE FOR MACOS
 " let g:marked_app = "Marked 2"
@@ -114,19 +106,16 @@ set hlsearch " highlight search pattern
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 set iskeyword+=:
-
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
-
 "augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype=tex
 "augroup END
-
 " section jumping
 function! TexJump2Section( cnt, dir )
     let i = 0
@@ -155,10 +144,6 @@ au Filetype latex,tex,plaintex  set
   nnoremap <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' ) <CR>
   let b:tex_stylish = 1
   
-
-" Indents word-wrapped lines as much as the 'parent' line
-" Ensures word-wrap does not split words
-
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
@@ -171,7 +156,6 @@ nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 " vimwiki Configuration
 " let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
-
 " vimwiki custom md2HTML
 let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
@@ -179,11 +163,9 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'ext': '.md',
   \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
 
-
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
 map <Leader>ms :InstantMarkdownStop<CR>
-
 "let g:instant_markdown_slow = 1
 "let g:instant_markdown_autostart = 0
 "let g:instant_markdown_open_to_the_world = 1
@@ -201,6 +183,8 @@ let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
 
 " Git / Rubarb / Signify
 " Change these if you want
+" default updatetime 4000ms is not good for async update
+set updatetime=100
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '_'
 let g:signify_sign_delete_first_line = '‾'
@@ -213,6 +197,7 @@ nmap <leader>gj <plug>(signify-next-hunk)
 nmap <leader>gk <plug>(signify-prev-hunk)
 nmap <leader>gJ 9999<leader>gJ
 nmap <leader>gK 9999<leader>gk
+nnoremap <silent> <Leader>st :SignifyToggle<CR>
 " If you like colors instead
 highlight SignifySignAdd                  ctermbg=darkgreen                guibg=#00ff00
 highlight SignifySignDelete ctermfg=black ctermbg=red    guifg=#ffffff guibg=#ff0000
