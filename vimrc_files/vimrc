@@ -1,6 +1,7 @@
 " Default
 set nocompatible
 let mapleader = " "
+let maplocalleader = ','
 
 " Enable plugins
 filetype plugin on

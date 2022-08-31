@@ -459,3 +459,28 @@ Command | Description
 `:SClose` | close current session
 
 ## Using Plug-Vim
+
+# GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
+## Signify
+:SignifyToggle
+:SignifyToggleHighlight
+
+
+## Git
+:Git add
+:Git commit
+...
+:Git blame
+Gdiffsplit
+GRemove
+GBrowse
+
+## GV - A git commit browser
+:GV
+:GV!         # will only list commits that affected the current file
+:GV?         # fills the location list with the revisions of the current file
+:GV          # or :GV? can be used in visual mode to track the changes in the selected lines.
+
+
+## Which Key [Source](https://www.chrisatmachine.com/blog/category/neovim/15-which-key)
+<leader> {char}
