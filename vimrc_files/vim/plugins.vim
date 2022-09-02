@@ -30,11 +30,8 @@ call plug#end()
 colorscheme gruvbox
 set background=dark
 
-" Fix highlight for misspelled words
-highlight SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
-" Use the below highlight group when displaying bad whitespace is desired.
-"highlight BadWhitespace ctermbg=red guibg=red
-let python_highlight_all=1
+" resetting highlight options
+set hlsearch
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
