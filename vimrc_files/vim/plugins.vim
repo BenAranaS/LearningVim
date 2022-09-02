@@ -167,10 +167,6 @@ let g:hardtime_maxcount = 4 " start ignoring presses after n
 " Startify Configuration
 nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
-" vimwiki Configuration
-" let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
-                       \ 'syntax': 'markdown', 'ext': '.md'}]
-
 " vimwiki custom md2HTML
 let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'path_html': '~/Documents/VimWiki/VimWiki_html',

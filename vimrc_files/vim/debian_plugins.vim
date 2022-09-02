@@ -9,6 +9,9 @@ Plug 'vim-latex/vim-latex'
 Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-surround'
 "Plug 'bling/vim-airline' " Status bar
 "Plug 'vim-airline/vim-airline-themes'
@@ -123,6 +126,17 @@ let g:tex_indent_brace = 1
 "      \ filetype=tex
 "augroup END
 
+" section jumping
+function! TexJump2Section( cnt, dir )
+    let i = 0
+    let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
+    let flags = 'W' . a:dir
+    while i < a:cnt && search( pat, flags ) > 0
+        let i = i+1
+    endwhile
+    let @/ = pat
+endfunction
+
 au Filetype latex,tex,plaintex  set
     \ wrap
     \ breakindent
@@ -135,28 +149,20 @@ au Filetype latex,tex,plaintex  set
     \ autoindent
     \ fileformat=unix
     \ spell spelllang=en_gb
+    \ conceallevel=2 "allows translation of characters to utf
+  nnoremap <silent> ]] :<c-u>call TexJump2Section( v:count1, '' )  <bar> <ESC> zO 
+  nnoremap <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' ) <CR>
+  let b:tex_stylish = 1
+  
+
 " Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words
-
-" section jumping
-noremap <buffer> <silent> ,] :<c-u>call TexJump2Section( v:count1, '' )<CR>
-noremap <buffer> <silent> ,[ :<c-u>call TexJump2Section( v:count1, 'b' )<CR>
-
-function! TexJump2Section( cnt, dir )
-  let i = 0
-  let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
-  let flags = 'W' . a:dir
-  while i < a:cnt && search( pat, flags ) > 0
-    let i = i+1
-  endwhile
-  let @/ = pat
-endfunction
 
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
 let g:hardtime_allow_different_key = 1 " allow different keys repetions
-let g:hardtime_maxcount = 2 " start ignoring presses after n
+let g:hardtime_maxcount = 4 " start ignoring presses after n
 
 " Startify Configuration
 nnoremap <silent> <leader>ss <Cmd>Startify<CR>
@@ -167,6 +173,7 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'syntax': 'markdown',
   \ 'ext': '.md',
   \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
+
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -185,4 +192,30 @@ let g:instant_markdown_mathjax = 1
 let g:instant_markdown_python = 1
 
 " LanguageTool Configuration
-"let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
+let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
+
+
+" Git / Rubarb / Signify
+" Change these if you want
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '_'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
+
+" I find the numbers disctracting
+"let g:signify_sign_show_count = 0
+"let g:signify_sign_show_text = 1
+
+
+" Jump though hunks
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+nmap <leader>gJ 9999<leader>gJ
+nmap <leader>gK 9999<leader>gk
+
+
+" If you like colors instead
+highlight SignifySignAdd                  ctermbg=green                guibg=#00ff00
+highlight SignifySignDelete ctermfg=black ctermbg=red    guifg=#ffffff guibg=#ff0000
+highlight SignifySignChange ctermfg=black ctermbg=yellow guifg=#000000 guibg=#ffff00
+
