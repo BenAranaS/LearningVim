@@ -92,11 +92,11 @@ nnoremap <Leader>k :wincmd k<CR>
 nnoremap <Leader>l :wincmd l<CR>
 
 " Tab and Shift Tab config
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-inoremap <S-Tab> <C-D>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+nnoremap <Leader><Tab> >>_
+nnoremap <Leader><S-Tab> <<_
+inoremap <Leader><S-Tab> <C-D>
+vnoremap <Leader><Tab> >gv
+vnoremap <Leader><S-Tab> <gv
 
 "" use tab to move to next sentence
 "nnoremap <TAB> ) 
