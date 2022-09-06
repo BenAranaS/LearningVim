@@ -9,20 +9,30 @@ Plug 'vim-latex/vim-latex'
 Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
-Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-commentary' " comment stff out
 Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/gv.vim'
 Plug 'bling/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
-Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 "Plug 'dpelle/vim-LanguageTool'
 Plug 'liuchengxu/vim-which-key'
+Plug 'preservim/tagbar'
+Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-autoformat/vim-autoformat'
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Use release branch (recommend)
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " From/for plugins
@@ -75,7 +85,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 
 
 " YouCompleteMe mapping for go to definitions.
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Syntastics Settings
 set statusline+=%#warningmsg#
@@ -204,3 +215,14 @@ set timeoutlen=500
 "let g:maplocalleader = ','
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
+
+"TagBar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_show_linenumbers=2
+let g:tagbar_autoclose = 0
+
+
+" Vim-autoformat
+noremap <F3> :Autoformat<CR>
+

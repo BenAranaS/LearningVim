@@ -149,7 +149,6 @@ command! Py  :w  | ! clear; python3 %
 " reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-
 let python_highlight_all=1
 " PEP 8 indentation
 au Filetype python set
@@ -159,6 +158,21 @@ au Filetype python set
     \ expandtab
     \ autoindent
     \ fileformat=unix
+    \ foldmethod=indent
+    \ foldlevel=99
+
+" Dealing with python's virtual environments
+  "execfile(activate_this, dict(__file__=activate_this))
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+EOF
+
+
 augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype tex
