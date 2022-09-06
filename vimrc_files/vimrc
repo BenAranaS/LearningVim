@@ -92,11 +92,11 @@ nnoremap <Leader>k :wincmd k<CR>
 nnoremap <Leader>l :wincmd l<CR>
 
 " Tab and Shift Tab config
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-inoremap <S-Tab> <C-D>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+nnoremap <Leader><Tab> >>_
+nnoremap <Leader><S-Tab> <<_
+inoremap <Leader><S-Tab> <C-D>
+vnoremap <Leader><Tab> >gv
+vnoremap <Leader><S-Tab> <gv
 
 "" use tab to move to next sentence
 "nnoremap <TAB> ) 
@@ -163,14 +163,14 @@ au Filetype python set
 
 " Dealing with python's virtual environments
   "execfile(activate_this, dict(__file__=activate_this))
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
-EOF
+"py3 << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+"EOF
 
 
 augroup filetypedetect

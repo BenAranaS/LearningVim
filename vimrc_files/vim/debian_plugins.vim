@@ -9,19 +9,30 @@ Plug 'mbbill/undotree'
 Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
-Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-commentary' " comment stff out
 Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-surround'
-"Plug 'bling/vim-airline' " Status bar
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/gv.vim'
+Plug 'bling/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'itspriddle/vim-marked' "markdown plug
 Plug 'takac/vim-hardtime' " stop using arrows!
-Plug 'mhinz/vim-startify'
-" Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak' " more efficient motions??
 "Plug 'vimwiki/vimwiki'
 "Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 "Plug 'dpelle/vim-LanguageTool'
+" Plug 'liuchengxu/vim-which-key'
+Plug 'preservim/tagbar'
+Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-autoformat/vim-autoformat'
+" post install (yarn install | npm install) then load plugin only for editing supported files
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Use release branch (recommend)
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " From/for plugins
@@ -29,16 +40,11 @@ call plug#end()
 colorscheme gruvbox
 set background=dark
 
-" Fix highlight for misspelled words
-highlight SpellBad term=NONE cterm=underline ctermfg=DarkMagenta
-" Use the below highlight group when displaying bad whitespace is desired.
-"highlight BadWhitespace ctermbg=red guibg=red
-
-let python_highlight_all=1
+" resetting highlight options
+set hlsearch
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
-
 
 " vim-airline options
 let g:airline#extensions#tabline#enabled = 1 "enable list of buffers
@@ -46,11 +52,9 @@ let g:airline_theme='dark'
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid
 " accidentally overwriting its contents.
-
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
 " powerline symbols
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
@@ -81,23 +85,20 @@ set t_Co=256
 
 
 " YouCompleteMe mapping for go to definitions.
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Syntastics Settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
-
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
-
-set hlsearch " highlight search pattern
 
 " vim-marked plugin settings  ONLY AVAILABLE FOR MACOS
 " let g:marked_app = "Marked 2"
@@ -113,19 +114,16 @@ set hlsearch " highlight search pattern
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 set iskeyword+=:
-
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 let g:tex_indent_items = 1
 let g:tex_indent_brace = 1
-
 "augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype=tex
 "augroup END
-
 " section jumping
 function! TexJump2Section( cnt, dir )
     let i = 0
@@ -154,10 +152,6 @@ au Filetype latex,tex,plaintex  set
   nnoremap <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' ) <CR>
   let b:tex_stylish = 1
   
-
-" Indents word-wrapped lines as much as the 'parent' line
-" Ensures word-wrap does not split words
-
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
@@ -174,11 +168,9 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'ext': '.md',
   \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
 
-
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
 map <Leader>ms :InstantMarkdownStop<CR>
-
 "let g:instant_markdown_slow = 1
 "let g:instant_markdown_autostart = 0
 "let g:instant_markdown_open_to_the_world = 1
@@ -189,33 +181,48 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
-let g:instant_markdown_python = 1
+"let g:instant_markdown_python = 1
 
 " LanguageTool Configuration
 let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
 
-
 " Git / Rubarb / Signify
 " Change these if you want
+" default updatetime 4000ms is not good for async update
+set updatetime=100
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '_'
 let g:signify_sign_delete_first_line = '‾'
 let g:signify_sign_change            = '~'
-
 " I find the numbers disctracting
 "let g:signify_sign_show_count = 0
 "let g:signify_sign_show_text = 1
-
-
 " Jump though hunks
 nmap <leader>gj <plug>(signify-next-hunk)
 nmap <leader>gk <plug>(signify-prev-hunk)
 nmap <leader>gJ 9999<leader>gJ
 nmap <leader>gK 9999<leader>gk
-
-
+nnoremap <silent> <Leader>st :SignifyToggle<CR>
 " If you like colors instead
-highlight SignifySignAdd                  ctermbg=green                guibg=#00ff00
+highlight SignifySignAdd                  ctermbg=darkgreen                guibg=#00ff00
 highlight SignifySignDelete ctermfg=black ctermbg=red    guifg=#ffffff guibg=#ff0000
 highlight SignifySignChange ctermfg=black ctermbg=yellow guifg=#000000 guibg=#ffff00
+
+" Which Key
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
+"let g:mapleader = "\<Space>"
+"let g:maplocalleader = ','
+" nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+" nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
+
+"TagBar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_show_linenumbers=2
+let g:tagbar_autoclose = 0
+
+
+" Vim-autoformat
+noremap <F3> :Autoformat<CR>
 
