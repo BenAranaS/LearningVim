@@ -1,6 +1,7 @@
 " Default
 set nocompatible
 let mapleader = " "
+let maplocalleader = ','
 
 " Enable plugins
 filetype plugin on
@@ -78,8 +79,10 @@ set background=dark
 
 " Fix highlight for misspelled words
 highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
-" displaying bad whitespace
-" highlight BadWhitespace ctermbg=red guibg=red
+" Use the below highlight group when displaying bad whitespace is desired.
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+"highlight BadWhitespace ctermbg=red guibg=red
+" Flag unnecessary white spaces
 
 " Navigation
 " Move vertically between windows
@@ -89,11 +92,11 @@ nnoremap <Leader>k :wincmd k<CR>
 nnoremap <Leader>l :wincmd l<CR>
 
 " Tab and Shift Tab config
-nnoremap <Tab> >>_
-nnoremap <S-Tab> <<_
-inoremap <S-Tab> <C-D>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+nnoremap <Leader><Tab> >>_
+nnoremap <Leader><S-Tab> <<_
+inoremap <Leader><S-Tab> <C-D>
+vnoremap <Leader><Tab> >gv
+vnoremap <Leader><S-Tab> <gv
 
 "" use tab to move to next sentence
 "nnoremap <TAB> ) 
@@ -146,9 +149,7 @@ command! Py  :w  | ! clear; python3 %
 " reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Flag unnecessary white spaces
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
+let python_highlight_all=1
 " PEP 8 indentation
 au Filetype python set
     \ tabstop=4
@@ -157,13 +158,27 @@ au Filetype python set
     \ expandtab
     \ autoindent
     \ fileformat=unix
+    \ foldmethod=indent
+    \ foldlevel=99
+
+" Dealing with python's virtual environments
+  "execfile(activate_this, dict(__file__=activate_this))
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+EOF
+
 
 augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype tex
 
   "au BufNew,BufNewFile,BufRead *.md,*.markdown set  
-      \ setfiletype markdown  
+      "\ setfiletype markdown  
 
   " Settings for plain text files
   au BufRead,BufNewFile *.txt set
