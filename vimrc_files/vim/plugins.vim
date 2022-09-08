@@ -5,7 +5,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' "theme
 Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree'
-Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips' " Track the engine.
+Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
 Plug 'vim-syntastic/syntastic' " syntax checking
 Plug 'nvie/vim-flake8'      " pep 8 support
 Plug 'tpope/vim-fugitive'  "git support
@@ -39,9 +41,6 @@ call plug#end()
 " gruvbox
 colorscheme gruvbox
 set background=dark
-
-" resetting highlight options
-set hlsearch
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
@@ -80,9 +79,14 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 " If you only see boxes here it may be because your system doesn't have
-" the correct fonts. Try it in vim first and if that fails see the help
-" pages for vim-airline :help airline-troubleshooting
-
+    " the correct fonts. Try it in vim first and if that fails see the help
+    " pages for vim-airline :help airline-troubleshooting
+    " WORDCOUNT 
+let g:airline#extensions#wordcount#filetypes =
+  \ ['asciidoc', 'help', 'mail', 'markdown', 'nroff', 'org', 'plaintex', 'rst', 'tex', 'text', 'vimwiki']
+    " Use ['all'] to enable for all filetypes.
+" Use vimtex specific wordcount function for TexBuffers
+let g:airline#extensions#vimtex#wordcount = 1 
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -104,54 +108,48 @@ nnoremap <leader>[ :lprev<CR>
 " let g:marked_app = "Marked 2"
 " let g:marked_filetypes = ["markdown", "mkd", "ghmarkdown", "vimwiki", "md"]
 
-" LATEX
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-" filetype plugin on
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-" set shellslash
-" TIP: if you write your \label's as \label{fig:something}, then if you
-" type in \ref{fig: and press <C-n> you will automatically cycle through
-" all the figure labels. Very useful!
-set iskeyword+=:
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-let g:tex_indent_items = 1
-let g:tex_indent_brace = 1
-"augroup filetypedetect
-"  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
-"      \ filetype=tex
-"augroup END
-" section jumping
-function! TexJump2Section( cnt, dir )
-    let i = 0
-    let pat = '^\s*\\\(part\|chapter\|\(sub\)*section\|paragraph\)\>\|\%$\|\%^'
-    let flags = 'W' . a:dir
-    while i < a:cnt && search( pat, flags ) > 0
-        let i = i+1
-    endwhile
-    let @/ = pat
-endfunction
+"" LATEX
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+" filetype plugin indent on
+" This enables Vim's and neovim's syntax-related features. Without this, some
+" VimTeX features will not work (see ":help vimtex-requirements" for more
+" info).
+" syntax enable
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+" let g:vimtex_view_method = 'zathura'
+" Or with a generic interface:
+" let g:vimtex_view_general_viewer = 'okular'
+" let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+" let g:vimtex_compiler_method = 'latexrun'
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+" let maplocalleader = ","
+" Note: If the compiler or the viewer doesn't start properly, one may type <localleader>li to view the system commands that were executed to start them. To inspect the compiler output, use <localleader>lo.
+let b:tex_stylish=1
+" let b:tex_conceal = "admgs"
+set conceallevel=2
 
-au Filetype latex,tex,plaintex  set
-    \ wrap
-    \ breakindent
-    \ formatoptions=l
-    \ lbr
-    \ tabstop=2
-    \ softtabstop=2
-    \ shiftwidth=2
-    \ expandtab
-    \ autoindent
-    \ fileformat=unix
-    \ spell spelllang=en_gb
-    \ conceallevel=2 "allows translation of characters to utf
-  nnoremap <silent> ]] :<c-u>call TexJump2Section( v:count1, '' )  <bar> <ESC> zO 
-  nnoremap <silent> [[ :<c-u>call TexJump2Section( v:count1, 'b' ) <CR>
-  let b:tex_stylish = 1
-  
+" Ultisnips
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
@@ -166,7 +164,12 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
   \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
   \ 'syntax': 'markdown',
   \ 'ext': '.md',
-  \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}]
+  \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}, 
+  \ {'path': '~/Documents/VimWiki_2',
+  \ 'path_html': '~/Documents/VimWiki_2/VimWiki_2_html',
+  \ 'syntax': 'markdown',
+  \ 'ext': '.md',
+  \ }]
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -225,4 +228,10 @@ let g:tagbar_autoclose = 0
 
 " Vim-autoformat
 noremap <F3> :Autoformat<CR>
+
+" Overwriting highlights
+highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
+" resetting highlight options
+set hlsearch
+
 

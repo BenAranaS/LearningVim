@@ -1,7 +1,7 @@
 " Default
 set nocompatible
 let mapleader = " "
-let maplocalleader = ','
+let maplocalleader = ' '
 
 " Enable plugins
 filetype plugin on
@@ -35,6 +35,15 @@ set scrolloff=4
 syntax on
 set noerrorbells
 "set showcmd        " Show (partial) command in status line.
+
+" Cursor configuration
+let &t_SI = "\e[1 q"
+let &t_EI = "\e[2 q"
+" reset the cursor on start (for older versions of vim, usually not required)
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
 
 " Clipboard handling
 " use same clipboard as the system
@@ -169,7 +178,10 @@ import sys
 if 'VIRTUAL_ENV' in os.environ:
   project_base_dir = os.environ['VIRTUAL_ENV']
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+  if os.path.exists(activate_this):
+      exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+ #  else:
+ #     print("No activate_this.py FOUND")
 EOF
 
 
