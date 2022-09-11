@@ -188,16 +188,25 @@ EOF
 augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype tex
-
   "au BufNew,BufNewFile,BufRead *.md,*.markdown set  
       "\ setfiletype markdown  
-
   " Settings for plain text files
   au BufRead,BufNewFile *.txt set
       \ wrapmargin=0
       \ smartindent
       \ spell spelllang=en_gb
 augroup END
+
+" Latex default configuration
+au Filetype tex,latex set
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+    " \ expandtab
+    " \ autoindent
+    " \ fileformat=unix
+    " \ foldmethod=indent
+    " \ foldlevel=99
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Standard Plugins
