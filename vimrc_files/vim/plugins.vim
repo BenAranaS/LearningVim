@@ -132,6 +132,7 @@ nnoremap <leader>[ :lprev<CR>
 " following line. The default is usually fine and is the symbol "\".
 " let maplocalleader = ","
 " Note: If the compiler or the viewer doesn't start properly, one may type <localleader>li to view the system commands that were executed to start them. To inspect the compiler output, use <localleader>lo.
+let g:vimtex_fold_enabled=1
 let b:tex_stylish=1
 " let b:tex_conceal = "admgs"
 set conceallevel=2
