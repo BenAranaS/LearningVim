@@ -60,6 +60,10 @@ Command | Description
 `:changes` | shows the list of changes
 `g;` | Move to the last change
 `g,` | Move to the next (more recent) change
+`vi(` | Select everything within "("
+`va(` | Select everything within "(" including (
+`yi(` | yank/copy all within the (
+`ya(` | yank/copy all, including (, within (
 
 ## netrw
 Command | Description

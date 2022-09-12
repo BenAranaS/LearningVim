@@ -47,11 +47,11 @@ augroup END
 
 " Clipboard handling
 " use same clipboard as the system
-if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed "OSX
-else
-  set clipboard=unnamedplus "Linux
-endif
+" if system('uname -s') == "Darwin\n"
+"   set clipboard=unnamed "OSX
+" else
+"   set clipboard=unnamedplus "Linux
+" endif
 
 " Files and undo
 set noswapfile
