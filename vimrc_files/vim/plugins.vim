@@ -2,39 +2,39 @@
 " Non-Standard Plugins and stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox' "theme
-Plug 'ycm-core/YouCompleteMe'
-Plug 'mbbill/undotree'
-Plug 'lervag/vimtex'
-Plug 'SirVer/ultisnips' " Track the engine.
-Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
-Plug 'vim-syntastic/syntastic' " syntax checking
-Plug 'nvie/vim-flake8'      " pep 8 support
-Plug 'tpope/vim-fugitive'  "git support
-Plug 'tpope/vim-commentary' " comment stff out
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
-Plug 'junegunn/gv.vim'
-Plug 'bling/vim-airline' " Status bar
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'itspriddle/vim-marked' "markdown plug
-Plug 'takac/vim-hardtime' " stop using arrows!
-" Plug 'justinmk/vim-sneak'
-Plug 'vimwiki/vimwiki'
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
-"Plug 'dpelle/vim-LanguageTool'
-Plug 'liuchengxu/vim-which-key'
-Plug 'preservim/tagbar'
-Plug 'tmhedberg/SimpylFold'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-autoformat/vim-autoformat'
+Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
+Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
+Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file 
+Plug 'lervag/vimtex'            " Latex compatibility package
+Plug 'SirVer/ultisnips'         " Snippets engine for vim 
+Plug 'honza/vim-snippets'       " Snippets files for various languages 
+Plug 'vim-syntastic/syntastic'  " syntax checking
+Plug 'nvie/vim-flake8'          " pep 8 support
+Plug 'junegunn/gv.vim'          " Browse git commits
+Plug 'tpope/vim-fugitive'       " git support
+Plug 'tpope/vim-commentary'     " Allows to comment stuff out 
+Plug 'tpope/vim-rhubarb'        " Browse and open GitHub urls
+Plug 'tpope/vim-surround'       " Handle surroundings like {,(,', etc.
+Plug 'mhinz/vim-signify'        " Shows what lines from a file have changed
+Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
+Plug 'bling/vim-airline'        " Nice looking status bar at the bottom
+Plug 'vim-airline/vim-airline-themes'  " Themes for airline
+"" Plug 'itspriddle/vim-marked' " markdown Compatibility 
+Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
+" Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
+Plug 'vimwiki/vimwiki'          " For notes, diary in vim
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files 
+" Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
+Plug 'liuchengxu/vim-which-key' " Shows key maps inline 
+Plug 'preservim/tagbar'         " Tagbar, shows code structure in another window
+Plug 'tmhedberg/SimpylFold'     " folding of latex files
+Plug 'Konfekt/FastFold'         " Script for faster folding 
+Plug 'vim-scripts/indentpython.vim'   " Supposed to keep indentation consistent
+Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or automatically on save).
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" Use release branch (recommend)
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
 call plug#end()
 
 " From/for plugins
@@ -81,16 +81,33 @@ let g:airline_symbols.whitespace = 'Ξ'
 " If you only see boxes here it may be because your system doesn't have
     " the correct fonts. Try it in vim first and if that fails see the help
     " pages for vim-airline :help airline-troubleshooting
-    " WORDCOUNT 
+" WORDCOUNT 
 let g:airline#extensions#wordcount#filetypes =
   \ ['asciidoc', 'help', 'mail', 'markdown', 'nroff', 'org', 'plaintex', 'rst', 'tex', 'text', 'vimwiki']
     " Use ['all'] to enable for all filetypes.
 " Use vimtex specific wordcount function for TexBuffers
-let g:airline#extensions#vimtex#wordcount = 1 
+" let g:airline#extensions#vimtex#wordcount = 1 
+" * enable/disable vimtex integration >
+let g:airline#extensions#vimtex#enabled = 1
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_filetype_blacklist = {
+"         \ 'tagbar': 1,
+"         \ 'notes': 1,
+"           \ 'markdown': 1,
+"           \ 'netrw': 1,
+"           \ 'unite': 1,
+"           \ 'text': 1,
+"           \ 'vimwiki': 1,
+"           \ 'pandoc': 1,
+"           \ 'infolog': 1,
+"           \ 'leaderf': 1,
+"           \ 'tex': 1,
+"           \ 'latex': 1,
+"           \ 'mail': 1
+"           \}
 
 " Syntastics Settings
 set statusline+=%#warningmsg#
@@ -132,13 +149,19 @@ nnoremap <leader>[ :lprev<CR>
 " following line. The default is usually fine and is the symbol "\".
 " let maplocalleader = ","
 " Note: If the compiler or the viewer doesn't start properly, one may type <localleader>li to view the system commands that were executed to start them. To inspect the compiler output, use <localleader>lo.
+" set nofoldenable
+unlet! g:tex_fold_enabled
 let g:vimtex_fold_enabled=1
+" let g:vimtex_fold_manual=1
 let b:tex_stylish=1
 " let b:tex_conceal = "admgs"
 set conceallevel=2
+if !exists('g:ycm_semantic_triggers')
+  let g:ycm_semantic_triggers = {}
+endif
+au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
 " Ultisnips
-
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
@@ -148,8 +171,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-
 
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
@@ -220,12 +241,10 @@ set timeoutlen=500
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
-
 "TagBar
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_show_linenumbers=2
 let g:tagbar_autoclose = 0
-
 
 " Vim-autoformat
 noremap <F3> :Autoformat<CR>
@@ -234,5 +253,4 @@ noremap <F3> :Autoformat<CR>
 highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 " resetting highlight options
 set hlsearch
-
 

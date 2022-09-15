@@ -41,8 +41,8 @@ let &t_SI = "\e[1 q"
 let &t_EI = "\e[2 q"
 " reset the cursor on start (for older versions of vim, usually not required)
 augroup myCmds
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
+  autocmd!
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
 " Clipboard handling
@@ -146,10 +146,12 @@ noremap <Leader>W :w !sudo tee % > /dev/null
 command! MakeTags !ctags -R .
 command! Wc !wc %
 command! Dts :%s/\s\+$//e "delete trailing spaces
+command! Q :1,$bd | q "soft quitting, all buffers and vim
+command! Qothers call CloseOtherBF('%')
 command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
 command! ConfigPlug execute ":e ~/.vim/plugins.vim"
-command! Reload execute ":source $MYVIMRC"
+command! Reload execute ":w |".."source $MYVIMRC"
 
 " Python
 command! Py  :w  | ! clear; python3 %
@@ -238,6 +240,14 @@ nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
 nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
 
 " Functions
+" Close buffers but the one currently using
+function! CloseOtherBF(file)
+    let bufnum = bufnr(a:file)
+    let pbuf = bufnum-1
+    exe '1,'..pbuf.."bd"
+    " exe nbuf..',$'.."bd"
+    exe '.+,$'.."bd"
+endfunction
 " Function to source only if file exists {
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
