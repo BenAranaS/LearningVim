@@ -35,6 +35,7 @@ Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or au
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
+Plug 'tools-life/taskwiki'      " tasks/project man in vim
 call plug#end()
 
 " From/for plugins
@@ -254,3 +255,6 @@ highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 " resetting highlight options
 set hlsearch
 
+" taskwiki Configuration
+let g:taskwiki_disable_concealcursor="yes"
+let g:taskwiki_maplocalleader=" t"
