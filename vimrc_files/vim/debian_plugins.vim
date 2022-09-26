@@ -23,7 +23,7 @@ Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
-" Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files 
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files 
 " Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
 Plug 'liuchengxu/vim-which-key' " Shows key maps inline 
 Plug 'preservim/tagbar'         " Tagbar, shows code structure in another window
@@ -35,6 +35,7 @@ Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or au
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
+Plug 'tools-life/taskwiki'      " tasks/project man in vim
 call plug#end()
 
 " From/for plugins
@@ -254,3 +255,6 @@ highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
 " resetting highlight options
 set hlsearch
 
+" taskwiki Configuration
+let g:taskwiki_disable_concealcursor="yes"
+let g:taskwiki_maplocalleader=" t"
