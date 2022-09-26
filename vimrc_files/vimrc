@@ -156,6 +156,9 @@ command! Reload execute ":w |".."source $MYVIMRC"
 " Python
 command! Py  :w  | ! clear; python3 %
 
+" Compiling C
+command! Gcc  :w  | ! clear; gcc  % -o %.bin ; %.bin
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
