@@ -4,31 +4,31 @@
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
 Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
-Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file 
+Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 Plug 'lervag/vimtex'            " Latex compatibility package
-Plug 'SirVer/ultisnips'         " Snippets engine for vim 
-Plug 'honza/vim-snippets'       " Snippets files for various languages 
+Plug 'SirVer/ultisnips'         " Snippets engine for vim
+Plug 'honza/vim-snippets'       " Snippets files for various languages
 Plug 'vim-syntastic/syntastic'  " syntax checking
 Plug 'nvie/vim-flake8'          " pep 8 support
 Plug 'junegunn/gv.vim'          " Browse git commits
 Plug 'tpope/vim-fugitive'       " git support
-Plug 'tpope/vim-commentary'     " Allows to comment stuff out 
+Plug 'tpope/vim-commentary'     " Allows to comment stuff out
 Plug 'tpope/vim-rhubarb'        " Browse and open GitHub urls
 Plug 'tpope/vim-surround'       " Handle surroundings like {,(,', etc.
 Plug 'mhinz/vim-signify'        " Shows what lines from a file have changed
 Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
 Plug 'bling/vim-airline'        " Nice looking status bar at the bottom
 Plug 'vim-airline/vim-airline-themes'  " Themes for airline
-"" Plug 'itspriddle/vim-marked' " markdown Compatibility 
+"" Plug 'itspriddle/vim-marked' " markdown Compatibility
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files 
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files
 " Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
-Plug 'liuchengxu/vim-which-key' " Shows key maps inline 
+Plug 'liuchengxu/vim-which-key' " Shows key maps inline
 Plug 'preservim/tagbar'         " Tagbar, shows code structure in another window
 Plug 'tmhedberg/SimpylFold'     " folding of latex files
-Plug 'Konfekt/FastFold'         " Script for faster folding 
+Plug 'Konfekt/FastFold'         " Script for faster folding
 Plug 'vim-scripts/indentpython.vim'   " Supposed to keep indentation consistent
 Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or automatically on save).
 " post install (yarn install | npm install) then load plugin only for editing supported files
@@ -36,6 +36,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --producti
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
 Plug 'tools-life/taskwiki'      " tasks/project man in vim
+Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
 call plug#end()
 
 " From/for plugins
@@ -53,7 +54,7 @@ let g:airline_theme='dark'
 " Also, it's a good idea to check whether it exists as to avoid
 " accidentally overwriting its contents.
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 " powerline symbols
 let g:airline_powerline_fonts = 1
@@ -80,16 +81,17 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 " If you only see boxes here it may be because your system doesn't have
-    " the correct fonts. Try it in vim first and if that fails see the help
-    " pages for vim-airline :help airline-troubleshooting
-" WORDCOUNT 
+" the correct fonts. Try it in vim first and if that fails see the help
+" pages for vim-airline :help airline-troubleshooting
+" WORDCOUNT
 let g:airline#extensions#wordcount#filetypes =
-  \ ['asciidoc', 'help', 'mail', 'markdown', 'nroff', 'org', 'plaintex', 'rst', 'tex', 'text', 'vimwiki']
-    " Use ['all'] to enable for all filetypes.
+            \ ['asciidoc', 'help', 'mail', 'markdown', 'nroff', 'org', 'plaintex', 'rst', 'tex', 'text', 'vimwiki']
+" Use ['all'] to enable for all filetypes.
 " Use vimtex specific wordcount function for TexBuffers
-" let g:airline#extensions#vimtex#wordcount = 1 
+" let g:airline#extensions#vimtex#wordcount = 1
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
+nmap <localleader>t<space> <Plug>VimwikiToggleListItem
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -158,7 +160,7 @@ let b:tex_stylish=1
 " let b:tex_conceal = "admgs"
 set conceallevel=2
 if !exists('g:ycm_semantic_triggers')
-  let g:ycm_semantic_triggers = {}
+    let g:ycm_semantic_triggers = {}
 endif
 au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
@@ -184,15 +186,15 @@ nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
 " vimwiki custom md2HTML
 let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
-  \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
-  \ 'syntax': 'markdown',
-  \ 'ext': '.md',
-  \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'}, 
-  \ {'path': '~/Documents/VimWiki_2',
-  \ 'path_html': '~/Documents/VimWiki_2/VimWiki_2_html',
-  \ 'syntax': 'markdown',
-  \ 'ext': '.md',
-  \ }]
+            \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
+            \ 'syntax': 'markdown',
+            \ 'ext': '.md',
+            \ 'custom_wiki2html': '~/.vim/vimwiki_custom/wiki2html.sh'},
+            \ {'path': '~/Documents/VimWiki_2',
+            \ 'path_html': '~/Documents/VimWiki_2/VimWiki_2_html',
+            \ 'syntax': 'markdown',
+            \ 'ext': '.md',
+            \ }]
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -257,4 +259,5 @@ set hlsearch
 
 " taskwiki Configuration
 let g:taskwiki_disable_concealcursor="yes"
-let g:taskwiki_maplocalleader=" t"
+" let g:taskwiki_maplocalleader=" t"
+
