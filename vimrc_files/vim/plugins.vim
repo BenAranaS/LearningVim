@@ -6,14 +6,14 @@ Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
 Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
 Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 Plug 'lervag/vimtex'            " Latex compatibility package
-Plug 'SirVer/ultisnips'         " Snippets engine for vim
 Plug 'honza/vim-snippets'       " Snippets files for various languages
+Plug 'SirVer/ultisnips'         " Snippets engine for vim
 Plug 'vim-syntastic/syntastic'  " syntax checking
 Plug 'nvie/vim-flake8'          " pep 8 support
 Plug 'junegunn/gv.vim'          " Browse git commits
 Plug 'tpope/vim-fugitive'       " git support
-Plug 'tpope/vim-commentary'     " Allows to comment stuff out
 Plug 'tpope/vim-rhubarb'        " Browse and open GitHub urls
+Plug 'tpope/vim-commentary'     " Allows to comment stuff out
 Plug 'tpope/vim-surround'       " Handle surroundings like {,(,', etc.
 Plug 'mhinz/vim-signify'        " Shows what lines from a file have changed
 Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
@@ -168,6 +168,8 @@ au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips', "UltiSnips", ]          " using Vim
+
 let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
