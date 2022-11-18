@@ -57,9 +57,15 @@ Command | Description
 `g~` | toggle case
 `gU` | all to uppercase
 `gu` | all to lowercase
+`gj gk` | Move cursor up and down to wrapped part of a line
+`g0 g$` | Move cursor to the first and last letter of a wrapped line
+`~ g~` | Switch capitalisation of a letter
 `:changes` | shows the list of changes
 `g;` | Move to the last change
 `g,` | Move to the next (more recent) change
+`gv` | Reselect previous selected text
+`gJ` | Joining lines without leaving spaces.
+`g&`  | Rerun substitute command for all lines
 `vi(` | Select everything within "("
 `va(` | Select everything within "(" including (
 `yi(` | yank/copy all within the (

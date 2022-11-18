@@ -212,6 +212,8 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
+let g:instant_markdown_theme = 'night' 
+let g:instant_markdown_theme = 'dark' 
 
 " LanguageTool Configuration
 let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'

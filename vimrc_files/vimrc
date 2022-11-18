@@ -158,6 +158,7 @@ command! Py  :w  | ! clear; python3 %
 
 " Compiling C
 command! Gcc  :w  | ! clear; gcc  % -o %.bin ; %.bin
+noremap <Leader>mm :w <bar> :!export SRC=%;cd $(dirname %); clear; make clean; make; make run <CR>
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -242,6 +243,9 @@ nnoremap <Leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
 nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
 
+"Open terminal
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>clear<CR>
+
 " Functions
 " Close buffers but the one currently using
 function! CloseOtherBF(file)
@@ -249,7 +253,7 @@ function! CloseOtherBF(file)
     let pbuf = bufnum-1
     exe '1,'..pbuf.."bd"
     " exe nbuf..',$'.."bd"
-    exe '.+,$'.."bd"
+    " exe '.+,$'.."bd"
 endfunction
 " Function to source only if file exists {
 function! SourceIfExists(file)
