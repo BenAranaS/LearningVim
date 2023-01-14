@@ -186,8 +186,8 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   if os.path.exists(activate_this):
       exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
- #  else:
- #     print("No activate_this.py FOUND")
+  else:
+      print("No activate_this.py FOUND")
 EOF
 
 

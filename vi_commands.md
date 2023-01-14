@@ -89,7 +89,6 @@ Command | Description
 `gh` | hide/unhide hidden files, dot-files
 `cd` | make browsing dir current dir
 `gn` | Make current dir the tree root
-
 `mb` | bookmark current dir
 `gb` | go to previous bookmarked dir
 `qb` | List bookmarked dir and history
@@ -331,7 +330,7 @@ edit as usual
 Command | Description
 --------- | -------------
 `gf `|go to file or url
-`g shift f`| open on linee
+`g shift f`| open on line reported by warning or error
 `gx `| open URL under cursor
 
 ### Using OS Commands

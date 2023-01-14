@@ -142,7 +142,11 @@ nnoremap <leader>[ :lprev<CR>
 " Or with a generic interface:
 " let g:vimtex_view_general_viewer = 'okular'
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" Skim vimtex setup
+" let g:tex_flavor='latex' " Default tex file format
+let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file
+let g:vimtex_view_skim_sync = 1 " Value 1 allows forward search after every successful compilation
+let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after command `:VimtexView` is given" VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
 " want another compiler backend, you can change it as follows. The list of
 " supported backends and further explanation is provided in the documentation,
@@ -212,8 +216,8 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
-let g:instant_markdown_theme = 'night' 
-let g:instant_markdown_theme = 'dark' 
+let g:instant_markdown_theme = 'night'
+let g:instant_markdown_theme = 'dark'
 
 " LanguageTool Configuration
 let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
