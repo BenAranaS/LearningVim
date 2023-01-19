@@ -1,13 +1,35 @@
 # Learning VIM
-## Openning Vim
-
+### Openning Vim
 Command | Description
 ------------ | -------------
 `vi -o file1.txt file2.txt` | open two files in two windows
 `vi -u NONE` | open without settings or plugins
 `vi file.xt +8  `| open file file.txt and go straight to line 8
 
-## Motions & Navigation
+### Build-in diff mode on vim
+Command | Description
+--------- | -------------
+`vim +d file1.txt file2.txt` |
+`do`| diff obtain
+`dp`| diff put
+`:diffsplit` |
+`:vert diffsplit` |
+`:set dip+=vertical `| diffopt=filler, vertical
+
+##### Direct modifications on files
+Command | Description
+--------- | -------------
+`vim hello.txt +8` |  open hello.txt and go to line 8
+`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
+`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
+`vim +4d +wq file.txt`| remove line 4 from file.xt
+
+### Zip files
+Command | Description
+--------- | -------------
+`vim weather.zip` | select and enter, edit as usual
+
+### Motions & Navigation
 Command | Description
 ------------ | -------------
 `h j k l` | instead of move arrows
@@ -18,6 +40,10 @@ Command | Description
 `b` | move to the beginning of previous word
 `B` | move to the beginning of previous big word
 `ge` | move to the end of the previous word
+`iw `| inner word
+`it `| inner tag
+`i" `| inner quotes
+`ip `| inner paragraph
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
@@ -54,7 +80,6 @@ Command | Description
 `@:` | repeat last command from normal mode
 `*` | search for the current word and takes you to the next occurrence
 `%` | go to the pair of ( or )
-`g~` | toggle case
 `gU` | all to uppercase
 `gu` | all to lowercase
 `gj gk` | Move cursor up and down to wrapped part of a line
@@ -70,31 +95,10 @@ Command | Description
 `va(` | Select everything within "(" including (
 `yi(` | yank/copy all within the (
 `ya(` | yank/copy all, including (, within (
+`ZZ` | Write changes and exit
+`ZQ` | Quit current file and exit (eq. to :q!)
 
-## netrw
-Command | Description
------------- | -------------
-`:Explore` | launch netrw explorer
-`Enter` | opens a dir or file
-`I` | toggle banner
-`%` | create a new file
-`-` | go to parent dir
-`u` | go to previous dir in history
-`p` | opens a preview window
-`D` | delete file of empty dir
-`d` | creates a directory
-`R` | rename file
-`v` | open file on new vertical window
-`t` | open file on new tab
-`gh` | hide/unhide hidden files, dot-files
-`cd` | make browsing dir current dir
-`gn` | Make current dir the tree root
-`mb` | bookmark current dir
-`gb` | go to previous bookmarked dir
-`qb` | List bookmarked dir and history
-
-
-## Edition Commands
+### Edition Commands
 Command | Description
 ------------ | -------------
 `d`| delete
@@ -110,7 +114,10 @@ Command | Description
 `ctrl + r`| redo
 `d) `| delete sentence
 `dd `| delete line
+`D` | delete characters under the cursor until the end of the line
 `d/Genius `| delete until word Genius
+`r` | replace character under the cursor
+`R` | enter Insert Mode replacing characters
 `yw `| copy word
 `ctrl + r + register`| paste text from register
 `ctrl + a` |  paste text from register '.'
@@ -126,12 +133,32 @@ Command | Description
 `p  `| paste on place
 `P `| paste before cursor
 `yy`| copy line
-`x `| delete word
+`x`| delete character under cursor
+`X`| delete character before cursor
 `xp`| exchange letters
 `c `| change
 `cw`| change word
 `c/word`| change until word
 `J` | join line to one above
+
+### yank to registers
+Command | Description
+------------ | -------------
+`"Ayy `| yank into register A
+`"Ap  `| paste from register A
+`"AgP `| paste from register A before cursor and put cursor at the end of paste text
+
+## The read Command
+Command | Description
+------------ | -------------
+`:r` | read a file and dump it content in current buffer
+`:-1r file.txt `| adds content of file.txt at the beginning of file
+
+### Substitute by searching
+Command | Description
+------------ | -------------
+`:s/word/newword/g` | substitute word by new word, as many times it appears in line
+`:s/word/newword/gc`| ask for confirmation
 
 ### in visual mode
 Command | Description
@@ -151,27 +178,21 @@ Command | Description
 `S` | delete line and go to insert mode
 `gi` | Go to last edited position in insert mode
 
-### yank to registers
+### Opening files referenced in text
 Command | Description
------------- | -------------
-`"Ayy `| yank into register A
-`"Ap  `| paste from register A
-`"AgP `| paste from register A before cursor and put cursor at the end of paste text
+--------- | -------------
+`gf `|go to file or url
+`g shift f`| open on line reported by warning or error
+`gx `| open URL under cursor
 
-### Substitute by searching
-Command | Description
------------- | -------------
-`:s/word/newword/g` | substitute word by new word, as many times it appears in line
-`:s/word/newword/gc`| ask for confirmation
-
-## MARKS
+### MARKS
 Command | Description
 ------------ | -------------
 `ma `| create mark a
 `mA`| create mark A
 `'a`| go to mark a
 
-## TAGS
+### TAGS
 Command | Description
 ------------ | -------------
 `ctrl+o `| go to previous jump
@@ -184,7 +205,7 @@ Command | Description
 `g ctrl + ]` | ambiguous tags
 `ctrl + t` | jump back up the tag stack
 
-## Macros
+### Macros
 Command | Description
 ------------ | -------------
 `qq` | Start recording on register q
@@ -237,22 +258,38 @@ Shortcut | Description
 `,[`| go to previous section on latex
 `,[`| go to previous section on latex
 
-
-
-## The read Command
+## netrw
 Command | Description
 ------------ | -------------
-`:r` | read a file and dump it content in current buffer
-`:-1r file.txt `| adds content of file.txt at the beginning of file
+`:Explore` | launch netrw explorer
+`Enter` | opens a dir or file
+`I` | toggle banner
+`%` | create a new file
+`-` | go to parent dir
+`u` | go to previous dir in history
+`p` | opens a preview window
+`D` | delete file of empty dir
+`d` | creates a directory
+`R` | rename file
+`v` | open file on new vertical window
+`t` | open file on new tab
+`gh` | hide/unhide hidden files, dot-files
+`cd` | make browsing dir current dir
+`gn` | Make current dir the tree root
+`mb` | bookmark current dir
+`gb` | go to previous bookmarked dir
+`qb` | List bookmarked dir and history
 
-## Configuration files
+### Configuration files
 User defined configuration file: `~/.vimrc`
 `:source ~/.vimrc` |
 
-### Settings
+### Settings - ~/.vimrc
 Setting | Description
 --------- | -------------
 `set number` |
+`:set relativenumber` |
+`:set notrelativenumber` |
 `set ruler` |
 `set nocompatible` |
 `syntax on` |
@@ -265,6 +302,17 @@ Setting | Description
 `set tabstop=2 shiftwidth=2 expandtab` |
 `:retab` |
 `noremap <SPACE> <C-F> `| use space to scroll down
+`set diffopt+=vertical` |show diff side by side
+`:help option-summary` |
+`:close` |
+`:set` |
+`:set ic`| ignore case when searching
+`:set hls`| highlight the matches
+`:noh `|no highlight
+`:incsearch `| search as typing
+`:set clipboard=unnamedplus `|use same clipboard as the system
+`:syntax on` |
+`:colorscheme morning` |
 
 #### Abbreviations
 Command | Description
@@ -281,57 +329,6 @@ Command | Description
 `:com! Py ! python %`| % is expanded to the name eof the file
 `:Py`| run the command
 `:comm! Wc !wc %`| run wc on the current file
-
-##### Direct modifications on files
-Command | Description
---------- | -------------
-`vim hello.txt +8` |  open hello.txt and go to line 8
-`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
-`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
-`vim +4d +wq file.txt`| remove line 4 from file.xt
-
-### Buildon diff mode on vim
-Command | Description
---------- | -------------
-`vim +d file1.txt file2.txt` |
-`do`| diff obtain
-`dp`| diff put
-`:diffsplit` |
-`:vert diffsplit` |
-`:set dip+=vertical `| diffopt=filler, vertical
-
-## .vimrc
-Command | Description
---------- | -------------
-`set diffopt+=vertical` |show diff side by side
-
-### Settings
-Command | Description
---------- | -------------
-`:help option-summary` |
-`:close` |
-`:set` |
-`:set ic`| ignore case when searching
-`:set hls`| highligh the matches
-`:noh `|no highlight
-`:incsearch `| search as typing
-`:set clipboard=unnamedplus `|use same clipboard as the system
-`:syntax on` |
-`:colorscheme morning` |
-
-### Zip files
-Command | Description
---------- | -------------
-`vim weather.zip` |
-select and enter
-edit as usual
-
-### Opening files referenced in text
-Command | Description
---------- | -------------
-`gf `|go to file or url
-`g shift f`| open on line reported by warning or error
-`gx `| open URL under cursor
 
 ### Using OS Commands
 Command | Description
@@ -367,7 +364,6 @@ Command | Description
 `[S  `| same
 `:set nospell `| stop checking spell
 
-
 ##### Latex Suite
 vi /usr/share/doc/vim-latexsuite/README.Debian
 Command | Description
@@ -376,9 +372,9 @@ Command | Description
  `set grepprg=grep\ -nH\ $*` |
  `filetype indent on` |
  `let g:tex_flavor='latex'` |
-
 http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings.html
 
+### LatexSuite Commands
 Command | Description
 --------- | -------------
 `^^ `| gets changed by ^{}
@@ -399,18 +395,8 @@ Command | Description
 ``D `|  \Delta
 `[[` | go to previous section
 `]]` | go to previous section
-
-## With default leader settings
-Command | Description
---------- | -------------
 `\ll `| Compile
 `\lv `| Visualise compiled file
-
-## After mapping leader key to space:
-Command | Description
---------- | -------------
-`<space>ll `| Compile
-`<space>lv `| Visualise compiled file
 `za`| fold and unfold
 `set nofoldenable` |
 `\rf `| fold up the entire file
@@ -426,23 +412,6 @@ Command | Description
 `<leader> [` | go to next error remap needed
 `<leader> ]` | go to previous error
 
-## No Plugin
-https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
-https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
-
-
-## Mastering the Vim Language
-Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
-
-Command | Description
---------- | -------------
-`iw `| inner word
-`it `| inner tag
-`i" `| inner quotes
-`ip `| inner paragraph
-`:set relativenumber` |
-`:set notrelativenumber` |
-
 ## Surround
 Command | Description
 --------- | -------------
@@ -451,6 +420,14 @@ Command | Description
 `ysiw]` | add surrounding [] to iw
 `[` | adds spaces
 `]` | do not add spaces
+
+# Documentation and more info
+## No Plugin
+https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
+https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+
+## Mastering the Vim Language
+Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
 
 ### Marked
 Command | Description
@@ -469,74 +446,45 @@ Command | Description
 
 ## Using Plug-Vim
 
-# GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
 ## Signify
-:SignifyToggle
-:SignifyToggleHighlight
+Command | Description
+--------- | -------------
+`:SignifyToggle`|
+`:SignifyToggleHighlight`|
 
 
+# GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
 ## Git
-:Git add
-:Git commit
-...
-:Git blame
-Gdiffsplit
-GRemove
-GBrowse
+Command | Description
+--------- | -------------
+`:Git add`|
+`:Git commit`|
+`:Git blame`|
+`Gdiffsplit`|
+`GRemove`|
+`GBrowse`|
 
 ## GV - A git commit browser
-:GV
-:GV!         # will only list commits that affected the current file
-:GV?         # fills the location list with the revisions of the current file
-:GV          # or :GV? can be used in visual mode to track the changes in the selected lines.
+Command | Description
+--------- | -------------
+`:GV`|
+`:GV!`|         # will only list commits that affected the current file
+`:GV?`|         # fills the location list with the revisions of the current file
+`:GV`|          # or :GV? can be used in visual mode to track the changes in the selected lines.
 
 
 ## Which Key [Source](https://www.chrisatmachine.com/blog/category/neovim/15-which-key)
-<leader> {char}
+Command | Description
+--------- | -------------
+`<leader> {char}`|
 
 ## Replace/Refactor variable name
 Place cursor at name to rename and type
-
-gd (or gD if you're renaming a global variable).
-
-gd         Goto local Declaration.  When the cursor is on a local
-            variable, this command will jump to its declaration.
-            First Vim searches for the start of the current
-            function, just like "[[".  If it is not found the
-            search stops in line 1.  If it is found, Vim goes back
-            until a blank line is found.  From this position Vim
-            searches for the keyword under the cursor, like with
-            "*", but lines that look like a comment are ignored
-            (see 'comments' option).
-            Note that this is not guaranteed to work, Vim does not
-            really check the syntax, it only searches for a match
-            with the keyword.  If included files also need to be
-            searched use the commands listed in |include-search|.
-            After this command |n| searches forward for the next
-            match (not backward).
-            {not in Vi}
-
-gD          Goto global Declaration.  When the cursor is on a
-            global variable that is defined in the file, this
-            command will jump to its declaration.  This works just
-            like "gd", except that the search for the keyword
-            always starts in line 1.  {not in Vi}
-Then
-
-c (change) + gn new_name esc
-
-gn         Search forward for the last used search pattern, like
-            with `n`, and start Visual mode to select the match.
-            If the cursor is on the match, visually selects it.
-            If an operator is pending, operates on the match.
-            E.g., "dgn" deletes the text of the next match.
-            If Visual mode is active, extends the selection
-            until the end of the next match.
-and
-
-. (repeat) one or more times to rename next occurrence(s)
-
-or
-
-:%norm . to rename all occurrences in the buffer at once.
+Command | Description
+--------- | -------------
+`gd `| Goto local Declaration.  When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "*", but lines that look like a comment are ignored (see 'comments' option).  Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).  {not in Vi}
+`gD` | Goto global Declaration.  When the cursor is on a global variable that is defined in the file, this command will jump to its declaration.  This works just like "gd", except that the search for the keyword always starts in line 1.  {not in Vi} Then c (change) + gn new_name esc
+`gn` | Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match.  If the cursor is on the match, visually selects it.  If an operator is pending, operates on the match.  E.g., "dgn" deletes the text of the next match.  If Visual mode is active, extends the selection until the end of the next match.
+`.`| (repeat) one or more times to rename next occurrence(s)
+`:%norm` | to rename all occurrences in the buffer at once.
 source:https://vi.stackexchange.com/questions/18004/renaming-variables

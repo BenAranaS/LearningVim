@@ -16,6 +16,7 @@ template = """# {date}
     * [ ] Long meditation -- due:today
     * [ ] Read training -- due:today
     * [ ] Read fast -- due:today
+    * [ ] Remember motivation -- due:today
     * [ ] Study German -- due:today
     * [ ] Study ML/Maths -- due:today
 * [ ] Work -- due:today
@@ -24,15 +25,22 @@ template = """# {date}
     * [ ] Write -- due:today
     * [ ] Plan next -- due:today
 
-## TODO | +TODAY
+## TODO Today! | +TODAY and project.not:Daily | +TODAY
+
 
 ## Notes
-- Leave excuses
-- Physical/emotional
-- Order
-- Professional
-- Act like I want to be
-    - Think of reaching that goal
+- [PhD Tips](PhD Tips)
+- [Productivity](Productivity)
+- [Machine Learning](Machine Learning)
+
+
+### Creating a New System
+    - Leave excuses
+    - Physical/emotional
+    - Order
+    - Professional
+    - Act like I want to be
+        - Think of reaching that goal
 
 """
 
