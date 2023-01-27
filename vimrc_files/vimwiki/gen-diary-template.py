@@ -4,7 +4,7 @@ import datetime
 
 template = """# {date}
 
-## Daily checklist | project:Daily +PENDING
+## Daily checklist | project:Daily +PENDING | project:Daily
 
 * [ ] Get up -- due:today
     * [ ] Kept mobile away -- due:today
@@ -19,19 +19,20 @@ template = """# {date}
     * [ ] Remember motivation -- due:today
     * [ ] Study German -- due:today
     * [ ] Study ML/Maths -- due:today
+    * [ ] Study UNADM -- due:today
 * [ ] Work -- due:today
     * [ ] Review day -- due:today
     * [ ] Read -- due:today
     * [ ] Write -- due:today
     * [ ] Plan next -- due:today
 
-## TODO Today! | +TODAY and project.not:Daily | +TODAY
+## TODO Today! | +TODAY and project.not:Daily or +OVERDUE and project.not:Daily | due:today
 
 
 ## Notes
-- [PhD Tips](PhD Tips)
-- [Productivity](Productivity)
-- [Machine Learning](Machine Learning)
+- [PhD Tips](../PhD Tips)
+- [Productivity](../Productivity)
+- [Machine Learning](../Machine Learning)
 
 
 ### Creating a New System
