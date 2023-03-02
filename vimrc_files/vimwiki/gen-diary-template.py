@@ -29,6 +29,9 @@ template = """# {date}
 ## TODO Today! | +TODAY and project.not:Daily or +OVERDUE and project.not:Daily | due:today
 
 
+## This Week! | due.after:now-1week and +PENDING and project.not:Daily and -TODAY |
+
+
 ## Notes
 - [PhD Tips](../PhD Tips)
 - [Productivity](../Productivity)
