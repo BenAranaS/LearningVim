@@ -204,7 +204,6 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
 let $DT = strftime(" %c")
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT
 
-
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
 map <Leader>ms :InstantMarkdownStop<CR>

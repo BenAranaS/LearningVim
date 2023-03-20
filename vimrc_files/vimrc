@@ -255,7 +255,8 @@ function! CloseOtherBF(file)
     let pbuf = bufnum-1
     exe '1,'..pbuf.."bd"
     " exe nbuf..',$'.."bd"
-    " exe '.+,$'.."bd"
+    echo '.+,$'.."bd"
+    exe '.+,$'.."bd"
 endfunction
 " Function to source only if file exists {
 function! SourceIfExists(file)

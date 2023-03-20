@@ -9,6 +9,7 @@ template = """# {date}
 * [ ] Get up -- due:today
     * [ ] Kept mobile away -- due:today
     * [ ] Short meditation -- due:today
+    * [ ] Duolingo -- due:today
     * [ ] Stretch -- due:today
     * [ ] Exercise -- due:today
     * [ ] Analyse health data -- due:today
@@ -29,7 +30,7 @@ template = """# {date}
 ## TODO Today! | +TODAY and project.not:Daily or +OVERDUE and project.not:Daily | due:today
 
 
-## This Week! | due.after:now-1week and +PENDING and project.not:Daily and -TODAY |
+## This Week! | due.after:now due.before:1week +PENDING
 
 
 ## Notes
@@ -37,14 +38,6 @@ template = """# {date}
 - [Productivity](../Productivity)
 - [Machine Learning](../Machine Learning)
 
-
-### Creating a New System
-    - Leave excuses
-    - Physical/emotional
-    - Order
-    - Professional
-    - Act like I want to be
-        - Think of reaching that goal
 
 """
 
