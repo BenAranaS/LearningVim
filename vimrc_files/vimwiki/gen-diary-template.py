@@ -4,7 +4,7 @@ import datetime
 
 template = """# {date}
 
-## Daily checklist | project:Daily +PENDING | project:Daily
+## Daily checklist | project:Daily due:today | project:Daily
 
 * [ ] Get up -- due:today
     * [ ] Kept mobile away -- due:today
