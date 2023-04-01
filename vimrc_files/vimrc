@@ -158,6 +158,8 @@ command! Py  :w  | ! clear; python3 %
 
 " Compiling C
 command! Gcc  :w  | ! clear; gcc  % -o %.bin ; %.bin
+map <Leader>gcc :compiler gcc<CR>:w <CR>:make %:r<CR>:copen<CR>:wincmd J<CR>
+map <Leader>gcr :!%:r
 noremap <Leader>mm :w <bar> :!export SRC=%;cd $(dirname %); clear; make clean; make; make run <CR>
 
 " Uncomment the following to have Vim jump to the last position when
@@ -237,7 +239,7 @@ let g:netrw_list_hide=ghregex
 "Open netrw at vimstartup
 "augroup ProjectDrawer
 "    autocmd!
-"    autocmd VimEnter * if argc() == 0 | Explore! | endif
+"    autocmd VimEnter * if argc() == 0 | Explore!j| endif
 "augroup END
 
 " Split vertically, open file explorer, resize.

@@ -140,6 +140,7 @@ Command | Description
 `cw`| change word
 `c/word`| change until word
 `J` | join line to one above
+`gg=G` | fix file indentation
 
 ### yank to registers
 Command | Description

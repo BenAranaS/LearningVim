@@ -6,4 +6,6 @@ function! MyVWS()
     exe 'VimwikiSearch' pattern 
     exe 'lopen'
 endfunction
-map <LocalLeader>f :call MyVWS()<CR>
+"find something on vimwiki
+map <LocalLeader>f :call MyVWS()<CR> 
+map <LocalLeader>rt :silent 3r ~/.vim/vimwiki_custom/daily_tasks.txt <CR>
