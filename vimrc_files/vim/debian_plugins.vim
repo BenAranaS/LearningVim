@@ -37,6 +37,7 @@ Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or au
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
 Plug 'tools-life/taskwiki'      " tasks/project man in vim
 Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
+Plug 'jiangmiao/auto-pairs'    " Automatic pair completion
 call plug#end()
 
 " From/for plugins
@@ -203,6 +204,10 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ }]
 let $DT = strftime(" %c")
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT
+" au BufNewFile */diary/*.md :silent 4r ~/.vim/vimwiki_custom/daily_tasks.txt
+
+" vim-commentary settings:
+autocmd FileType vimwiki setlocal commentstring=<!--%s-->
 
 
 " instant-markdown "Uncomment to override defaults:
@@ -259,6 +264,9 @@ nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_show_linenumbers=2
 let g:tagbar_autoclose = 0
+let g:tagbar_autoshowtag = 1 " Highlight the active tag
+let g:tagbar_map_showproto = '\'
+autocmd BufEnter * nested :call tagbar#autoopen(0) "autoopen tagbar
 
 " Vim-autoformat
 noremap <F3> :Autoformat<CR>
@@ -271,4 +279,5 @@ set hlsearch
 " taskwiki Configuration
 let g:taskwiki_disable_concealcursor="yes"
 " let g:taskwiki_maplocalleader=" t"
+let g:taskwiki_maplocalleader=","
 
