@@ -4,14 +4,14 @@ import datetime
 
 template = """# {date}
 
-## Daily checklist | project:Daily due:today | project:Daily
+## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily
 
 
 ---
 ## TODO Today! | (+TODAY or +OVERDUE) and project.not:Daily | due:today
 
 
-## This Week! | +WEEK -DUETODAY | due:tomorrow
+## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow
 
 
 ## Notes
