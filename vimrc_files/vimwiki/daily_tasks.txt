@@ -1,3 +1,4 @@
+* [ ] Constrained development - 50min -- due:today tag:CD
 * [ ] Healthy Habits 25 min -- tag:EM,Habit due:today
     * [ ] Short meditation -- due:today tag:Habit,EM
     * [ ] Duolingo -- due:today tag:Habit,EM
@@ -9,8 +10,7 @@
     * [ ] Remember motivation -- due:today tag:TWI,Habit
     * [ ] Review The Way In -- due:today tag:Habit,TWI
         * [ ] Update day goal -- due:today tag:Habit,TWI
-    * [ ] Actual Work -- due:today tag:PhD,Habit
-* [ ] Constrained development - 50min -- due:today tag:CD
+* [ ] Actual Work -- due:today tag:PhD,Habit
     * [ ] Read training -- due:today tag:CD
     * [ ] Read fast -- due:today tag:CD
     * [ ] Practice German -- due:today tag:CD

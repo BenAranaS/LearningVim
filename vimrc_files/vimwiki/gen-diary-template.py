@@ -4,14 +4,14 @@ import datetime
 
 template = """# {date}
 
-## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily
+## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily due:today
 
 
 ---
-## TODO Today! | (+TODAY or +OVERDUE) and project.not:Daily | due:today
+## TODO Today! | (due:today or +OVERDUE) and project.not:Daily | due:today project:Default
 
 
-## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow
+## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow project:Default
 
 
 ## Notes
@@ -22,8 +22,6 @@ template = """# {date}
 - [PhD Tips](../PhD Tips)
 - [Productivity](../Productivity)
 - [Machine Learning](../Machine Learning)
-
-
 """
 
 date = (datetime.date.today() if len(sys.argv) < 2

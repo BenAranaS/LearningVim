@@ -245,7 +245,7 @@ let g:netrw_list_hide=ghregex
 " Split vertically, open file explorer, resize.
 nnoremap <Leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
-nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
+nnoremap <Leader>da :Lexplore ~<bar> :vert resize +10 <CR>
 
 "Open terminal
 map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>clear<CR>
