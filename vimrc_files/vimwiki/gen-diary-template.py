@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 import sys
 import datetime
+import os
 
+something = ""
 template = """# {date}
 
 ## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily due:today
@@ -13,6 +15,8 @@ template = """# {date}
 
 ## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow project:Default
 
+
+{something}
 
 ## Notes
 - [Diffuse Mode Visualisation](../DiffuseModeVisualisation)
@@ -26,6 +30,12 @@ template = """# {date}
 
 date = (datetime.date.today() if len(sys.argv) < 2
         # Expecting filename in YYYY-MM-DD.foo format
-        else " ".join(sys.argv[1:])) #.rsplit(".", 1)[0])
-print(template.format(date=date))
+        else " ".join(sys.argv[1:-1])) #.rsplit(".", 1)[0])
+if len(sys.argv) > 2:
+    # try:
+        with open(os.path.expanduser(sys.argv[-1])+'/priorities_plan.md', 'r') as f:
+            something = f.read()
+    # except:
+        # something = "- Nothing"
+print(template.format(date=date, something=something))
 

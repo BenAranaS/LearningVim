@@ -202,9 +202,9 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'syntax': 'markdown',
             \ 'ext': '.md',
             \ }]
+let $PATH_ = g:vimwiki_list[0]['path']
 let $DT = strftime(" %c")
-au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT
-" au BufNewFile */diary/*.md :silent 4r ~/.vim/vimwiki_custom/daily_tasks.txt
+au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
 
 " vim-commentary settings:
 autocmd FileType vimwiki setlocal commentstring=<!--%s-->
