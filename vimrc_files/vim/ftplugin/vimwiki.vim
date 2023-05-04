@@ -8,4 +8,4 @@ function! MyVWS()
 endfunction
 "find something on vimwiki
 map <LocalLeader>f :call MyVWS()<CR> 
-map <LocalLeader>rt :silent 3r ~/.vim/vimwiki_custom/daily_tasks.md <CR>
+map <LocalLeader>rt :silent 3r ~/.vim/vimwiki_custom/daily_tasks.txt <CR>
