@@ -202,9 +202,9 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'syntax': 'markdown',
             \ 'ext': '.md',
             \ }]
+let $PATH_ = g:vimwiki_list[0]['path']
 let $DT = strftime(" %c")
-au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT
-" au BufNewFile */diary/*.md :silent 4r ~/.vim/vimwiki_custom/daily_tasks.txt
+au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
 
 " vim-commentary settings:
 autocmd FileType vimwiki setlocal commentstring=<!--%s-->
@@ -223,9 +223,9 @@ let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
-let g:instant_markdown_python = 1
-let g:instant_markdown_theme = 'night'
-let g:instant_markdown_theme = 'dark'
+"let g:instant_markdown_python = 1
+" let g:instant_markdown_theme = 'night'
+" let g:instant_markdown_theme = 'dark'
 
 " LanguageTool Configuration
 let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
