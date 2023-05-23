@@ -139,15 +139,23 @@ nnoremap <leader>[ :lprev<CR>
 " syntax enable
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
+if system('uname -s') == "Darwin\n"
+    let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file
+    let g:vimtex_view_skim_sync = 1 " Value 1 allows forward search after every successful compilation
+    let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after command `:VimtexView` is given" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+else
+  " Use Zathura as the VimTeX PDF viewer
+    let g:vimtex_view_method = 'zathura'
+endif
 " let g:vimtex_view_method = 'zathura'
 " Or with a generic interface:
 " let g:vimtex_view_general_viewer = 'okular'
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " Skim vimtex setup
 " let g:tex_flavor='latex' " Default tex file format
-let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file
-let g:vimtex_view_skim_sync = 1 " Value 1 allows forward search after every successful compilation
-let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after command `:VimtexView` is given" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file
+" let g:vimtex_view_skim_sync = 1 " Value 1 allows forward search after every successful compilation
+" let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after command `:VimtexView` is given" VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
 " want another compiler backend, you can change it as follows. The list of
 " supported backends and further explanation is provided in the documentation,
@@ -203,7 +211,7 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'ext': '.md',
             \ }]
 let $PATH_ = g:vimwiki_list[0]['path']
-let $DT = strftime(" %c")
+let $DT = systemlist('date "+%c"')[0]
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
 
 " vim-commentary settings:

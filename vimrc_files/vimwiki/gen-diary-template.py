@@ -19,9 +19,8 @@ template = """# {date}
 {something}
 
 ## Notes
-- [Diffuse Mode Visualisation](../DiffuseModeVisualisation)
+- [UNADM](../UnADM/UnADM.md)
 - [Thoughts](../Thoughts)
-- [The Way In](../TheWayIn)
 
 - [PhD Tips](../PhD Tips)
 - [Productivity](../Productivity)
