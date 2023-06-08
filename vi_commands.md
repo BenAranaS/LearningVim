@@ -223,6 +223,10 @@ Command | Description
 `ctrl+ww` | move to other window
 `ctrl+wc`| close window
 `:close` | close window
+`:wa` | Write all unsaved buffers, but keep Vim open.
+`:xa or :wqa` | Write all unsaved buffers, and close Vim.
+`:qa` | Quit Vim but stop if there are unsaved buffers.
+`:qa!` | Quit Vim and discard unsaved buffers.
 `:new file.txt` | create file.txt
 `:e file.txt` | open/edit file.txt
 `:bd `| buffer delete
@@ -305,7 +309,6 @@ Setting | Description
 `noremap <SPACE> <C-F> `| use space to scroll down
 `set diffopt+=vertical` |show diff side by side
 `:help option-summary` |
-`:close` |
 `:set` |
 `:set ic`| ignore case when searching
 `:set hls`| highlight the matches
