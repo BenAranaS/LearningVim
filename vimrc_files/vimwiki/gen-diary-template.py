@@ -4,18 +4,21 @@ import datetime
 import os
 
 something = ""
+today = datetime.date.today().strftime('%Y-%m-%d')
 template = """# {date}
 
 ## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily due:today
 
 
 ---
-## TODO Today! | (due:today or +OVERDUE) and project.not:Daily | due:today project:Default
-
+## TODO Today! | +PENDING and (due:today or +OVERDUE) and project.not:Daily | due:today project:Default
 
 ## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow project:Default
 
+---
+## Done Today | end:{today}
 
+___
 {something}
 
 ## Notes
@@ -36,5 +39,5 @@ if len(sys.argv) > 2:
             something = f.read()
     # except:
         # something = "- Nothing"
-print(template.format(date=date, something=something))
+print(template.format(date=date, something=something, today=today))
 

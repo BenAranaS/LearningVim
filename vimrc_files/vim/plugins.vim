@@ -266,7 +266,7 @@ let g:tagbar_show_linenumbers=2
 let g:tagbar_autoclose = 0
 let g:tagbar_autoshowtag = 1 " Highlight the active tag
 let g:tagbar_map_showproto = '\'
-autocmd BufEnter * nested :call tagbar#autoopen(0) "autoopen tagbar
+" autocmd BufEnter * nested :call tagbar#autoopen(0) "autoopen tagbar
 
 " Vim-autoformat
 noremap <F3> :Autoformat<CR>
