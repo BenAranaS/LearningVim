@@ -9,3 +9,5 @@ endfunction
 "find something on vimwiki
 map <LocalLeader>f :call MyVWS()<CR> 
 map <LocalLeader>rt :silent 3r ~/.vim/vimwiki_custom/daily_tasks.txt <CR>
+" make a task our of an list item
+nmap <localleader>t<space> <Plug>VimwikiToggleListItem 

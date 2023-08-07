@@ -18,6 +18,8 @@ filetype indent on
 "set smartindent
 
 "Search & display
+" set mouse=a        " Enable mouse usage (all modes)
+set mouse=n        
 set wrap
 set linebreak
 set ignorecase
@@ -130,16 +132,17 @@ inoremap <Up> <C-o>:echo "ArrowKeys Disabled!"<CR>
 vnoremap <Down> :<C-u>echo "ArrowKeys Disabled!"<CR>
 inoremap <Down> <C-o>:echo "ArrowKeys Disabled!"<CR>
 "noremap <SPACE> <C-F> " use space to scroll down
-noremap <Leader>n :bn<CR>
-noremap <Leader>p :bp<CR>
-noremap <Leader>b :ls<CR>
-noremap <Leader>bd :bd<CR>
+
+" Using vim-bufkill now
+" noremap <Leader>n :bn<CR>
+" noremap <Leader>p :bp<CR>
+" noremap <Leader>b :ls<CR>
+" noremap <Leader>bd :bd<CR>
 
 "In normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
 nnoremap TTT "=strftime(" %c")<CR>P
 inoremap TTT <C-R>=strftime(" %c")<CR>
 
-"set mouse=a        " Enable mouse usage (all modes)
 
 " Some useful commands
 noremap <Leader>W :w !sudo tee % > /dev/null

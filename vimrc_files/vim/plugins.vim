@@ -24,7 +24,7 @@ Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files
-" Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
+Plug 'dpelle/vim-LanguageTool'  " Grammar and spell checker
 Plug 'liuchengxu/vim-which-key' " Shows key maps inline
 Plug 'preservim/tagbar'         " Tagbar, shows code structure in another window
 Plug 'tmhedberg/SimpylFold'     " folding of latex files
@@ -38,6 +38,10 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --producti
 Plug 'tools-life/taskwiki'      " tasks/project man in vim
 Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
 Plug 'jiangmiao/auto-pairs'    " Automatic pair completion
+Plug 'qpkorr/vim-bufkill'       " Close buffer without closing window or split
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
+Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
+Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 call plug#end()
 
 " From/for plugins
@@ -49,7 +53,7 @@ set background=dark
 nnoremap <leader>u :UndotreeShow<CR>
 
 " vim-airline options
-let g:airline#extensions#tabline#enabled = 1 "enable list of buffers
+let g:airline#extensions#tabline#enabled = 1 "enable list of buffers on top
 let g:airline_theme='dark'
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid
@@ -92,7 +96,6 @@ let g:airline#extensions#wordcount#filetypes =
 " let g:airline#extensions#vimtex#wordcount = 1
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
-nmap <localleader>t<space> <Plug>VimwikiToggleListItem
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -122,6 +125,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
+let g:syntastic_tex_lacheck_quiet_messages = { 'regex': '\Vpossible unwanted space at' }
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
 
@@ -132,7 +136,7 @@ nnoremap <leader>[ :lprev<CR>
 "" LATEX
 " This is necessary for VimTeX to load properly. The "indent" is optional.
 " Note that most plugin managers will do this automatically.
-" filetype plugin indent on
+filetype plugin indent on
 " This enables Vim's and neovim's syntax-related features. Without this, some
 " VimTeX features will not work (see ":help vimtex-requirements" for more
 " info).
@@ -145,7 +149,11 @@ nnoremap <leader>[ :lprev<CR>
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " Skim vimtex setup
 " let g:tex_flavor='latex' " Default tex file format
+let g:vimtex_view_general_viewer = 'skim'
+let g:vimtex_context_pdf_viewer = 'open -a Preview'
+" let g:vimtex_context_pdf_viewer = '/Applications/Skim.app/Contents/MacOS/Skim'
 let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file
+let g:vimtex_viewer_skim = 1
 let g:vimtex_view_skim_sync = 1 " Value 1 allows forward search after every successful compilation
 let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after command `:VimtexView` is given" VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
@@ -161,6 +169,7 @@ let g:vimtex_view_skim_activate = 1 " Value 1 allows change focus to skim after 
 unlet! g:tex_fold_enabled
 let g:vimtex_fold_enabled=1
 " let g:vimtex_fold_manual=1
+let g:vimtex_format_enabled=1
 let b:tex_stylish=1
 " let b:tex_conceal = "admgs"
 set conceallevel=2
@@ -185,13 +194,14 @@ let g:UltiSnipsEditSplit="vertical"
 " Hardtime plugin options
 let g:hardtime_default_on = 1 " hardtime on in all buffers
 let g:hardtime_showmsg = 1 " show notification of hardtime enabled
-let g:hardtime_allow_different_key = 1 " allow different keys repetions
-let g:hardtime_maxcount = 4 " start ignoring presses after n
+let g:hardtime_allow_different_key = 4 " allow different keys repetions
+let g:hardtime_maxcount = 10 " start ignoring presses after n
 
 " Startify Configuration
 nnoremap <silent> <leader>ss <Cmd>Startify<CR>
 
 " vimwiki custom md2HTML
+" Specific options on ftplugin/vimwiki.vim
 let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'path_html': '~/Documents/VimWiki/VimWiki_html',
             \ 'syntax': 'markdown',
@@ -202,6 +212,8 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'syntax': 'markdown',
             \ 'ext': '.md',
             \ }]
+let g:vimwiki_conceal_pre=1
+" setup for dairy notes
 let $PATH_ = g:vimwiki_list[0]['path']
 let $DT = strftime(" %c")
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
@@ -228,7 +240,12 @@ let g:instant_markdown_mathjax = 1
 " let g:instant_markdown_theme = 'dark'
 
 " LanguageTool Configuration
-let g:languagetool_cmd='/Users/ba16078/Code/brew/bin/languagetool'
+" let g:languagetool_cmd='/usr/local/bin/languagetool'
+let g:languagetool_jar='/usr/local/Cellar/languagetool/5.9/libexec/languagetool-commandline.jar'
+" Enable all categories
+let g:languagetool_enable_categories = 'PUNCTUATION,TYPOGRAPHY,CASING,COLLOCATIONS,CONFUSED_WORDS,CREATIVE_WRITING,GRAMMAR,MISC,MISUSED_TERMS_EU_PUBLICATIONS,NONSTANDARD_PHRASES,PLAIN_ENGLISH,TYPOS,REDUNDANCY,SEMANTICS,TEXT_ANALYSIS,STYLE,GENDER_NEUTRALITY'
+" Enable all special rules that cannot be enabled via category
+let g:languagetool_enable_rules = 'AND_ALSO,ARE_ABLE_TO,ARTICLE_MISSING,AS_FAR_AS_X_IS_CONCERNED,BEST_EVER,BLEND_TOGETHER,BRIEF_MOMENT,CAN_NOT,CANT_HELP_BUT,COMMA_WHICH,EG_NO_COMMA,ELLIPSIS,EXACT_SAME,HONEST_TRUTH,HOPEFULLY,IE_NO_COMMA,IN_ORDER_TO,I_VE_A,NEGATE_MEANING,PASSIVE_VOICE,PLAN_ENGLISH,REASON_WHY,SENT_START_NUM,SERIAL_COMMA_OFF,SERIAL_COMMA_ON,SMARTPHONE,THREE_NN,TIRED_INTENSIFIERS,ULESLESS_THAT,WIKIPEDIA,WORLD_AROUND_IT'
 
 " Git / Rubarb / Signify
 " Change these if you want
@@ -251,6 +268,12 @@ nnoremap <silent> <Leader>st :SignifyToggle<CR>
 highlight SignifySignAdd                  ctermbg=darkgreen                guibg=#00ff00
 highlight SignifySignDelete ctermfg=black ctermbg=red    guifg=#ffffff guibg=#ff0000
 highlight SignifySignChange ctermfg=black ctermbg=yellow guifg=#000000 guibg=#ffff00
+" fugitive Conflict Resolution
+set diffopt+=followwrap
+nnoremap <leader>gd3 :Gvdiffsplit!<CR> " three-way diff split
+nnoremap dgh :diffget //2<CR>
+nnoremap dgl :diffget //3<CR>
+
 
 " Which Key
 " By default timeoutlen is 1000 ms
@@ -280,4 +303,23 @@ set hlsearch
 let g:taskwiki_disable_concealcursor="yes"
 " let g:taskwiki_maplocalleader=" t"
 let g:taskwiki_maplocalleader=","
+let g:taskwiki_split_max_height=18
+
+
+" PdfAnnots mapping
+nnoremap <leader>pa <cmd>call PdfAnnots()<cr>
+
+" vim-bufkill
+noremap <Leader>n :bn<CR>
+noremap <Leader>p :bp<CR>
+noremap <Leader>b :ls<CR>
+noremap <Leader>bd :BD<CR>
+
+" fzf 
+noremap <Leader>ff :Files<CR>
+noremap <Leader>fb :Buffers<CR>
+noremap <Leader>fl :Lines<CR>
+noremap <Leader>fh :History<CR>
+noremap <Leader>fj :Jumps<CR>
+
 

@@ -7,27 +7,28 @@ something = ""
 today = datetime.date.today().strftime('%Y-%m-%d')
 template = """# {date}
 
-## Daily checklist | project:Daily  and (due:today or +PENDING) | project:Daily due:today
+## Daily checklist | @daily | project:Daily due:today
+
+___
+## Notes
+- [Notes](../Notes)
+
+___
+- [TODOs](../TODOs)
+## TODO Today! | @today | scheduled:today project:Default
 
 
----
-## TODO Today! | +PENDING and (due:today or +OVERDUE) and project.not:Daily | due:today project:Default
+## TODO Tomorrow! | @tomorrow | scheduled:tomorrow
 
-## This Week! | +WEEK -DUETODAY -OVERDUE | due:tomorrow project:Default
 
----
+## The Week Ahead! | @week | due:tomorrow project:Default
+
+___
 ## Done Today | end:{today}
 
 ___
 {something}
-
-## Notes
-- [UNADM](../UnADM/UnADM.md)
-- [Thoughts](../Thoughts)
-
-- [PhD Tips](../PhD Tips)
-- [Productivity](../Productivity)
-- [Machine Learning](../Machine Learning)
+___
 """
 
 date = (datetime.date.today() if len(sys.argv) < 2
