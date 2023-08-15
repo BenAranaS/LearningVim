@@ -1,13 +1,35 @@
 # Learning VIM
-## Openning Vim
-
+### Openning Vim
 Command | Description
 ------------ | -------------
 `vi -o file1.txt file2.txt` | open two files in two windows
 `vi -u NONE` | open without settings or plugins
 `vi file.xt +8  `| open file file.txt and go straight to line 8
 
-## Motions & Navigation
+### Build-in diff mode on vim
+Command | Description
+--------- | -------------
+`vim +d file1.txt file2.txt` |
+`do`| diff obtain
+`dp`| diff put
+`:diffsplit` |
+`:vert diffsplit` |
+`:set dip+=vertical `| diffopt=filler, vertical
+
+##### Direct modifications on files
+Command | Description
+--------- | -------------
+`vim hello.txt +8` |  open hello.txt and go to line 8
+`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
+`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
+`vim +4d +wq file.txt`| remove line 4 from file.xt
+
+### Zip files
+Command | Description
+--------- | -------------
+`vim weather.zip` | select and enter, edit as usual
+
+### Motions & Navigation
 Command | Description
 ------------ | -------------
 `h j k l` | instead of move arrows
@@ -18,6 +40,10 @@ Command | Description
 `b` | move to the beginning of previous word
 `B` | move to the beginning of previous big word
 `ge` | move to the end of the previous word
+`iw `| inner word
+`it `| inner tag
+`i" `| inner quotes
+`ip `| inner paragraph
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
@@ -54,38 +80,25 @@ Command | Description
 `@:` | repeat last command from normal mode
 `*` | search for the current word and takes you to the next occurrence
 `%` | go to the pair of ( or )
-`g~` | toggle case
 `gU` | all to uppercase
 `gu` | all to lowercase
+`gj gk` | Move cursor up and down to wrapped part of a line
+`g0 g$` | Move cursor to the first and last letter of a wrapped line
+`~ g~` | Switch capitalisation of a letter
 `:changes` | shows the list of changes
 `g;` | Move to the last change
 `g,` | Move to the next (more recent) change
+`gv` | Reselect previous selected text
+`gJ` | Joining lines without leaving spaces.
+`g&`  | Rerun substitute command for all lines
+`vi(` | Select everything within "("
+`va(` | Select everything within "(" including (
+`yi(` | yank/copy all within the (
+`ya(` | yank/copy all, including (, within (
+`ZZ` | Write changes and exit
+`ZQ` | Quit current file and exit (eq. to :q!)
 
-## netrw
-Command | Description
------------- | -------------
-`:Explore` | launch netrw explorer
-`Enter` | opens a dir or file
-`I` | toggle banner
-`%` | create a new file
-`-` | go to parent dir
-`u` | go to previous dir in history
-`p` | opens a preview window
-`D` | delete file of empty dir
-`d` | creates a directory
-`R` | rename file
-`v` | open file on new vertical window
-`t` | open file on new tab
-`gh` | hide/unhide hidden files, dot-files
-`cd` | make browsing dir current dir
-`gn` | Make current dir the tree root
-
-`mb` | bookmark current dir
-`gb` | go to previous bookmarked dir
-`qb` | List bookmarked dir and history
-
-
-## Edition Commands
+### Edition Commands
 Command | Description
 ------------ | -------------
 `d`| delete
@@ -101,7 +114,10 @@ Command | Description
 `ctrl + r`| redo
 `d) `| delete sentence
 `dd `| delete line
+`D` | delete characters under the cursor until the end of the line
 `d/Genius `| delete until word Genius
+`r` | replace character under the cursor
+`R` | enter Insert Mode replacing characters
 `yw `| copy word
 `ctrl + r + register`| paste text from register
 `ctrl + a` |  paste text from register '.'
@@ -117,12 +133,33 @@ Command | Description
 `p  `| paste on place
 `P `| paste before cursor
 `yy`| copy line
-`x `| delete word
+`x`| delete character under cursor
+`X`| delete character before cursor
 `xp`| exchange letters
 `c `| change
 `cw`| change word
 `c/word`| change until word
 `J` | join line to one above
+`gg=G` | fix file indentation
+
+### yank to registers
+Command | Description
+------------ | -------------
+`"Ayy `| yank into register A
+`"Ap  `| paste from register A
+`"AgP `| paste from register A before cursor and put cursor at the end of paste text
+
+## The read Command
+Command | Description
+------------ | -------------
+`:r` | read a file and dump it content in current buffer
+`:-1r file.txt `| adds content of file.txt at the beginning of file
+
+### Substitute by searching
+Command | Description
+------------ | -------------
+`:s/word/newword/g` | substitute word by new word, as many times it appears in line
+`:s/word/newword/gc`| ask for confirmation
 
 ### in visual mode
 Command | Description
@@ -142,27 +179,21 @@ Command | Description
 `S` | delete line and go to insert mode
 `gi` | Go to last edited position in insert mode
 
-### yank to registers
+### Opening files referenced in text
 Command | Description
------------- | -------------
-`"Ayy `| yank into register A
-`"Ap  `| paste from register A
-`"AgP `| paste from register A before cursor and put cursor at the end of paste text
+--------- | -------------
+`gf `|go to file or url
+`g shift f`| open on line reported by warning or error
+`gx `| open URL under cursor
 
-### Substitute by searching
-Command | Description
------------- | -------------
-`:s/word/newword/g` | substitute word by new word, as many times it appears in line
-`:s/word/newword/gc`| ask for confirmation
-
-## MARKS
+### MARKS
 Command | Description
 ------------ | -------------
 `ma `| create mark a
 `mA`| create mark A
 `'a`| go to mark a
 
-## TAGS
+### TAGS
 Command | Description
 ------------ | -------------
 `ctrl+o `| go to previous jump
@@ -175,7 +206,7 @@ Command | Description
 `g ctrl + ]` | ambiguous tags
 `ctrl + t` | jump back up the tag stack
 
-## Macros
+### Macros
 Command | Description
 ------------ | -------------
 `qq` | Start recording on register q
@@ -192,6 +223,10 @@ Command | Description
 `ctrl+ww` | move to other window
 `ctrl+wc`| close window
 `:close` | close window
+`:wa` | Write all unsaved buffers, but keep Vim open.
+`:xa or :wqa` | Write all unsaved buffers, and close Vim.
+`:qa` | Quit Vim but stop if there are unsaved buffers.
+`:qa!` | Quit Vim and discard unsaved buffers.
 `:new file.txt` | create file.txt
 `:e file.txt` | open/edit file.txt
 `:bd `| buffer delete
@@ -228,22 +263,38 @@ Shortcut | Description
 `,[`| go to previous section on latex
 `,[`| go to previous section on latex
 
-
-
-## The read Command
+## netrw
 Command | Description
 ------------ | -------------
-`:r` | read a file and dump it content in current buffer
-`:-1r file.txt `| adds content of file.txt at the beginning of file
+`:Explore` | launch netrw explorer
+`Enter` | opens a dir or file
+`I` | toggle banner
+`%` | create a new file
+`-` | go to parent dir
+`u` | go to previous dir in history
+`p` | opens a preview window
+`D` | delete file of empty dir
+`d` | creates a directory
+`R` | rename file
+`v` | open file on new vertical window
+`t` | open file on new tab
+`gh` | hide/unhide hidden files, dot-files
+`cd` | make browsing dir current dir
+`gn` | Make current dir the tree root
+`mb` | bookmark current dir
+`gb` | go to previous bookmarked dir
+`qb` | List bookmarked dir and history
 
-## Configuration files
+### Configuration files
 User defined configuration file: `~/.vimrc`
 `:source ~/.vimrc` |
 
-### Settings
+### Settings - ~/.vimrc
 Setting | Description
 --------- | -------------
 `set number` |
+`:set relativenumber` |
+`:set notrelativenumber` |
 `set ruler` |
 `set nocompatible` |
 `syntax on` |
@@ -256,6 +307,16 @@ Setting | Description
 `set tabstop=2 shiftwidth=2 expandtab` |
 `:retab` |
 `noremap <SPACE> <C-F> `| use space to scroll down
+`set diffopt+=vertical` |show diff side by side
+`:help option-summary` |
+`:set` |
+`:set ic`| ignore case when searching
+`:set hls`| highlight the matches
+`:noh `|no highlight
+`:incsearch `| search as typing
+`:set clipboard=unnamedplus `|use same clipboard as the system
+`:syntax on` |
+`:colorscheme morning` |
 
 #### Abbreviations
 Command | Description
@@ -272,57 +333,6 @@ Command | Description
 `:com! Py ! python %`| % is expanded to the name eof the file
 `:Py`| run the command
 `:comm! Wc !wc %`| run wc on the current file
-
-##### Direct modifications on files
-Command | Description
---------- | -------------
-`vim hello.txt +8` |  open hello.txt and go to line 8
-`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
-`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
-`vim +4d +wq file.txt`| remove line 4 from file.xt
-
-### Buildon diff mode on vim
-Command | Description
---------- | -------------
-`vim +d file1.txt file2.txt` |
-`do`| diff obtain
-`dp`| diff put
-`:diffsplit` |
-`:vert diffsplit` |
-`:set dip+=vertical `| diffopt=filler, vertical
-
-## .vimrc
-Command | Description
---------- | -------------
-`set diffopt+=vertical` |show diff side by side
-
-### Settings
-Command | Description
---------- | -------------
-`:help option-summary` |
-`:close` |
-`:set` |
-`:set ic`| ignore case when searching
-`:set hls`| highligh the matches
-`:noh `|no highlight
-`:incsearch `| search as typing
-`:set clipboard=unnamedplus `|use same clipboard as the system
-`:syntax on` |
-`:colorscheme morning` |
-
-### Zip files
-Command | Description
---------- | -------------
-`vim weather.zip` |
-select and enter
-edit as usual
-
-### Opening files referenced in text
-Command | Description
---------- | -------------
-`gf `|go to file or url
-`g shift f`| open on linee
-`gx `| open URL under cursor
 
 ### Using OS Commands
 Command | Description
@@ -358,7 +368,6 @@ Command | Description
 `[S  `| same
 `:set nospell `| stop checking spell
 
-
 ##### Latex Suite
 vi /usr/share/doc/vim-latexsuite/README.Debian
 Command | Description
@@ -367,9 +376,9 @@ Command | Description
  `set grepprg=grep\ -nH\ $*` |
  `filetype indent on` |
  `let g:tex_flavor='latex'` |
-
 http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings.html
 
+### LatexSuite Commands
 Command | Description
 --------- | -------------
 `^^ `| gets changed by ^{}
@@ -390,21 +399,164 @@ Command | Description
 ``D `|  \Delta
 `[[` | go to previous section
 `]]` | go to previous section
-
-## With default leader settings
-Command | Description
---------- | -------------
 `\ll `| Compile
 `\lv `| Visualise compiled file
-
-## After mapping leader key to space:
-Command | Description
---------- | -------------
-`<space>ll `| Compile
-`<space>lv `| Visualise compiled file
 `za`| fold and unfold
 `set nofoldenable` |
 `\rf `| fold up the entire file
+
+## VIMTEX 
+### From :h vimtex-default-mappings
+   LHS          |    RHS           |                               MODE~
+  ---|---|---
+   `<localleader>li`  | `<plug>(vimtex-info)` |                           `n`
+   `<localleader>lI`  | `<plug>(vimtex-info-full)` |                      `n`
+   `<localleader>lt`  | `<plug>(vimtex-toc-open)` |                       `n`
+   `<localleader>lT`  | `<plug>(vimtex-toc-toggle)` |                     `n`
+   `<localleader>lq`  | `<plug>(vimtex-log)` |                            `n`
+   `<localleader>lv`  | `<plug>(vimtex-view)` |                           `n`
+   `<localleader>lr`  | `<plug>(vimtex-reverse-search)` |                 `n`
+   `<localleader>ll`  | `<plug>(vimtex-compile)` |                        `n`
+   `<localleader>lL`  | `<plug>(vimtex-compile-selected)` |               `nx`
+   `<localleader>lk`  | `<plug>(vimtex-stop)` |                           `n`
+   `<localleader>lK`  | `<plug>(vimtex-stop-all)` |                       `n`
+   `<localleader>le`  | `<plug>(vimtex-errors)` |                         `n`
+   `<localleader>lo`  | `<plug>(vimtex-compile-output)` |                 `n`
+   `<localleader>lg`  | `<plug>(vimtex-status)` |                         `n`
+   `<localleader>lG`  | `<plug>(vimtex-status-all)` |                     `n`
+   `<localleader>lc`  | `<plug>(vimtex-clean)` |                          `n`
+   `<localleader>lC`  | `<plug>(vimtex-clean-full)` |                     `n`
+   `<localleader>lm`  | `<plug>(vimtex-imaps-list)` |                     `n`
+   `<localleader>lx`  | `<plug>(vimtex-reload)` |                         `n`
+   `<localleader>lX`  | `<plug>(vimtex-reload-state)` |                   `n`
+   `<localleader>ls`  | `<plug>(vimtex-toggle-main)` |                    `n`
+   `<localleader>la`  | `<plug>(vimtex-context-menu)` |                   `n`
+   `dse`              | `<plug>(vimtex-env-delete)` |                     `n`
+   `dsc`              | `<plug>(vimtex-cmd-delete)` |                     `n`
+   `ds$`              | `<plug>(vimtex-env-delete-math)` |                `n`
+   `dsd`              | `<plug>(vimtex-delim-delete)` |                   `n`
+   `cse`              | `<plug>(vimtex-env-change)` |                     `n`
+   `csc`              | `<plug>(vimtex-cmd-change)` |                     `n`
+   `cs$`              | `<plug>(vimtex-env-change-math)` |                `n`
+   `csd`              | `<plug>(vimtex-delim-change-math)` |              `n`
+   `tsf`              | `<plug>(vimtex-cmd-toggle-frac)` |                `nx`
+   `tsc`              | `<plug>(vimtex-cmd-toggle-star)` |                `n`
+   `tse`              | `<plug>(vimtex-env-toggle-star)` |                `n`
+   `ts$`              | `<plug>(vimtex-env-toggle-math)` |                `n`
+   `tsd`              | `<plug>(vimtex-delim-toggle-modifier)` |          `nx`
+   `tsD`              | `<plug>(vimtex-delim-toggle-modifier-reverse)` |  `nx`
+   `<F7>`             | `<plug>(vimtex-cmd-create)` |                     `nxi`
+   `]]`               | `<plug>(vimtex-delim-close)` |                    `i`
+   `<F8>`             | `<plug>(vimtex-delim-add-modifiers)` |            `n`
+   `ac`               | `<plug>(vimtex-ac)` |                             `xo`
+   `ic`               | `<plug>(vimtex-ic)` |                             `xo`
+   `ad`               | `<plug>(vimtex-ad)` |                             `xo`
+   `id`               | `<plug>(vimtex-id)` |                             `xo`
+   `ae`               | `<plug>(vimtex-ae)` |                             `xo`
+   `ie`               | `<plug>(vimtex-ie)` |                             `xo`
+   `a$`               | `<plug>(vimtex-a$)` |                             `xo`
+   `i$`               | `<plug>(vimtex-i$)` |                             `xo`
+   `aP`               | `<plug>(vimtex-aP)` |                             `xo`
+   `iP`               | `<plug>(vimtex-iP)` |                             `xo`
+   `am`               | `<plug>(vimtex-am)` |                             `xo`
+   `im`               | `<plug>(vimtex-im)` |                             `xo`
+   `%`                | `<plug>(vimtex-%)` |                              `nxo`
+   `]]`               | `<plug>(vimtex-]])` |                             `nxo`
+   `][`               | `<plug>(vimtex-][)` |                             `nxo`
+   `[]`               | `<plug>(vimtex-[])` |                             `nxo`
+   `[[`               | `<plug>(vimtex-[[)` |                             `nxo`
+   `]m`               | `<plug>(vimtex-]m)` |                             `nxo`
+   `]M`               | `<plug>(vimtex-]M)` |                             `nxo`
+   `[m`               | `<plug>(vimtex-[m)` |                             `nxo`
+   `[M`               | `<plug>(vimtex-[M)` |                             `nxo`
+   `]n`               | `<plug>(vimtex-]n)` |                             `nxo`
+   `]N`               | `<plug>(vimtex-]N)` |                             `nxo`
+   `[n`               | `<plug>(vimtex-[n)` |                             `nxo`
+   `[N`               | `<plug>(vimtex-[N)` |                             `nxo`
+   `]r`               | `<plug>(vimtex-]r)` |                             `nxo`
+   `]R`               | `<plug>(vimtex-]R)` |                             `nxo`
+   `[r`               | `<plug>(vimtex-[r)` |                             `nxo`
+   `[R`               | `<plug>(vimtex-[R)` |                             `nxo`
+   `]/`               | `<plug>(vimtex-]/` |                              `nxo`
+   `]*`               | `<plug>(vimtex-]star` |                           `nxo`
+   `[/`               | `<plug>(vimtex-[/` |                              `nxo`
+   `[*`               | `<plug>(vimtex-[star` |                           `nxo`
+   `K`                | `<plug>(vimtex-doc-package)` |                    `n`
+
+Imap   | Action  | Context
+---|---|---
+`0   |   '\emptyset'                    | vimtex#imaps#wrap_math
+   `6   |   '\partial'                     | vimtex#imaps#wrap_math
+   `8   |   '\infty'                       | vimtex#imaps#wrap_math
+   `=   |   '\equiv'                       | vimtex#imaps#wrap_math
+   `\   |   '\setminus'                    | vimtex#imaps#wrap_math
+   `.   |   '\cdot'                        | vimtex#imaps#wrap_math
+   `*   |   '\times'                       | vimtex#imaps#wrap_math
+   `<   |   '\langle'                      | vimtex#imaps#wrap_math
+   `>   |   '\rangle'                      | vimtex#imaps#wrap_math
+   `H   |   '\hbar'                        | vimtex#imaps#wrap_math
+   `+   |   '\dagger'                      | vimtex#imaps#wrap_math
+   `[   |   '\subseteq'                    | vimtex#imaps#wrap_math
+   `]   |   '\supseteq'                    | vimtex#imaps#wrap_math
+   `(   |   '\subset'                      | vimtex#imaps#wrap_math
+   `)   |   '\supset'                      | vimtex#imaps#wrap_math
+   `A   |   '\forall'                      | vimtex#imaps#wrap_math
+   `E   |   '\exists'                      | vimtex#imaps#wrap_math
+  `jj   |   '\downarrow'                   | vimtex#imaps#wrap_math
+  `jJ   |   '\Downarrow'                   | vimtex#imaps#wrap_math
+  `jk   |   '\uparrow'                     | vimtex#imaps#wrap_math
+  `jK   |   '\Uparrow'                     | vimtex#imaps#wrap_math
+  `jh   |   '\leftarrow'                   | vimtex#imaps#wrap_math
+  `jH   |   '\Leftarrow'                   | vimtex#imaps#wrap_math
+  `jl   |   '\rightarrow'                  | vimtex#imaps#wrap_math
+  `jL   |   '\Rightarrow'                  | vimtex#imaps#wrap_math
+   `a   |   '\alpha'                       | vimtex#imaps#wrap_math
+   `b   |   '\beta'                        | vimtex#imaps#wrap_math
+   `c   |   '\chi'                         | vimtex#imaps#wrap_math
+   `d   |   '\delta'                       | vimtex#imaps#wrap_math
+   `e   |   '\epsilon'                     | vimtex#imaps#wrap_math
+   `f   |   '\phi'                         | vimtex#imaps#wrap_math
+   `g   |   '\gamma'                       | vimtex#imaps#wrap_math
+   `h   |   '\eta'                         | vimtex#imaps#wrap_math
+   `i   |   '\iota'                        | vimtex#imaps#wrap_math
+   `k   |   '\kappa'                       | vimtex#imaps#wrap_math
+   `l   |   '\lambda'                      | vimtex#imaps#wrap_math
+   `m   |   '\mu'                          | vimtex#imaps#wrap_math
+   `n   |   '\nu'                          | vimtex#imaps#wrap_math
+   `p   |   '\pi'                          | vimtex#imaps#wrap_math
+   `q   |   '\theta'                       | vimtex#imaps#wrap_math
+   `r   |   '\rho'                         | vimtex#imaps#wrap_math
+   `s   |   '\sigma'                       | vimtex#imaps#wrap_math
+   `t   |   '\tau'                         | vimtex#imaps#wrap_math
+   `y   |   '\psi'                         | vimtex#imaps#wrap_math
+   `u   |   '\upsilon'                     | vimtex#imaps#wrap_math
+   `w   |   '\omega'                       | vimtex#imaps#wrap_math
+   `z   |   '\zeta'                        | vimtex#imaps#wrap_math
+   `x   |   '\xi'                          | vimtex#imaps#wrap_math
+   `D   |   '\Delta'                       | vimtex#imaps#wrap_math
+   `F   |   '\Phi'                         | vimtex#imaps#wrap_math
+   `G   |   '\Gamma'                       | vimtex#imaps#wrap_math
+   `L   |   '\Lambda'                      | vimtex#imaps#wrap_math
+   `P   |   '\Pi'                          | vimtex#imaps#wrap_math
+   `Q   |   '\Theta'                       | vimtex#imaps#wrap_math
+   `S   |   '\Sigma'                       | vimtex#imaps#wrap_math
+   `U   |   '\Upsilon'                     | vimtex#imaps#wrap_math
+   `W   |   '\Omega'                       | vimtex#imaps#wrap_math
+   `X   |   '\Xi'                          | vimtex#imaps#wrap_math
+   `Y   |   '\Psi'                         | vimtex#imaps#wrap_math
+  `ve   |   '\varepsilon'                  | vimtex#imaps#wrap_math
+  `vf   |   '\varphi'                      | vimtex#imaps#wrap_math
+  `vk   |   '\varkappa'                    | vimtex#imaps#wrap_math
+  `vq   |   '\vartheta'                    | vimtex#imaps#wrap_math
+  `vr   |   '\varrho'                      | vimtex#imaps#wrap_math
+   `#/`   |   vimtex#imaps#style_math("slashed") | vimtex#imaps#wrap_math
+   `#b`   |   vimtex#imaps#style_math("mathbf") | vimtex#imaps#wrap_math
+   `#f`   |   vimtex#imaps#style_math("mathfrak") | vimtex#imaps#wrap_math
+   `#c`   |   vimtex#imaps#style_math("mathcal") | vimtex#imaps#wrap_math
+   `#-`   |   vimtex#imaps#style_math("overline") | vimtex#imaps#wrap_math
+   `#B`   |   vimtex#imaps#style_math("mathbb") | vimtex#imaps#wrap_math
+   ``   |   '``'                           | vimtex#imaps#wrap_trivial
+
 
 ## Syntastic
 Command | Description
@@ -417,23 +569,6 @@ Command | Description
 `<leader> [` | go to next error remap needed
 `<leader> ]` | go to previous error
 
-## No Plugin
-https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
-https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
-
-
-## Mastering the Vim Language
-Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
-
-Command | Description
---------- | -------------
-`iw `| inner word
-`it `| inner tag
-`i" `| inner quotes
-`ip `| inner paragraph
-`:set relativenumber` |
-`:set notrelativenumber` |
-
 ## Surround
 Command | Description
 --------- | -------------
@@ -442,6 +577,14 @@ Command | Description
 `ysiw]` | add surrounding [] to iw
 `[` | adds spaces
 `]` | do not add spaces
+
+# Documentation and more info
+## No Plugin
+https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
+https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+
+## Mastering the Vim Language
+Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
 
 ### Marked
 Command | Description
@@ -459,3 +602,56 @@ Command | Description
 `:SClose` | close current session
 
 ## Using Plug-Vim
+
+## Signify
+Command | Description
+--------- | -------------
+`:SignifyToggle`|
+`:SignifyToggleHighlight`|
+
+
+# GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
+## Git
+Command | Description
+--------- | -------------
+`:Git add`|
+`:Git commit`|
+`:Git blame`|
+`Gdiffsplit`|
+`GRemove`|
+`GBrowse`|
+
+## GV - A git commit browser
+Command | Description
+--------- | -------------
+`:GV`|
+`:GV!`|         # will only list commits that affected the current file
+`:GV?`|         # fills the location list with the revisions of the current file
+`:GV`|          # or :GV? can be used in visual mode to track the changes in the selected lines.
+
+## git-fugitive conflict resolution
+[Git Merge Medium](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
+Command | Description
+--------- | -------------
+`<leader>gd3` | 3-way diff split
+`dgh` | Get diff from left
+`dgl` | Get diff from right
+`[c` | jump to previous git hunk
+`]c` | jump to next git hunk
+
+
+## Which Key [Source](https://www.chrisatmachine.com/blog/category/neovim/15-which-key)
+Command | Description
+--------- | -------------
+`<leader> {char}`|
+
+## Replace/Refactor variable name
+Place cursor at name to rename and type
+Command | Description
+--------- | -------------
+`gd `| Goto local Declaration.  When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "*", but lines that look like a comment are ignored (see 'comments' option).  Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).  {not in Vi}
+`gD` | Goto global Declaration.  When the cursor is on a global variable that is defined in the file, this command will jump to its declaration.  This works just like "gd", except that the search for the keyword always starts in line 1.  {not in Vi} Then c (change) + gn new_name esc
+`gn` | Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match.  If the cursor is on the match, visually selects it.  If an operator is pending, operates on the match.  E.g., "dgn" deletes the text of the next match.  If Visual mode is active, extends the selection until the end of the next match.
+`.`| (repeat) one or more times to rename next occurrence(s)
+`:%norm` | to rename all occurrences in the buffer at once.
+source:https://vi.stackexchange.com/questions/18004/renaming-variables

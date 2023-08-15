@@ -18,6 +18,8 @@ filetype indent on
 "set smartindent
 
 "Search & display
+" set mouse=a        " Enable mouse usage (all modes)
+set mouse=n        
 set wrap
 set linebreak
 set ignorecase
@@ -36,13 +38,22 @@ syntax on
 set noerrorbells
 "set showcmd        " Show (partial) command in status line.
 
+" Cursor configuration
+let &t_SI = "\e[1 q"
+let &t_EI = "\e[2 q"
+" reset the cursor on start (for older versions of vim, usually not required)
+augroup myCmds
+  autocmd!
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+
 " Clipboard handling
 " use same clipboard as the system
-if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed "OSX
-else
-  set clipboard=unnamedplus "Linux
-endif
+" if system('uname -s') == "Darwin\n"
+"   set clipboard=unnamed "OSX
+" else
+"   set clipboard=unnamedplus "Linux
+" endif
 
 " Files and undo
 set noswapfile
@@ -121,29 +132,38 @@ inoremap <Up> <C-o>:echo "ArrowKeys Disabled!"<CR>
 vnoremap <Down> :<C-u>echo "ArrowKeys Disabled!"<CR>
 inoremap <Down> <C-o>:echo "ArrowKeys Disabled!"<CR>
 "noremap <SPACE> <C-F> " use space to scroll down
-noremap <Leader>n :bn<CR>
-noremap <Leader>p :bp<CR>
-noremap <Leader>b :ls<CR>
-noremap <Leader>bd :bd<CR>
+
+" Using vim-bufkill now
+" noremap <Leader>n :bn<CR>
+" noremap <Leader>p :bp<CR>
+" noremap <Leader>b :ls<CR>
+" noremap <Leader>bd :bd<CR>
 
 "In normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
 nnoremap TTT "=strftime(" %c")<CR>P
 inoremap TTT <C-R>=strftime(" %c")<CR>
 
-"set mouse=a        " Enable mouse usage (all modes)
 
 " Some useful commands
 noremap <Leader>W :w !sudo tee % > /dev/null
 command! MakeTags !ctags -R .
 command! Wc !wc %
 command! Dts :%s/\s\+$//e "delete trailing spaces
+command! Q :1,$bd | q "soft quitting, all buffers and vim
+command! Qothers call CloseOtherBF('%')
 command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
 command! ConfigPlug execute ":e ~/.vim/plugins.vim"
-command! Reload execute ":source $MYVIMRC"
+command! Reload execute ":w |".."source $MYVIMRC"
 
 " Python
 command! Py  :w  | ! clear; python3 %
+
+" Compiling C
+command! Gcc  :w  | ! clear; gcc  % -o %.bin ; %.bin
+map <Leader>gcc :compiler gcc<CR>:w <CR>:make %:r<CR>:copen<CR>:wincmd J<CR>
+map <Leader>gcr :!%:r
+noremap <Leader>mm :w <bar> :!export SRC=%;cd $(dirname %); clear; make clean; make; make run <CR>
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -163,29 +183,43 @@ au Filetype python set
 
 " Dealing with python's virtual environments
   "execfile(activate_this, dict(__file__=activate_this))
+if has('python3')
 py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
   project_base_dir = os.environ['VIRTUAL_ENV']
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+  if os.path.exists(activate_this):
+      exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+  # else:
+  #     print("No activate_this.py FOUND")
 EOF
+endif
 
 
 augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype tex
-
   "au BufNew,BufNewFile,BufRead *.md,*.markdown set  
       "\ setfiletype markdown  
-
   " Settings for plain text files
   au BufRead,BufNewFile *.txt set
       \ wrapmargin=0
       \ smartindent
       \ spell spelllang=en_gb
 augroup END
+
+" Latex default configuration
+au Filetype tex,latex set
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+    " \ expandtab
+    " \ autoindent
+    " \ fileformat=unix
+    " \ foldmethod=indent
+    " \ foldlevel=99
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Standard Plugins
@@ -208,15 +242,27 @@ let g:netrw_list_hide=ghregex
 "Open netrw at vimstartup
 "augroup ProjectDrawer
 "    autocmd!
-"    autocmd VimEnter * if argc() == 0 | Explore! | endif
+"    autocmd VimEnter * if argc() == 0 | Explore!j| endif
 "augroup END
 
 " Split vertically, open file explorer, resize.
 nnoremap <Leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>
-nnoremap <Leader>da :Lexplore<bar> :vert resize +10 <CR>
+nnoremap <Leader>da :Lexplore ~<bar> :vert resize +10 <CR>
+
+"Open terminal
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>clear<CR>
 
 " Functions
+" Close buffers but the one currently using
+function! CloseOtherBF(file)
+    let bufnum = bufnr(a:file)
+    let pbuf = bufnum-1
+    exe '1,'..pbuf.."bd"
+    " exe nbuf..',$'.."bd"
+    echo '.+,$'.."bd"
+    exe '.+,$'.."bd"
+endfunction
 " Function to source only if file exists {
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
