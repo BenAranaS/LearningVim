@@ -33,7 +33,7 @@ Plug 'vim-scripts/indentpython.vim'   " Supposed to keep indentation consistent
 Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or automatically on save).
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
 Plug 'tools-life/taskwiki'      " tasks/project man in vim
 Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
@@ -45,6 +45,7 @@ Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 call plug#end()
 
 " From/for plugins
+
 " gruvbox
 colorscheme gruvbox
 set background=dark
@@ -183,11 +184,9 @@ au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips', "UltiSnips", ]          " using Vim
-
 let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -220,7 +219,6 @@ au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.
 
 " vim-commentary settings:
 autocmd FileType vimwiki setlocal commentstring=<!--%s-->
-
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -274,7 +272,6 @@ nnoremap <leader>gd3 :Gvdiffsplit!<CR> " three-way diff split
 nnoremap dgh :diffget //2<CR>
 nnoremap dgl :diffget //3<CR>
 
-
 " Which Key
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
@@ -305,7 +302,6 @@ let g:taskwiki_disable_concealcursor="yes"
 let g:taskwiki_maplocalleader=","
 let g:taskwiki_split_max_height=18
 
-
 " PdfAnnots mapping
 nnoremap <leader>pa <cmd>call PdfAnnots()<cr>
 
@@ -321,5 +317,4 @@ noremap <Leader>fb :Buffers<CR>
 noremap <Leader>fl :Lines<CR>
 noremap <Leader>fh :History<CR>
 noremap <Leader>fj :Jumps<CR>
-
 
