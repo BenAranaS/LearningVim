@@ -3,10 +3,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
- " Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
+" Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
 Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 " Plug 'lervag/vimtex'            " Latex compatibility package
-" Plug 'honza/vim-snippets'       " Snippets files for various languages
+Plug 'honza/vim-snippets'       " Snippets files for various languages
 " Plug 'SirVer/ultisnips'         " Snippets engine for vim
 Plug 'vim-syntastic/syntastic'  " syntax checking
 Plug 'nvie/vim-flake8'          " pep 8 support
@@ -29,11 +29,10 @@ Plug 'liuchengxu/vim-which-key' " Shows key maps inline
 Plug 'preservim/tagbar'         " Tagbar, shows code structure in another window
 " Plug 'tmhedberg/SimpylFold'     " folding of latex files
 " Plug 'Konfekt/FastFold'         " Script for faster folding
-Plug 'vim-scripts/indentpython.vim'   " Supposed to keep indentation consistent
+" Plug 'vim-scripts/indentpython.vim'   " Supposed to keep indentation consistent
 Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or automatically on save).
-" post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop'  }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop'  }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
 " Plug 'tools-life/taskwiki'      " tasks/project man in vim
 " Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
