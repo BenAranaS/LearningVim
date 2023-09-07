@@ -177,7 +177,7 @@ set conceallevel=2
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
-au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+" au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
 " Ultisnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
