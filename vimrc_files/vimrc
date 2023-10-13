@@ -245,6 +245,9 @@ let g:netrw_list_hide=ghregex
 "    autocmd VimEnter * if argc() == 0 | Explore!j| endif
 "augroup END
 
+"Always show numbers in help window
+autocmd FileType help  setlocal number relativenumber
+
 " Split vertically, open file explorer, resize.
 nnoremap <Leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>dd :Lexplore %:p:h <bar> :vert resize +10 <CR>

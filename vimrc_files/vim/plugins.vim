@@ -126,7 +126,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_tex_lacheck_quiet_messages = { 'regex': '\Vpossible unwanted space at' }
+let g:syntastic_tex_lacheck_quiet_messages = { 'regex': [ 'in LaTeX macro names', 'unmatched "}"', 'unmatched "beginning of file', '\\dimen', '\\advance', '\\divide']}
+"
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
 
@@ -178,6 +179,13 @@ if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+" Table of content configuration
+autocmd FileType vimtex-toc  setlocal number relativenumber
+let g:vimtex_toc_config = {'fold_enable' : 1,
+            \    'fold_level_start' : 1 ,
+            \    'indent_levels' : 1,
+            \    'hide_line_numbers' : 0}
+nnoremap <localleader>lf :call vimtex#fzf#run()<cr>
 
 " Ultisnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
@@ -311,7 +319,7 @@ noremap <Leader>p :bp<CR>
 noremap <Leader>b :ls<CR>
 noremap <Leader>bd :BD<CR>
 
-" fzf 
+" fzf
 noremap <Leader>ff :Files<CR>
 noremap <Leader>fb :Buffers<CR>
 noremap <Leader>fl :Lines<CR>
