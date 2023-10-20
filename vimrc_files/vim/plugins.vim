@@ -42,6 +42,7 @@ Plug 'qpkorr/vim-bufkill'       " Close buffer without closing window or split
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
 Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
+Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
 call plug#end()
 
 " From/for plugins
@@ -97,6 +98,10 @@ let g:airline#extensions#wordcount#filetypes =
 " let g:airline#extensions#vimtex#wordcount = 1
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
+" Pomodoro on status config
+call airline#parts#define_function('Pomodoro', 'pomo#status_bar')
+let g:airline_section_y = airline#section#create_right(['ffenc','Pomodoro'])
+
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -220,7 +225,7 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'ext': '.md',
             \ }]
 let g:vimwiki_conceal_pre=1
-" setup for dairy notes
+" setup for daily notes
 let $PATH_ = g:vimwiki_list[0]['path']
 let $DT = strftime(" %c")
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
@@ -326,3 +331,26 @@ noremap <Leader>fl :Lines<CR>
 noremap <Leader>fh :History<CR>
 noremap <Leader>fj :Jumps<CR>
 
+" vim-pomodoro
+" Duration of a pomodoro in minutes (default: 25)
+" let g:pomodoro_time_work = 25
+let g:pomodoro_time_work = 25
+" Duration of a break in minutes (default: 5)
+let g:pomodoro_time_slack = 5
+" Log completed pomodoros, 0 = False, 1 = True (default: 0)
+let g:pomodoro_do_log = 1
+" Path to the pomodoro log file (default: /tmp/pomodoro.log)
+let g:pomodoro_log_file = "~/.vim/logs/pomodoro.log"
+"Notifications outside vim can be enabled through the option
+"g:pomodoro_notification_cmd. For instance, to play a sound file after each
+"completed pomodoro or break, add something like
+" let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
+" let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
+let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
+let g:pomodoros_before_reward = 4
+" show icons and remaining time on bar
+let g:pomodoro_use_devicons = 1
+let g:pomodoro_show_time_remaining = 1
+nnoremap <leader>p+ :PomodoroStart<CR>
+nnoremap <leader>ps :PomodoroStatus<CR>
+nnoremap <leader>p- :PomodoroStop<CR>

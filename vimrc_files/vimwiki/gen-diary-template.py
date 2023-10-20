@@ -5,6 +5,7 @@ import os
 
 something = ""
 today = datetime.date.today().strftime('%Y-%m-%d')
+date = datetime.datetime.now().strftime('%a %d %b %H:%M:%S %Y')
 template = """# {date}
 
 ## Daily checklist | @daily | project:Daily due:today
@@ -30,15 +31,15 @@ ___
 {something}
 ___
 """
-
-date = (datetime.date.today() if len(sys.argv) < 2
-        # Expecting filename in YYYY-MM-DD.foo format
-        else " ".join(sys.argv[1:-1])) #.rsplit(".", 1)[0])
+# Ignoring time argument to always use locale's representation
+# date = (datetime.date.today() if len(sys.argv) < 2
+# Expecting filename in YYYY-MM-DD.foo format
+# else " ".join(sys.argv[1:-1])) #.rsplit(".", 1)[0])
 if len(sys.argv) > 2:
     # try:
-        with open(os.path.expanduser(sys.argv[-1])+'/priorities_plan.md', 'r') as f:
-            something = f.read()
+    with open(os.path.expanduser(sys.argv[-1]) + '/priorities_plan.md',
+              'r') as f:
+        something = f.read()
     # except:
         # something = "- Nothing"
 print(template.format(date=date, something=something, today=today))
-

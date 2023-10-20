@@ -405,7 +405,7 @@ Command | Description
 `set nofoldenable` |
 `\rf `| fold up the entire file
 
-## VIMTEX 
+## VIMTEX
 ### From :h vimtex-default-mappings
    LHS          |    RHS           |                               MODE~
   ---|---|---
