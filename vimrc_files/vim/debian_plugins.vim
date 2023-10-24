@@ -42,9 +42,11 @@ Plug 'qpkorr/vim-bufkill'       " Close buffer without closing window or split
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
 Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
+Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
 call plug#end()
 
 " From/for plugins
+
 " gruvbox
 colorscheme gruvbox
 set background=dark
@@ -96,6 +98,10 @@ let g:airline#extensions#wordcount#filetypes =
 " let g:airline#extensions#vimtex#wordcount = 1
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
+" Pomodoro on status config
+call airline#parts#define_function('Pomodoro', 'pomo#status_bar')
+let g:airline_section_y = airline#section#create_right(['ffenc','Pomodoro'])
+
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -125,7 +131,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_tex_lacheck_quiet_messages = { 'regex': '\Vpossible unwanted space at' }
+let g:syntastic_tex_lacheck_quiet_messages = { 'regex': [ 'in LaTeX macro names', 'unmatched "}"', 'unmatched "beginning of file', '\\dimen', '\\advance', '\\divide']}
+"
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
 nnoremap <leader>[ :lprev<CR>
 
@@ -177,17 +184,22 @@ if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+" Table of content configuration
+autocmd FileType vimtex-toc  setlocal number relativenumber
+let g:vimtex_toc_config = {'fold_enable' : 1,
+            \    'fold_level_start' : 1 ,
+            \    'indent_levels' : 1,
+            \    'hide_line_numbers' : 0}
+nnoremap <localleader>lf :call vimtex#fzf#run()<cr>
 
 " Ultisnips
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips', "UltiSnips", ]          " using Vim
-
 let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -213,14 +225,13 @@ let g:vimwiki_list = [{'path': '~/Documents/VimWiki',
             \ 'ext': '.md',
             \ }]
 let g:vimwiki_conceal_pre=1
-" setup for dairy notes
+" setup for daily notes
 let $PATH_ = g:vimwiki_list[0]['path']
 let $DT = strftime(" %c")
 au BufNewFile */diary/*.md :silent 0r !~/.vim/vimwiki_custom/gen-diary-template.py $DT $PATH_
 
 " vim-commentary settings:
 autocmd FileType vimwiki setlocal commentstring=<!--%s-->
-
 
 " instant-markdown "Uncomment to override defaults:
 map <Leader>md :InstantMarkdownPreview<CR>
@@ -274,7 +285,6 @@ nnoremap <leader>gd3 :Gvdiffsplit!<CR> " three-way diff split
 nnoremap dgh :diffget //2<CR>
 nnoremap dgl :diffget //3<CR>
 
-
 " Which Key
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
@@ -305,7 +315,6 @@ let g:taskwiki_disable_concealcursor="yes"
 let g:taskwiki_maplocalleader=","
 let g:taskwiki_split_max_height=18
 
-
 " PdfAnnots mapping
 nnoremap <leader>pa <cmd>call PdfAnnots()<cr>
 
@@ -315,11 +324,33 @@ noremap <Leader>p :bp<CR>
 noremap <Leader>b :ls<CR>
 noremap <Leader>bd :BD<CR>
 
-" fzf 
+" fzf
 noremap <Leader>ff :Files<CR>
 noremap <Leader>fb :Buffers<CR>
 noremap <Leader>fl :Lines<CR>
 noremap <Leader>fh :History<CR>
 noremap <Leader>fj :Jumps<CR>
 
-
+" vim-pomodoro
+" Duration of a pomodoro in minutes (default: 25)
+" let g:pomodoro_time_work = 25
+let g:pomodoro_time_work = 25
+" Duration of a break in minutes (default: 5)
+let g:pomodoro_time_slack = 5
+" Log completed pomodoros, 0 = False, 1 = True (default: 0)
+let g:pomodoro_do_log = 1
+" Path to the pomodoro log file (default: /tmp/pomodoro.log)
+let g:pomodoro_log_file = "~/.vim/logs/pomodoro.log"
+"Notifications outside vim can be enabled through the option
+"g:pomodoro_notification_cmd. For instance, to play a sound file after each
+"completed pomodoro or break, add something like
+" let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
+" let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
+let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
+let g:pomodoros_before_reward = 4
+" show icons and remaining time on bar
+let g:pomodoro_use_devicons = 1
+let g:pomodoro_show_time_remaining = 1
+nnoremap <leader>p+ :PomodoroStart<CR>
+nnoremap <leader>ps :PomodoroStatus<CR>
+nnoremap <leader>p- :PomodoroStop<CR>

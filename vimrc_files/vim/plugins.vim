@@ -346,7 +346,7 @@ let g:pomodoro_log_file = "~/.vim/logs/pomodoro.log"
 "completed pomodoro or break, add something like
 " let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
 " let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
-let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
+" let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
 let g:pomodoros_before_reward = 4
 " show icons and remaining time on bar
 let g:pomodoro_use_devicons = 1
