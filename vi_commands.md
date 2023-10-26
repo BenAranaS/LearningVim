@@ -655,3 +655,48 @@ Command | Description
 `.`| (repeat) one or more times to rename next occurrence(s)
 `:%norm` | to rename all occurrences in the buffer at once.
 source:https://vi.stackexchange.com/questions/18004/renaming-variables
+
+
+## Vim-taskwarrior (from docs)
+Command | Description
+--------- | -------------
+`A`       | add annotation
+`x`       | delete annotation.
+`o`       | open the annotation as a file.
+`a`       | create new task.
+`d`       | set the task in current line done.
+`D`       | delete task
+`<Del>`   | delete field/annotation/task
+`<Space>` | select/remove current task to selected list
+`m`       | modify current field.
+`M`       | modify current task.
+`f`       | change filter
+`r`       | change report type
+`c`       | execute a command for selected tasks/current task
+`R`       | refresh the report/clear selected list
+`q`       | quit buffer.
+`X`       | clear all completed task.
+`p`       | duplicate selected tasks
+`u`       | undo last change.
+`+`       | start task
+`-`       | stop task
+`S`       | sync with taskd server.
+`s`       | sort by this column primarily.(if already of the highest priority then switch the polarity)
+`<`       | sort by this column increasingly.(if already increasingly then increase its priority)
+`>`       | sort by this column decreasingly.(if already decreasingly then decrease its priority)
+`H`       | cycle column format left
+`L`       | cycle column format right
+`J`       | next historical entry
+`K`       | previous historical entry
+`B`       | create a bookmark for current combination
+`<F1>`    | view the documents
+`<CR>`    | show task info.
+`<TAB>`   | jump to the next column
+`<S-TAB>` | jump to the previous column
+`<right>` | jump to the next non-empty column
+`<left>`  | jump to the previous non-empty column
+`d`       | set done to all visual selected tasks
+`D`       | delete all visual selected tasks
+`<CR>`    | show information about visual selected tasks
+`<Space>` | add visual selected tasks to selected list"
+

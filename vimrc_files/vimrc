@@ -69,7 +69,7 @@ set eadirection=hor "keep size of windows after closing a horizontal one.
 
 " Spelling
 set spell 
-set spelllang=en_gb,en_us " ,es_mx
+set spelllang=en_gb " ,en_us  ,es_mx
 "setlocal spell spelllang=en_gb
 nnoremap <Leader>es :setlocal spelllang=es_mx <CR>
 nnoremap <Leader>en :setlocal spelllang=en_gb <CR>
