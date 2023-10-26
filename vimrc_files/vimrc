@@ -24,9 +24,11 @@ set wrap
 set linebreak
 set ignorecase
 set incsearch
-set hlsearch " highlight search pattern
+set hlsearch " highlight search pattern :noh temporarily hide hi
+" Press F4 to toggle highlighting on/off, and show current value.
+noremap <F3> :set hlsearch! hlsearch?<CR>
 set cursorline " highlight current line
-set nohls
+" set nohls
 set number
 set relativenumber
 set showmatch
