@@ -23,6 +23,8 @@ Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
+Plug 'tools-life/taskwiki'      " tasks/project man in vim
+Plug 'blindFS/vim-taskwarrior'  " vim interface for taskwarrior
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files
 " Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
 Plug 'liuchengxu/vim-which-key' " Shows key maps inline
@@ -35,7 +37,6 @@ Plug 'vim-autoformat/vim-autoformat'  " Format code with one button press (or au
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' } "A vim plugin wrapper for prettier
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'neoclide/coc.nvim', {'branch': 'release'} " another autocomplete with snippets support.Use release branch (recommend)
-Plug 'tools-life/taskwiki'      " tasks/project man in vim
 Plug 'rhysd/vim-healthcheck'    " check vim configuration issues
 Plug 'jiangmiao/auto-pairs'    " Automatic pair completion
 Plug 'qpkorr/vim-bufkill'       " Close buffer without closing window or split
@@ -46,7 +47,6 @@ Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
 call plug#end()
 
 " From/for plugins
-
 " gruvbox
 " let g:gruvbox_hls_cursor="blue"
 colorscheme gruvbox
@@ -96,14 +96,31 @@ set t_Co=256
 let g:airline#extensions#wordcount#filetypes =
             \ ['asciidoc', 'help', 'mail', 'markdown', 'nroff', 'org', 'plaintex', 'rst', 'tex', 'text', 'vimwiki']
 " Use ['all'] to enable for all filetypes.
-" Use vimtex specific wordcount function for TexBuffers
-" let g:airline#extensions#vimtex#wordcount = 1
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
+" Use vimtex specific wordcount function for TexBuffers
+let g:airline#extensions#vimtex#wordcount = 1
 " Pomodoro on status config
 call airline#parts#define_function('Pomodoro', 'pomo#status_bar')
 let g:airline_section_y = airline#section#create_right(['ffenc','Pomodoro'])
-
+" LanguageTool Vimtex Integration
+let g:vimtex_grammar_vlty = {
+      \ 'lt_command': 'languagetool',
+      \ 'lt_disable': 'OXFORD_SPELLING_Z_NOT_S',
+      \}
+" let g:vimtex_grammar_vlty = {
+"       \ 'lt_directory': '~/lib/LanguageTool',
+"       \ 'lt_command': '',
+"       \ 'lt_disable': 'WHITESPACE_RULE',
+"       \ 'lt_enable': '',
+"       \ 'lt_disablecategories': '',
+"       \ 'lt_enablecategories': '',
+"       \ 'server': 'no',
+"       \ 'shell_options': '',
+"       \ 'show_suggestions': 0,
+"       \ 'encoding': 'auto',
+"       \}
+map <F9> :w<CR>:VimtexReload<CR>:compiler vlty<CR>:make<CR>:cwindow<CR><CR>
 
 " YouCompleteMe mapping for go to definitions.
 " nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
@@ -134,9 +151,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_tex_lacheck_quiet_messages = { 'regex': [ 'in LaTeX macro names', 'unmatched "}"', 'unmatched "beginning of file', '\\dimen', '\\advance', '\\divide']}
-"
 nnoremap <leader>] :lnext<CR>  " move to next syntastic warn/error
-nnoremap <leader>[ :lprev<CR>
+nnoremap <leader>[ :lprev<CR> " move to previous syntastic warn/error
 
 " vim-marked plugin settings  ONLY AVAILABLE FOR MACOS
 " let g:marked_app = "Marked 2"
@@ -259,6 +275,7 @@ let g:instant_markdown_mathjax = 1
 " let g:languagetool_enable_categories = 'PUNCTUATION,TYPOGRAPHY,CASING,COLLOCATIONS,CONFUSED_WORDS,CREATIVE_WRITING,GRAMMAR,MISC,MISUSED_TERMS_EU_PUBLICATIONS,NONSTANDARD_PHRASES,PLAIN_ENGLISH,TYPOS,REDUNDANCY,SEMANTICS,TEXT_ANALYSIS,STYLE,GENDER_NEUTRALITY'
 " Enable all special rules that cannot be enabled via category
 " let g:languagetool_enable_rules = 'AND_ALSO,ARE_ABLE_TO,ARTICLE_MISSING,AS_FAR_AS_X_IS_CONCERNED,BEST_EVER,BLEND_TOGETHER,BRIEF_MOMENT,CAN_NOT,CANT_HELP_BUT,COMMA_WHICH,EG_NO_COMMA,ELLIPSIS,EXACT_SAME,HONEST_TRUTH,HOPEFULLY,IE_NO_COMMA,IN_ORDER_TO,I_VE_A,NEGATE_MEANING,PASSIVE_VOICE,PLAN_ENGLISH,REASON_WHY,SENT_START_NUM,SERIAL_COMMA_OFF,SERIAL_COMMA_ON,SMARTPHONE,THREE_NN,TIRED_INTENSIFIERS,ULESLESS_THAT,WIKIPEDIA,WORLD_AROUND_IT'
+" let g:languagetool_lang='en-GB'
 
 " Git / Rubarb / Signify
 " Change these if you want
@@ -268,7 +285,7 @@ let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '_'
 let g:signify_sign_delete_first_line = '‾'
 let g:signify_sign_change            = '~'
-" I find the numbers disctracting
+" I find the numbers distracting
 "let g:signify_sign_show_count = 0
 "let g:signify_sign_show_text = 1
 " Jump though hunks
@@ -356,3 +373,6 @@ let g:pomodoro_show_time_remaining = 1
 nnoremap <leader>p+ :PomodoroStart<CR>
 nnoremap <leader>ps :PomodoroStatus<CR>
 nnoremap <leader>p- :PomodoroStop<CR>
+
+" vim-taskwarrior pluging config
+let g:task_log_directory = '~/Dropbox/Working-On/Notes/VimWiki/tasks/.task'

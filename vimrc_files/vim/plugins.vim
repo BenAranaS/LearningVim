@@ -48,8 +48,10 @@ call plug#end()
 
 " From/for plugins
 " gruvbox
+" let g:gruvbox_hls_cursor="blue"
 colorscheme gruvbox
 set background=dark
+" highlight CurSearch cterm=underline ctermbg=Blue ctermfg=White guibg=green
 
 " See Undo Tree
 nnoremap <leader>u :UndotreeShow<CR>
@@ -319,7 +321,7 @@ let g:tagbar_map_showproto = '\'
 " autocmd BufEnter * nested :call tagbar#autoopen(0) "autoopen tagbar
 
 " Vim-autoformat
-noremap <F3> :Autoformat<CR>
+noremap <F4> :Autoformat<CR>
 
 " Overwriting highlights
 highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
