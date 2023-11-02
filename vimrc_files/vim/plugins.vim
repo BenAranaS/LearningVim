@@ -376,7 +376,7 @@ nnoremap <leader>p- :PomodoroStop<CR>
 
 " vim-taskwarrior pluging config
 let g:task_log_directory = '~/Dropbox/Working-On/Notes/VimWiki/tasks/.task'
-let g:task_report_name     = 'all'
+let g:task_report_name     = 'focus'
 " default task report type
 " let g:task_report_name     = 'next'
 " " custom reports have to be listed explicitly to make them available
@@ -390,6 +390,7 @@ let g:task_report_name     = 'all'
 " " allows user to override task configurations. Seperated by space. Defaults
 " to ''
 " let g:task_rc_override     = 'rc.defaultwidth=999'
+let g:task_rc_override     = 'rc.defaultwidth=0'
 " " default fields to ask when adding a new task
 " let g:task_default_prompt  = ['due', 'description']
 " " whether the info window is splited vertically
