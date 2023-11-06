@@ -700,3 +700,16 @@ Command | Description
 `<CR>`    | show information about visual selected tasks
 `<Space>` | add visual selected tasks to selected list"
 
+## Zotcite -  Zotero/Vim Integration
+Command | Description
+--------- | -------------
+'leader+zo' | to open the reference's attachment as registered in Zotero's database.
+'leader+zi' | to see in the status bar the last name of all authors, the year, and the title of the reference.
+'leader+za' | to see all fields of a reference as stored by Zotcite.
+'leader+zy' | to see how the reference will be converted into YAML.
+'leader+zv' | to view the (pdf or html) document generated from the current (Markdown, Rmd, or Quarto) document.
+':Zannotations key -10' | extract annotations made with zotero's build-in pdf viewer on doc with autor or title key, correct by -10pages
+':Znote key' | extract notes from Zotero
+':Zpdfnote' | extract annotations (notes and highlighted texts) that were inserted into a PDF document by an external PDF viewer
+':Zseek key' | see what references have either a last author's name or title matching the pattern being seeked
+

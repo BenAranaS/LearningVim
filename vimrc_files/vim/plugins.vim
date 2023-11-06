@@ -44,6 +44,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
 Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
+Plug 'jalvesaq/zotcite' " zotero vim integration
 call plug#end()
 
 " From/for plugins
@@ -375,8 +376,8 @@ nnoremap <leader>ps :PomodoroStatus<CR>
 nnoremap <leader>p- :PomodoroStop<CR>
 
 " vim-taskwarrior pluging config
-let g:task_log_directory = '~/Dropbox/Working-On/Notes/VimWiki/tasks/.task'
-let g:task_report_name     = 'focus'
+" let g:task_log_directory=expand('~') . 'Dropbox/Working-On/Notes/VimWiki/tasks/.task'
+let g:task_report_name='all'
 " default task report type
 " let g:task_report_name     = 'next'
 " " custom reports have to be listed explicitly to make them available
@@ -390,7 +391,7 @@ let g:task_report_name     = 'focus'
 " " allows user to override task configurations. Seperated by space. Defaults
 " to ''
 " let g:task_rc_override     = 'rc.defaultwidth=999'
-let g:task_rc_override     = 'rc.defaultwidth=0'
+let g:task_rc_override='rc.defaultwidth=999'
 " " default fields to ask when adding a new task
 " let g:task_default_prompt  = ['due', 'description']
 " " whether the info window is splited vertically
@@ -407,3 +408,8 @@ let g:task_rc_override     = 'rc.defaultwidth=0'
 " let g:task_left_arrow      = ' <<'
 " " backward arrow ...
 " let g:task_left_arrow      = '>> '"
+
+" Zotcite Config
+let g:zotcite_filetypes = ['markdown', 'pandoc', 'rmd', 'quarto', 'vimwiki', 'tex', 'vimtex']
+let zotcite_open_in_zotero = 1
+
