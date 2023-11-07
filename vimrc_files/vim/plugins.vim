@@ -2,7 +2,7 @@
 " Non-Standard Plugins and stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
+Plug 'bennydeb/gruvbox'          " Nice theme, specially with dark background
 Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
 Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 Plug 'lervag/vimtex'            " Latex compatibility package
@@ -23,7 +23,7 @@ Plug 'vim-airline/vim-airline-themes'  " Themes for airline
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
-Plug 'tools-life/taskwiki'      " tasks/project man in vim
+Plug 'bennydeb/taskwiki'      " tasks/project man in vim
 Plug 'blindFS/vim-taskwarrior'  " vim interface for taskwarrior
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files
 Plug 'dpelle/vim-LanguageTool'  " Grammar and spell checker
@@ -44,7 +44,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
 Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
-Plug 'jalvesaq/zotcite' " zotero vim integration
+Plug 'bennydeb/zotcite' " zotero vim integration
 call plug#end()
 
 " From/for plugins
