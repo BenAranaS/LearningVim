@@ -2,8 +2,8 @@
 " Non-Standard Plugins and stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'          " Nice theme, specially with dark background
-" Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
+Plug 'bennydeb/gruvbox'          " Nice theme, specially with dark background
+Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
 Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 Plug 'lervag/vimtex'            " Latex compatibility package
 Plug 'honza/vim-snippets'       " Snippets files for various languages
@@ -23,7 +23,7 @@ Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
 Plug 'vimwiki/vimwiki'          " For notes, diary in vim
-Plug 'tools-life/taskwiki'      " tasks/project man in vim
+Plug 'bennydeb/taskwiki'      " tasks/project man in vim
 Plug 'blindFS/vim-taskwarrior'  " vim interface for taskwarrior
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}  " Instant rendering of markdown files
 " Plug 'dpelle/vim-LanguageTool'" Grammar and spell checker
@@ -44,6 +44,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy search binary
 Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
+Plug 'bennydeb/zotcite' " zotero vim integration
 call plug#end()
 
 " From/for plugins
@@ -365,7 +366,7 @@ let g:pomodoro_log_file = "~/.vim/logs/pomodoro.log"
 "completed pomodoro or break, add something like
 " let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
 " let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
-let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
+" let g:pomodoro_notification_cmd = "osascript -e 'display notification \"Pomodoro Finished\" with title \"Vim Notification\" sound name \"Hero\"'; play /System/Library/Sounds/Hero.aiff"
 let g:pomodoros_before_reward = 4
 " show icons and remaining time on bar
 let g:pomodoro_use_devicons = 1
@@ -375,4 +376,40 @@ nnoremap <leader>ps :PomodoroStatus<CR>
 nnoremap <leader>p- :PomodoroStop<CR>
 
 " vim-taskwarrior pluging config
-let g:task_log_directory = '~/Dropbox/Working-On/Notes/VimWiki/tasks/.task'
+" let g:task_log_directory=expand('~') . 'Dropbox/Working-On/Notes/VimWiki/tasks/.task'
+let g:task_report_name='all'
+" default task report type
+" let g:task_report_name     = 'next'
+" " custom reports have to be listed explicitly to make them available
+" let g:task_report_command  = []
+" " whether the field under the cursor is highlighted
+" let g:task_highlight_field = 1
+" " can not make change to task data when set to 1
+" let g:task_readonly        = 0
+" " vim built-in term for task undo in gvim
+" let g:task_gui_term        = 1
+" " allows user to override task configurations. Seperated by space. Defaults
+" to ''
+" let g:task_rc_override     = 'rc.defaultwidth=999'
+let g:task_rc_override='rc.defaultwidth=999'
+" " default fields to ask when adding a new task
+" let g:task_default_prompt  = ['due', 'description']
+" " whether the info window is splited vertically
+" let g:task_info_vsplit     = 0
+" " info window size
+" let g:task_info_size       = 15
+" " info window position
+" let g:task_info_position   = 'belowright'
+" " directory to store log files defaults to taskwarrior data.location
+" let g:task_log_directory   = '~/.task'
+" " max number of historical entries
+" let g:task_log_max         = '20'
+" " forward arrow shown on statusline
+" let g:task_left_arrow      = ' <<'
+" " backward arrow ...
+" let g:task_left_arrow      = '>> '"
+
+" Zotcite Config
+let g:zotcite_filetypes = ['markdown', 'pandoc', 'rmd', 'quarto', 'vimwiki', 'tex', 'vimtex']
+let zotcite_open_in_zotero = 1
+
