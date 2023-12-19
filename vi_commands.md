@@ -727,3 +727,7 @@ Command | Description
 4. " At this point do slow actions
 5. :profile pause
 6. :noautocmd qall!"
+
+# Startup Blame
+% vim --startuptime vim_log.log
+
