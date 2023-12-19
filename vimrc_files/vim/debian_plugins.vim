@@ -17,8 +17,8 @@ Plug 'tpope/vim-commentary'     " Allows to comment stuff out
 Plug 'tpope/vim-surround'       " Handle surroundings like {,(,', etc.
 Plug 'mhinz/vim-signify'        " Shows what lines from a file have changed
 Plug 'mhinz/vim-startify'       " Open vim with a list of recently opened files
-" Plug 'bling/vim-airline'        " Nice looking status bar at the bottom
-" Plug 'vim-airline/vim-airline-themes'  " Themes for airline
+Plug 'bling/vim-airline'        " Nice looking status bar at the bottom
+Plug 'vim-airline/vim-airline-themes'  " Themes for airline
 "" Plug 'itspriddle/vim-marked' " markdown Compatibility
 Plug 'takac/vim-hardtime'       " stop using arrows! Block key's repetition
 " Plug 'justinmk/vim-sneak'     " navigation: jump to location using two chars
