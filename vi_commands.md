@@ -284,6 +284,10 @@ Command | Description
 `mb` | bookmark current dir
 `gb` | go to previous bookmarked dir
 `qb` | List bookmarked dir and history
+`mt` | Mark destination directory
+`mf` | Mark file/s to be copied/moved
+`mc` | Copy marked files to target dir
+`mm` | Move marked files to target dir
 
 ### Configuration files
 User defined configuration file: `~/.vimrc`
@@ -701,6 +705,7 @@ Command | Description
 `<Space>` | add visual selected tasks to selected list"
 
 ## Zotcite -  Zotero/Vim Integration
+Omnicompletion of citation keys: '@' and part of name or title and CTRL-X CTRL-O.
 Command | Description
 --------- | -------------
 'leader+zo' | to open the reference's attachment as registered in Zotero's database.
@@ -712,4 +717,17 @@ Command | Description
 ':Znote key' | extract notes from Zotero
 ':Zpdfnote' | extract annotations (notes and highlighted texts) that were inserted into a PDF document by an external PDF viewer
 ':Zseek key' | see what references have either a last author's name or title matching the pattern being seeked
+
+
+
+# Profiling
+1. :profile start profile.log
+2. :profile func *
+3. :profile file *
+4. " At this point do slow actions
+5. :profile pause
+6. :noautocmd qall!"
+
+# Startup Blame
+% vim --startuptime vim_log.log
 
