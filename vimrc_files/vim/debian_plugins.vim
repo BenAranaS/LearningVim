@@ -3,6 +3,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'bennydeb/gruvbox'          " Nice theme, specially with dark background
+Plug 'NLKNguyen/papercolor-theme' " light theme
 Plug 'ycm-core/YouCompleteMe'   " Autocomplete tool for diff languages
 Plug 'mbbill/undotree'          " Allows to navigate all changes made to a file
 Plug 'lervag/vimtex'            " Latex compatibility package
@@ -169,13 +170,14 @@ filetype plugin indent on
 " syntax enable
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
-" let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_method = 'zathura'
 " Or with a generic interface:
 " let g:vimtex_view_general_viewer = 'okular'
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " Skim vimtex setup
 " let g:tex_flavor='latex' " Default tex file format
-let g:vimtex_view_general_viewer = 'skim'
+" let g:vimtex_view_general_viewer = 'skim'
+" let g:vimtex_view_general_viewer = 'zathura'
 " let g:vimtex_context_pdf_viewer = 'open -a Preview'
 " let g:vimtex_context_pdf_viewer = '/Applications/Skim.app/Contents/MacOS/Skim'
 " let g:vimtex_view_method = 'skim' " Choose which program to use to view PDF file

@@ -115,10 +115,14 @@ vnoremap <Leader><S-Tab> <gv
 "nnoremap <TAB> ) 
 "" use shift tab to move to the previous sentence
 "nnoremap <S-TAB> ( 
-
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" Insert line before and after cursor
+nnoremap [<space> :call append(line('.')-1, '') <CR>
+nnoremap ]<space> :call append(line('.')+1, '') <CR>
+
+" Arrows change size of windows
 nnoremap <Up> :resize +6 <CR>
 nnoremap <Down> :resize -6 <CR>
 nnoremap <Left> :vertical resize +6 <CR>
@@ -135,16 +139,9 @@ vnoremap <Down> :<C-u>echo "ArrowKeys Disabled!"<CR>
 inoremap <Down> <C-o>:echo "ArrowKeys Disabled!"<CR>
 "noremap <SPACE> <C-F> " use space to scroll down
 
-" Using vim-bufkill now
-" noremap <Leader>n :bn<CR>
-" noremap <Leader>p :bp<CR>
-" noremap <Leader>b :ls<CR>
-" noremap <Leader>bd :bd<CR>
-
 "In normal mode or in insert mode to insert the current datestamp: :help i_CTRL-R
 nnoremap TTT "=strftime(" %c")<CR>P
 inoremap TTT <C-R>=strftime(" %c")<CR>
-
 
 " Some useful commands
 noremap <Leader>W :w !sudo tee % > /dev/null
