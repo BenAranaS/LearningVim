@@ -100,8 +100,7 @@ let g:airline#extensions#wordcount#filetypes =
 " * enable/disable vimtex integration >
 let g:airline#extensions#vimtex#enabled = 1
 " Use vimtex specific wordcount function for TexBuffers
-" let g:airline#extensions#vimtex#wordcount = 1  " Activating vimtex count
-" might be more precise but makes vimtex super sluggish.
+" let g:airline#extensions#vimtex#wordcount = 1  " Activating vimtex count, might be more precise but makes vimtex super sluggish.
 " Pomodoro on status config
 call airline#parts#define_function('Pomodoro', 'pomo#status_bar')
 let g:airline_section_y = airline#section#create_right(['ffenc','Pomodoro'])
