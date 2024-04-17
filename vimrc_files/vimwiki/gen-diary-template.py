@@ -6,7 +6,7 @@ import os
 something = ""
 today = datetime.date.today().strftime('%Y-%m-%d')
 date = datetime.datetime.now().strftime('%a %d %b %H:%M:%S %Y')
-template = """# {date}
+template = """# {date} - Hold one thought, one objective
 
 ## Daily checklist | @daily | project:Daily due:today
 
