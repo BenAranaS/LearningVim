@@ -44,6 +44,7 @@ Command | Description
 `it `| inner tag
 `i" `| inner quotes
 `ip `| inner paragraph
+`di"`| delete inner quotes
 `H` | move cursor to the top of the window
 `M  `| = to the middle of the window
 `L  `| = to the bottom of the window
@@ -119,6 +120,10 @@ Command | Description
 `r` | replace character under the cursor
 `R` | enter Insert Mode replacing characters
 `yw `| copy word
+`ctrl + w`| deletes the previous word
+`ctrl + h`| deletes a single character
+`ctrl + u`| deletes a until the beginning of line
+`ctrl + o`| go into normal mode from insert mode
 `ctrl + r + register`| paste text from register
 `ctrl + a` |  paste text from register '.'
 `ctrl + p` | open completion menu
@@ -141,6 +146,8 @@ Command | Description
 `c/word`| change until word
 `J` | join line to one above
 `gg=G` | fix file indentation
+`S` | In normal mode, indents the empty line???
+
 
 ### yank to registers
 Command | Description
