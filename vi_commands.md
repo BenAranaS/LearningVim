@@ -1,10 +1,23 @@
 # Learning VIM
-### Openning Vim
+## Openning Vim
+### Open alternatives
 Command | Description
 ------------ | -------------
 `vi -o file1.txt file2.txt` | open two files in two windows
 `vi -u NONE` | open without settings or plugins
 `vi file.xt +8  `| open file file.txt and go straight to line 8
+
+### Direct modifications on files
+Command | Description
+--------- | -------------
+`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
+`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
+`vim +4d +wq file.txt`| remove line 4 from file.xt
+
+### Zip files
+Command | Description
+--------- | -------------
+`vim weather.zip` | select and enter, edit as usual
 
 ### Build-in diff mode on vim
 Command | Description
@@ -16,19 +29,7 @@ Command | Description
 `:vert diffsplit` |
 `:set dip+=vertical `| diffopt=filler, vertical
 
-##### Direct modifications on files
-Command | Description
---------- | -------------
-`vim hello.txt +8` |  open hello.txt and go to line 8
-`vim hello.txt +Kramm` | open hello.txt and go to first Kramm
-`vim +1,2d +wq conway.txt`|remove first two lines from conway.txt
-`vim +4d +wq file.txt`| remove line 4 from file.xt
-
-### Zip files
-Command | Description
---------- | -------------
-`vim weather.zip` | select and enter, edit as usual
-
+## Normal Mode
 ### Motions & Navigation
 Command | Description
 ------------ | -------------
@@ -125,7 +126,10 @@ Command | Description
 `ctrl + u`| deletes a until the beginning of line
 `ctrl + o`| go into normal mode from insert mode
 `ctrl + r + register`| paste text from register
-`ctrl + a` |  paste text from register '.'
+`ctrl + a` | paste text from register '.' in insert mode
+`ctrl + a` | increase number below cursor in normal mode
+`g ctrl + a` | increase consecutively numbers in selected area in visual mode
+`ctrl + x` | decrease number below cursor in normal mode
 `ctrl + p` | open completion menu
 `ctrl + x` | especial completion mode in insert submode
 `ctrl+x + ctrl+]` | tag insert mode
@@ -135,6 +139,15 @@ Command | Description
 `ctrl+x + ctrl+l` | autocomplete line
 `ctrl+x + ctrl+o` | all autocompletion
 `set complete=.,w,b,u,t,i,kspell` |  (this file, window, buffer, ... spell when enabled
+`O `| add a line above and go to insert mode
+`o `| add a line below and insert there
+`A `| start writing at the end of line
+`a `| insert after the current location of cursor
+`i `| insert where cursor is
+`I `| Insert in the beginning of line
+`s` | remove character and go to insert mode
+`S` | delete line and go to insert mode
+`gi` | Go to last edited position in insert mode
 `p  `| paste on place
 `P `| paste before cursor
 `yy`| copy line
@@ -156,7 +169,7 @@ Command | Description
 `"Ap  `| paste from register A
 `"AgP `| paste from register A before cursor and put cursor at the end of paste text
 
-## The read Command
+### The read Command
 Command | Description
 ------------ | -------------
 `:r` | read a file and dump it content in current buffer
@@ -167,24 +180,6 @@ Command | Description
 ------------ | -------------
 `:s/word/newword/g` | substitute word by new word, as many times it appears in line
 `:s/word/newword/gc`| ask for confirmation
-
-### in visual mode
-Command | Description
------------- | -------------
-`V`| select current line
-`ctrl + v `| visual block
-`ctrl+v l4j `| select one column and 4 rows
-`ctrl+v l4j c - esc `| and chance space by -
-`7G `| go to line 7
-`O `| add a line above and go to insert mode
-`o `| add a line below and insert there
-`A `| start writing at the end of line
-`a `| insert after the current location of cursor
-`i `| insert where cursor is
-`I `| Insert in the beginning of line
-`s` | remove character and go to insert mode
-`S` | delete line and go to insert mode
-`gi` | Go to last edited position in insert mode
 
 ### Opening files referenced in text
 Command | Description
@@ -213,22 +208,15 @@ Command | Description
 `g ctrl + ]` | ambiguous tags
 `ctrl + t` | jump back up the tag stack
 
-### Macros
-Command | Description
------------- | -------------
-`qq` | Start recording on register q
-`Esc + q` | Stop recording
-`@q` | apply macro on register q to current position
-`:5,10norm! @q` | apply macro in q on lines 5 to 10
-
-## Multiple windows
-### buffer & window
+### Multiple windows
+#### buffer & window
 Command | Description
 ------------ | -------------
 `:split` | horizontally split window
 `ctrl+w` | split window command prefix?
 `ctrl+ww` | move to other window
 `ctrl+wc`| close window
+`ctrl+wr`| rotate windows to the right
 `:close` | close window
 `:wa` | Write all unsaved buffers, but keep Vim open.
 `:xa or :wqa` | Write all unsaved buffers, and close Vim.
@@ -258,17 +246,45 @@ Command | Description
 `:vs `| vertical split
 `ctrl + ^` | caret: go to previous opened file
 
-## Personalised Commands
-Shortcut | Description
+## Visual Mode
+Command | Description
+------------ | -------------
+`V`| select current line
+`ctrl + v `| visual block
+`ctrl+v l4j `| select one column and 4 rows
+`ctrl+v l4j c - esc `| and chance space by -
+`7G `| select from line 7 to the end of file
+`o `| change the direction of the cursor in a selected area
+`:normal` | Invoke normal-mode for multiple-line selection in visual-mode, eg :'< '> norm A".
+
+## Macros
+Command | Description
+------------ | -------------
+`qq` | Start recording on register q
+`Esc + q` | Stop recording
+`@q` | apply macro on register q to current position
+`:5,10norm! @q` | apply macro in q on lines 5 to 10
+
+## Spelling
+Setting | Description
 --------- | -------------
-`leader dd`| open netrw on same dir as current file
-`leader da`| open netrw on home dir
-`leader p`| Switch to previous buffer
-`leader n`| Switch to next buffer
-`leader bd`| delete current buffer
-`leader b`| list buffers
-`,[`| go to previous section on latex
-`,[`| go to previous section on latex
+`:set spell spelllang=en_us` |
+`:setlocal spell spelllang=en_us,en_gb,es_mx` |
+
+Command | Description
+--------- | -------------
+`zG `| store new words in internal wordlist
+`zg `| add word under cursor to dictionary
+`zw `| remove the word from dictionary
+`zW `| stores the words in internal wordlist which is global
+`z= `| load spell suggestions
+`Ctrl + x + s `| in insert mode to load spell suggestions.
+`:spellrepall  `| command to apply the same change to all words that match.
+`]s  `| find the misspelled word after the cursor
+`[s `| find the misspelled word before the cursor
+`]S  `| same as ]s but only stop at bad words.
+`[S  `| same
+`:set nospell `| stop checking spell
 
 ## netrw
 Command | Description
@@ -296,7 +312,7 @@ Command | Description
 `mc` | Copy marked files to target dir
 `mm` | Move marked files to target dir
 
-### Configuration files
+## Configuration files
 User defined configuration file: `~/.vimrc`
 `:source ~/.vimrc` |
 
@@ -329,6 +345,8 @@ Setting | Description
 `:syntax on` |
 `:colorscheme morning` |
 
+* Added command to vimrc to verify TTHEME from tmux and change background accordingly.
+ 
 #### Abbreviations
 Command | Description
 --------- | -------------
@@ -336,6 +354,21 @@ Command | Description
 `ctrl + v`| to avoid expansion of abb
 `:set paste `| to avoid wrong formatting when pasting
 `:set nopaste` |
+
+## Personalised Commands
+Shortcut | Description
+--------- | -------------
+`leader dd`| open netrw on same dir as current file
+`leader da`| open netrw on home dir
+`leader p`| Switch to previous buffer
+`leader n`| Switch to next buffer
+`leader bd`| delete current buffer
+`leader b`| list buffers
+`leader R`| Reload configuration vimrc
+`yob`| Toggle dark/light background
+`,[`| go to previous section on latex
+`,[`| go to previous section on latex
+
 
 ## Running commands
 Command | Description
@@ -348,6 +381,7 @@ Command | Description
 ### Using OS Commands
 Command | Description
 --------- | -------------
+`:'< '> ! sort | unique` | sorts and removes repeated lines from the selection
 `:!date` |
 `:e file.txt` |
 `:r !ls` |
@@ -358,56 +392,39 @@ Command | Description
 
 ---
 
-##### Spelling
-Setting | Description
---------- | -------------
-`:set spell spelllang=en_us` |
-`:setlocal spell spelllang=en_us,en_gb,es_mx` |
-
-Command | Description
---------- | -------------
-`zG `| store new words in internal wordlist
-`zg `| add word under cursor to dictionary
-`zw `| remove the word from dictionary
-`zW `| stores the words in internal wordlist which is global
-`z= `| load spell suggestions
-`Ctrl + x + s `| in insert mode to load spell suggestions.
-`:spellrepall  `| command to apply the same change to all words that match.
-`]s  `| find the misspelled word after the cursor
-`[s `| find the misspelled word before the cursor
-`]S  `| same as ]s but only stop at bad words.
-`[S  `| same
-`:set nospell `| stop checking spell
-
-##### Latex Suite
+## Plugins
+### Using Plug-Vim
+### Latex Suite
 vi /usr/share/doc/vim-latexsuite/README.Debian
+
+http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings.html
+
 Command | Description
 --------- | -------------
  `filetype plugin on` |
  `set grepprg=grep\ -nH\ $*` |
  `filetype indent on` |
  `let g:tex_flavor='latex'` |
-http://vim-latex.sourceforge.net/documentation/latex-suite/greek-letter-mappings.html
 
-### LatexSuite Commands
+#### LatexSuite Commands
 Command | Description
 --------- | -------------
 `^^ `| gets changed by ^{}
 `F5 `| insert environment
-` "`p" "`8 "" "`/" `| abbreviation for pi, inf, fracc
+` p 8 / `| abbreviation for pi, inf, fracc
 `F9`| insert references \label \cite
 `ctrl + j `| jump to the next input needed
 `:TTemplate`| Select from a list of latex templates
 `FEM`| emph
 `FTS`| bold
 `FBF` | bfseries
-``sf`| emph selected text
-``st`| bold selected text
+`sf`| emph selected text
+`st`| bold selected text
 `SSE`| section
 `SSS`| subsection
 `SS2`| subsubsection
 `EEN` | enumerate
-``D `|  \Delta
+`D `|  Delta
 `[[` | go to previous section
 `]]` | go to previous section
 `\ll `| Compile
@@ -416,8 +433,8 @@ Command | Description
 `set nofoldenable` |
 `\rf `| fold up the entire file
 
-## VIMTEX
-### From :h vimtex-default-mappings
+### VIMTEX
+#### From :h vimtex-default-mappings
    LHS          |    RHS           |                               MODE~
   ---|---|---
    `<localleader>li`  | `<plug>(vimtex-info)` |                           `n`
@@ -494,6 +511,7 @@ Command | Description
    `[*`               | `<plug>(vimtex-[star` |                           `nxo`
    `K`                | `<plug>(vimtex-doc-package)` |                    `n`
 
+#### VIMTEX IMAPS
 Imap   | Action  | Context
 ---|---|---
 `0   |   '\emptyset'                    | vimtex#imaps#wrap_math
@@ -568,8 +586,7 @@ Imap   | Action  | Context
    `#B`   |   vimtex#imaps#style_math("mathbb") | vimtex#imaps#wrap_math
    ``   |   '``'                           | vimtex#imaps#wrap_trivial
 
-
-## Syntastic
+### Syntastic
 Command | Description
 --------- | -------------
 `:Errors` | Load errors into vim
@@ -580,7 +597,7 @@ Command | Description
 `<leader> [` | go to next error remap needed
 `<leader> ]` | go to previous error
 
-## Surround
+### Surround
 Command | Description
 --------- | -------------
 `ds"` | delete surrounding \"
@@ -589,22 +606,7 @@ Command | Description
 `[` | adds spaces
 `]` | do not add spaces
 
-# Documentation and more info
-## No Plugin
-https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
-https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
-
-## Mastering the Vim Language
-Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
-
-### Marked
-Command | Description
---------- | -------------
-`:MarkedOpen[!]  `|        Open the current Markdown buffer in Marked. Call with a bang to prevent Marked from stealing focus from Vim. Documents opened in Marked are tracked and closed automatically when you quit Vim.
-`:MarkedQuit     `|        Close the current Markdown buffer in Marked. Quits Marked if there are no other documents open.
-`:MarkedToggle[!] `|       If the current Markdown buffer is already open in Marked, calls :MarkedQuit. If not, calls :MarkedOpen[!].
-
-## Startify
+### Startify
 Command | Description
 --------- | -------------
 `:SLoad` | load a session
@@ -612,17 +614,9 @@ Command | Description
 `:SDelete` |delete a session
 `:SClose` | close current session
 
-## Using Plug-Vim
 
-## Signify
-Command | Description
---------- | -------------
-`:SignifyToggle`|
-`:SignifyToggleHighlight`|
-
-
-# GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
-## Git
+### GIT [Source](https://www.chrisatmachine.com/blog/category/neovim/12-git-integration)
+#### Git
 Command | Description
 --------- | -------------
 `:Git add`|
@@ -632,7 +626,7 @@ Command | Description
 `GRemove`|
 `GBrowse`|
 
-## GV - A git commit browser
+#### GV - A git commit browser
 Command | Description
 --------- | -------------
 `:GV`|
@@ -640,7 +634,7 @@ Command | Description
 `:GV?`|         # fills the location list with the revisions of the current file
 `:GV`|          # or :GV? can be used in visual mode to track the changes in the selected lines.
 
-## git-fugitive conflict resolution
+#### git-fugitive conflict resolution
 [Git Merge Medium](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
 Command | Description
 --------- | -------------
@@ -650,25 +644,18 @@ Command | Description
 `[c` | jump to previous git hunk
 `]c` | jump to next git hunk
 
+#### Signify
+Command | Description
+--------- | -------------
+`:SignifyToggle`|
+`:SignifyToggleHighlight`|
 
-## Which Key [Source](https://www.chrisatmachine.com/blog/category/neovim/15-which-key)
+### Which Key [Source](https://www.chrisatmachine.com/blog/category/neovim/15-which-key)
 Command | Description
 --------- | -------------
 `<leader> {char}`|
 
-## Replace/Refactor variable name
-Place cursor at name to rename and type
-Command | Description
---------- | -------------
-`gd `| Goto local Declaration.  When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "*", but lines that look like a comment are ignored (see 'comments' option).  Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).  {not in Vi}
-`gD` | Goto global Declaration.  When the cursor is on a global variable that is defined in the file, this command will jump to its declaration.  This works just like "gd", except that the search for the keyword always starts in line 1.  {not in Vi} Then c (change) + gn new_name esc
-`gn` | Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match.  If the cursor is on the match, visually selects it.  If an operator is pending, operates on the match.  E.g., "dgn" deletes the text of the next match.  If Visual mode is active, extends the selection until the end of the next match.
-`.`| (repeat) one or more times to rename next occurrence(s)
-`:%norm` | to rename all occurrences in the buffer at once.
-source:https://vi.stackexchange.com/questions/18004/renaming-variables
-
-
-## Vim-taskwarrior (from docs)
+### Vim-taskwarrior (from docs)
 Command | Description
 --------- | -------------
 `A`       | add annotation
@@ -711,7 +698,7 @@ Command | Description
 `<CR>`    | show information about visual selected tasks
 `<Space>` | add visual selected tasks to selected list"
 
-## Zotcite -  Zotero/Vim Integration
+### Zotcite -  Zotero/Vim Integration
 Omnicompletion of citation keys: '@' and part of name or title and CTRL-X CTRL-O.
 Command | Description
 --------- | -------------
@@ -727,7 +714,15 @@ Command | Description
 
 
 
-# Profiling
+### Marked
+Command | Description
+--------- | -------------
+`:MarkedOpen[!]  `|        Open the current Markdown buffer in Marked. Call with a bang to prevent Marked from stealing focus from Vim. Documents opened in Marked are tracked and closed automatically when you quit Vim.
+`:MarkedQuit     `|        Close the current Markdown buffer in Marked. Quits Marked if there are no other documents open.
+`:MarkedToggle[!] `|       If the current Markdown buffer is already open in Marked, calls :MarkedQuit. If not, calls :MarkedOpen[!].
+
+## Advanced Features
+### Profiling
 1. :profile start profile.log
 2. :profile func *
 3. :profile file *
@@ -735,6 +730,27 @@ Command | Description
 5. :profile pause
 6. :noautocmd qall!"
 
-# Startup Blame
+### #Startup Blame
 % vim --startuptime vim_log.log
+
+
+# Documentation and more info
+## No Plugin
+https://www.youtube.com/watch?v=XA2WjJbmmoM&t=1029s
+https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
+
+## Mastering the Vim Language
+Source: https://www.youtube.com/watch?v=wlR5gYd6um0&t=1507s
+
+
+## Replace/Refactor variable name
+Place cursor at name to rename and type
+Command | Description
+--------- | -------------
+`gd `| Goto local Declaration.  When the cursor is on a local variable, this command will jump to its declaration.  First Vim searches for the start of the current function, just like "[[".  If it is not found the search stops in line 1.  If it is found, Vim goes back until a blank line is found.  From this position Vim searches for the keyword under the cursor, like with "asterisk", but lines that look like a comment are ignored (see 'comments' option).  Note that this is not guaranteed to work, Vim does not really check the syntax, it only searches for a match with the keyword.  If included files also need to be searched use the commands listed in |include-search|.  After this command |n| searches forward for the next match (not backward).  {not in Vi}
+`gD` | Goto global Declaration.  When the cursor is on a global variable that is defined in the file, this command will jump to its declaration.  This works just like "gd", except that the search for the keyword always starts in line 1.  {not in Vi} Then c (change) + gn new_name esc
+`gn` | Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match.  If the cursor is on the match, visually selects it.  If an operator is pending, operates on the match.  E.g., "dgn" deletes the text of the next match.  If Visual mode is active, extends the selection until the end of the next match.
+`.`| (repeat) one or more times to rename next occurrence(s)
+`:%norm` | to rename all occurrences in the buffer at once.
+source:https://vi.stackexchange.com/questions/18004/renaming-variables
 

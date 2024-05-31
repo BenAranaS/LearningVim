@@ -1,3 +1,8 @@
+" strip characters from string
+function! Chomp(string)
+    return substitute(a:string, '\n\+$', '', '')
+endfunction
+
 " Default
 set nocompatible
 let mapleader = " "
@@ -12,20 +17,20 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab  "tab char to spaces
 set autoindent
-set breakindent  
+set breakindent
 " OPTIONAL: This enables automatic indentation as you type.
 filetype indent on
 "set smartindent
 
 "Search & display
 " set mouse=a        " Enable mouse usage (all modes)
-set mouse=n        
+set mouse=n
 set wrap
 set linebreak
 set ignorecase
 set incsearch
 set hlsearch " highlight search pattern :noh temporarily hide hi
-" Press F4 to toggle highlighting on/off, and show current value.
+" Press F3 to toggle highlighting on/off, and show current value.
 noremap <F3> :set hlsearch! hlsearch?<CR>
 set cursorline " highlight current line
 " set nohls
@@ -39,6 +44,7 @@ set scrolloff=4
 syntax on
 set noerrorbells
 "set showcmd        " Show (partial) command in status line.
+set t_ut=       "disable Background color erase, avoids refresh other color lines issue
 
 " Cursor configuration
 let &t_SI = "\e[1 q"
@@ -70,7 +76,7 @@ set eadirection=hor "keep size of windows after closing a horizontal one.
 
 
 " Spelling
-set spell 
+set spell
 set spelllang=en_gb " ,en_us  ,es_mx
 "setlocal spell spelllang=en_gb
 nnoremap <Leader>es :setlocal spelllang=es_mx <CR>
@@ -89,6 +95,19 @@ highligh ColorColumn ctermbg=0 guibg=lightgrey
 " Default colorscheme if no plugins
 colorscheme slate
 set background=dark
+" set background according to system-wide setup
+" if has('macunix')
+  " if system("defaults read -g appleinterfacestyle") =~ '^dark'
+:silent let TTHEME = Chomp(system("tmux showenv TTHEME | cut -d '=' -f 2"))
+" echo TTHEME
+if TTHEME == 'light'
+	set background=light
+    " echo "light"
+else
+    set background=dark
+    " echo "dark"
+endif
+" endif
 
 " Fix highlight for misspelled words
 highlight SpellBad term=NONE cterm=underline ctermbg=NONE ctermfg=DarkMagenta
@@ -112,9 +131,9 @@ vnoremap <Leader><Tab> >gv
 vnoremap <Leader><S-Tab> <gv
 
 "" use tab to move to next sentence
-"nnoremap <TAB> ) 
+"nnoremap <TAB> )
 "" use shift tab to move to the previous sentence
-"nnoremap <S-TAB> ( 
+"nnoremap <S-TAB> (
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -154,6 +173,8 @@ command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
 command! ConfigPlug execute ":e ~/.vim/plugins.vim"
 command! Reload execute ":w |".."source $MYVIMRC"
+" Reload configuration
+noremap <Leader>R :Reload<CR>
 
 " Python
 command! Py  :w  | ! clear; python3 %
@@ -200,8 +221,8 @@ EOF
 augroup filetypedetect
 "  au BufNew,BufNewFile,BufRead *.tex,*.latex,*.sty set
 "      \ filetype tex
-  "au BufNew,BufNewFile,BufRead *.md,*.markdown set  
-      "\ setfiletype markdown  
+  "au BufNew,BufNewFile,BufRead *.md,*.markdown set
+      "\ setfiletype markdown
   " Settings for plain text files
   au BufRead,BufNewFile *.txt set
       \ wrapmargin=0
