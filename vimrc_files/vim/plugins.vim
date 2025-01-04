@@ -45,6 +45,7 @@ Plug 'junegunn/fzf.vim'         " Fuzzy vim integration
 Plug 'christoomey/vim-tmux-navigator' " tmux and vim navigation integration
 Plug 'bennydeb/pomodoro.vim' " pomodoro timer integration
 Plug 'bennydeb/zotcite' " zotero vim integration
+Plug 'jmcantrell/vim-virtualenv' " virtual environment management 
 call plug#end()
 
 " From/for plugins
